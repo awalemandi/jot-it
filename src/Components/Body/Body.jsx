@@ -1,21 +1,25 @@
-import { Container, Typography } from "@material-ui/core";
+import { Grid, Container, Typography } from "@material-ui/core";
 
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
 
 const Body = () => {
     return (  
-        <Container>
+        <Grid container spacing={3}>
             <Paper elevation={0}>
-                <Typography variant="h1">
-                    Body
-                    Body
-                    Body
-                    Body
-                    Body
-                </Typography>
+                <Grid container item >
+                    <Typography> left</Typography>
+                    <Typography> left</Typography>
+                    <Typography> left</Typography>
+                </Grid>
+                <Grid container item>
+                    <Typography> Right</Typography>
+                    <Typography> Right</Typography>
+                    <Typography> Right</Typography>
+                    <Typography> Right</Typography>
+                </Grid>
             </Paper>
-        </Container>
+        </Grid>
     );
 }
  
