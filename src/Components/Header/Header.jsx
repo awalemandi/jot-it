@@ -1,12 +1,15 @@
 import React from 'react';
+import { Grid, Container, Typography, Icon } from "@material-ui/core";
+import Paper from '@material-ui/core/Paper';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import Brightness6RoundedIcon from '@material-ui/icons/Brightness6Rounded';
 import logo from './logo.png';
 
 
@@ -83,9 +86,12 @@ const Header = () => {
   
   return (
     <div className={classes.grow}>
+      <Grid container spacing={1} justify="space-between">
       <AppBar position="sticky" style={{maxHeight: 80 }}>
         <Toolbar>
-          <IconButton
+  
+        <Grid item xs={1}>
+        <IconButton
             edge="start"
             className={classes.menuButton}
             color="inherit"
@@ -93,8 +99,12 @@ const Header = () => {
           >
             <MenuIcon />
           </IconButton>
+        </Grid>
+        <Grid item xs={0} sm={2} lg={3}>
           <img className={classes.logo} src={logo} alt="logo"/>
-          <div className={classes.search}>
+        </Grid>
+        <Grid item xs={9}>
+           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
@@ -106,10 +116,22 @@ const Header = () => {
               }}
               inputProps={{ 'aria-label': 'search' }}
             />
-          </div>
-          <div className={classes.grow} />
+           </div>
+          </Grid>
+          <Grid item xs={1} sm={2} lg={3}>
+            <div className={classes.grow} />
+          </Grid>
+          <Grid container xs={3}>
+            <IconButton>
+              <Brightness6RoundedIcon />
+            </IconButton>
+            <IconButton>
+              <AccountCircleIcon />
+            </IconButton>
+          </Grid>
         </Toolbar>
       </AppBar>
+      </Grid>
     </div>
   );
 }
