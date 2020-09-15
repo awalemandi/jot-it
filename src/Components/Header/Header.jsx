@@ -1,6 +1,5 @@
 import React from 'react';
-import { Grid, Container, Typography, Icon } from "@material-ui/core";
-import Paper from '@material-ui/core/Paper';
+import { Grid, Hidden, Container, Typography, Icon } from "@material-ui/core";
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -87,50 +86,61 @@ const Header = () => {
   return (
     <div className={classes.grow}>
       <Grid container spacing={1} justify="space-between">
-      <AppBar position="sticky" style={{maxHeight: 80 }}>
-        <Toolbar>
-  
-        <Grid item xs={1}>
-        <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MenuIcon />
-          </IconButton>
-        </Grid>
-        <Grid item xs={0} sm={2} lg={3}>
-          <img className={classes.logo} src={logo} alt="logo"/>
-        </Grid>
-        <Grid item xs={9}>
-           <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-           </div>
-          </Grid>
-          <Grid item xs={1} sm={2} lg={3}>
-            <div className={classes.grow} />
-          </Grid>
-          <Grid container xs={3}>
-            <IconButton>
-              <Brightness6RoundedIcon />
-            </IconButton>
-            <IconButton>
-              <AccountCircleIcon />
-            </IconButton>
-          </Grid>
-        </Toolbar>
-      </AppBar>
+        <AppBar position="sticky" style={{maxHeight: 80 }}>
+            <Toolbar>
+    
+                <Grid item xs={1}>
+                    <IconButton
+                        edge="start"
+                        className={classes.menuButton}
+                        color="inherit"
+                        aria-label="open drawer"
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                </Grid>
+
+                <Grid item xs={0} sm={2} lg={3}>
+                    <img className={classes.logo} src={logo} alt="logo"/>
+                </Grid>
+
+                <Grid item xs={8} sm={6} md={7}>
+                    <div className={classes.search}>
+                        <div className={classes.searchIcon}>
+                            <SearchIcon />
+                        </div>
+
+                        <InputBase
+                        placeholder="Search…"
+                        classes={{
+                            root: classes.inputRoot,
+                            input: classes.inputInput,
+                        }}
+                        inputProps={{ 'aria-label': 'search' }}
+                        />
+                    </div>
+                </Grid>
+
+                <Grid item xs={0} sm={0} md={1} lg={3}>
+                    <div className={classes.grow} />
+                 </Grid>
+
+                <Grid container item xs={3} sm={3} justify="space-evenly">
+                    <Grid item>
+                        <IconButton>
+                            <Brightness6RoundedIcon />
+                        </IconButton>
+                    </Grid>
+
+                    <Grid item>
+                        <IconButton>
+                            <AccountCircleIcon />
+                        </IconButton>
+                    </Grid>
+                </Grid>
+
+            </Toolbar>
+        </AppBar>
       </Grid>
     </div>
   );
