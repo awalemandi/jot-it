@@ -1,53 +1,121 @@
 import React from 'react';
+import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import { makeStyles } from '@material-ui/core/styles';
 import LibraryBooksRoundedIcon from '@material-ui/icons/LibraryBooksRounded';
 import MenuBookRoundedIcon from '@material-ui/icons/MenuBookRounded';
 import PlaylistAddRoundedIcon from '@material-ui/icons/PlaylistAddRounded';
 import FunctionsRoundedIcon from '@material-ui/icons/FunctionsRounded';
+import { Hidden } from '@material-ui/core';
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    width: '100%',
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper,
+  },
+}));
 
 const MenuItems = () => {
+  const classes = useStyles();
 
   return (
-    <List
-      subheader={
-        <ListSubheader>
-          Menu
-        </ListSubheader>
-      }
-    >
-      <Paper>
-      <ListItem button>
-        <ListItemIcon>
-          <MenuBookRoundedIcon />
-        </ListItemIcon>
-        <ListItemText primary="Current Read" />
-      </ListItem>
-      <ListItem button>
-        <ListItemIcon>
-          <LibraryBooksRoundedIcon />
-        </ListItemIcon>
-        <ListItemText primary="Library" />
-      </ListItem>
-      <ListItem button>
-        <ListItemIcon>
-          <PlaylistAddRoundedIcon />
-        </ListItemIcon>
-        <ListItemText primary="TBR List" />
-      </ListItem>
-      <ListItem button>
-        <ListItemIcon>
-          <FunctionsRoundedIcon />
-        </ListItemIcon>
-        <ListItemText primary="Statistics" />
-      </ListItem>
-      </Paper>
-    </List>
+    <div className={classes.root}>
+      
+          {/*Grid container for small container (icons only)  */}
+      <Hidden smUp>
+        <Grid container item direction="column" justify="space-around" alignItems="stretch" s={1} sm={4} lg={3}>
+            <List>
+              <Paper>
+                <Grid item>
+                  <ListItem button>
+                    <ListItemIcon>
+                      <MenuBookRoundedIcon />
+                    </ListItemIcon>
+                  </ListItem>
+                </Grid>
+               
+                <Grid item>
+                  <ListItem button>
+                    <ListItemIcon>
+                      <LibraryBooksRoundedIcon />
+                    </ListItemIcon>
+                  </ListItem>
+                </Grid>
+
+                <Grid item>
+                  <ListItem button>
+                    <ListItemIcon>
+                      <PlaylistAddRoundedIcon />
+                    </ListItemIcon>
+                  </ListItem>
+                </Grid>
+
+                <Grid item>
+                  <ListItem button>
+                    <ListItemIcon>
+                      <FunctionsRoundedIcon />
+                    </ListItemIcon>
+                  </ListItem>
+                </Grid>
+              </Paper>
+            </List>
+        </Grid>
+      </Hidden>
+
+          {/* Second grid container for non small screen (icons + menulabels) */}
+      <Hidden xsDown>
+        <Grid container item s={1} sm={4} lg={3}>
+          <List>
+            <Paper>
+
+              <Grid item>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MenuBookRoundedIcon/>
+                  </ListItemIcon>
+                    <ListItemText primary="Current Read" />
+                </ListItem>
+              </Grid>
+
+              <Grid item>
+                <ListItem button>
+                  <ListItemIcon>
+                    <LibraryBooksRoundedIcon />
+                  </ListItemIcon>
+                    <ListItemText primary="Library" />
+                </ListItem>
+              </Grid>
+
+              <Grid item>
+                <ListItem button>
+                  <ListItemIcon>
+                    <PlaylistAddRoundedIcon />
+                  </ListItemIcon>
+                    <ListItemText primary="TBR" />
+                </ListItem>
+              </Grid>
+
+              <Grid item>
+                <ListItem button>
+                  <ListItemIcon>
+                    <FunctionsRoundedIcon />
+                  </ListItemIcon>
+                    <ListItemText primary="Statistics" />
+                </ListItem>
+              </Grid>
+
+            </Paper>
+          </List>
+        </Grid>
+      </Hidden>
+      
+    </div>
   );
 }
 

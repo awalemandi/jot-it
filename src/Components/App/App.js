@@ -21,7 +21,7 @@ function App() {
   const classes = useStyles();
 
   return (
-    <div className={classes.root} spacing={2} justify="space-between">
+    <div className={classes.root} spacing={1} justify="space-between">
           <Grid container direction="column">
             <Grid item xs={12}>
               <Header />

@@ -19,10 +19,10 @@ const classes = useStyles();
     return (  
         <div className={classes.root}>
             <Grid container spacing={1} justify="space-evenly" alignItems="stretch">
-                    <Grid container item xs={2}>
-                          <MenuItems />
+                    <Grid container item xs={1} sm={4} lg={3}>
+                            <MenuItems />
                     </Grid>
-                    <Grid container item xs={10}>
+                    <Grid container item xs={10} sm={8} lg={9}>
                         <Paper>
                            <Typography variant="body2">
                                 Content Window Content Window Content Window Content Window Content Window Content Window Content Window Content Window
