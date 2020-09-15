@@ -18,9 +18,11 @@ const classes = useStyles();
 
     return (  
         <div className={classes.root}>
-            <Grid container spacing={1} justify="space-evenly" alignItems="stretch">
-                    <Grid container item xs={1} sm={4} lg={3}>
+            <Grid container justify="center" xs={12}>
+                    <Grid container item xs={2} sm={4} lg={3}>
+                        <Paper>
                             <MenuItems />
+                        </Paper>
                     </Grid>
                     <Grid container item xs={10} sm={8} lg={9}>
                         <Paper>

@@ -1,6 +1,5 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -16,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     width: '100%',
-    maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
   },
 }));
@@ -29,9 +27,8 @@ const MenuItems = () => {
       
           {/*Grid container for small container (icons only)  */}
       <Hidden smUp>
-        <Grid container item direction="column" justify="space-around" alignItems="stretch" s={1} sm={4} lg={3}>
+        <Grid container item>
             <List>
-              <Paper>
                 <Grid item>
                   <ListItem button>
                     <ListItemIcon>
@@ -63,17 +60,14 @@ const MenuItems = () => {
                     </ListItemIcon>
                   </ListItem>
                 </Grid>
-              </Paper>
             </List>
         </Grid>
       </Hidden>
 
           {/* Second grid container for non small screen (icons + menulabels) */}
       <Hidden xsDown>
-        <Grid container item s={1} sm={4} lg={3}>
+        <Grid container item>
           <List>
-            <Paper>
-
               <Grid item>
                 <ListItem button>
                   <ListItemIcon>
@@ -110,7 +104,7 @@ const MenuItems = () => {
                 </ListItem>
               </Grid>
 
-            </Paper>
+
           </List>
         </Grid>
       </Hidden>
