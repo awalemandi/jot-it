@@ -9,9 +9,9 @@ const Footer = () => {
     return (  
           <div>
             <BottomNavigation>
-                <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-                <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-                <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
+                <Typography variant="body1">Footer</Typography>
+                <Typography variant="body1">Footer</Typography>
+                <Typography variant="body1">Footer</Typography>
             </BottomNavigation>
           </div>
     );

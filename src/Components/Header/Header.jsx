@@ -86,7 +86,7 @@ const Header = () => {
   return (
     <div className={classes.grow}>
       <Grid container spacing={1} justify="space-between">
-        <AppBar position="sticky" style={{maxHeight: 80 }}>
+        <AppBar position="sticky" style={{maxHeight: 60 }}>
             <Toolbar>
     
                 <Grid item xs={1}>
@@ -121,11 +121,11 @@ const Header = () => {
                     </div>
                 </Grid>
 
-                <Grid item xs={0} sm={0} md={1} lg={3}>
+                <Grid item xs={0} sm={1} md={1} lg={3}>
                     <div className={classes.grow} />
                  </Grid>
 
-                <Grid container item xs={3} sm={3} justify="space-evenly">
+                <Grid container item xs={3} sm={3} md={2}justify="center">
                     <Grid item>
                         <IconButton>
                             <Brightness6RoundedIcon />
