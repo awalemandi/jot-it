@@ -9,7 +9,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Brightness6RoundedIcon from '@material-ui/icons/Brightness6Rounded';
-import logo from './logo.png';
+import logo from './Jotit-logo-small.png';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -26,8 +26,8 @@ const useStyles = makeStyles((theme) => ({
     },
     height: 'auto',
     width: 'auto',
-    maxHeight: 72,
-    maxWidth: 250,
+    maxHeight: 200,
+    maxWidth: 400,
   },
   search: {
     position: 'relative',
