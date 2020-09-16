@@ -1,6 +1,7 @@
 import React from 'react';
 import {Grid} from '@material-ui/core';
-import { makeStyles, ThemeProvider} from '@material-ui/core/styles';
+import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import TestBody from '../Body/TestBody';
 import Header from '../Header/Header';
 import Body from '../Body/Body';
 import Footer from '../Footer/Footer';
@@ -23,8 +24,9 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className={classes.root} spacing={1} justify="space-between">
-          <Grid container direction="column">
+      <div className={classes.root}>
+        <TestBody />
+          {/* <Grid container direction="column">
             <Grid item xs={12}>
               <Header />
             </Grid>
@@ -37,7 +39,7 @@ function App() {
             <Grid item xs={12}>
               <Footer />
             </Grid>
-          </Grid>
+          </Grid> */}
       </div>
     </ThemeProvider>
   );
