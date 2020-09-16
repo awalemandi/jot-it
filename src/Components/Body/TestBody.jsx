@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import {fade, makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -13,63 +13,149 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+
+import SearchIcon from '@material-ui/icons/Search';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import Brightness6RoundedIcon from '@material-ui/icons/Brightness6Rounded';
+import InputBase from '@material-ui/core/InputBase';
+import logo from './Jotit-logo-small.png';
+
+import LibraryBooksRoundedIcon from '@material-ui/icons/LibraryBooksRounded';
+import MenuBookRoundedIcon from '@material-ui/icons/MenuBookRounded';
+import PlaylistAddRoundedIcon from '@material-ui/icons/PlaylistAddRounded';
+import FunctionsRoundedIcon from '@material-ui/icons/FunctionsRounded';
 
 const drawerWidth = 200;
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  menuButton: {
-    marginRight: 36,
-  },
-  hide: {
-    display: 'none',
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-    whiteSpace: 'nowrap',
-  },
-  drawerOpen: {
-    width: drawerWidth,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  drawerClose: {
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    overflowX: 'hidden',
-    width: theme.spacing(7) + 1,
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(9) + 1,
+     root: {
+        display: 'flex',
+        flexGrow: 1,
     },
-  },
-  toolbar: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-  },
+    
+    appBar: {
+        maxHeight: 60,
+        zIndex: theme.zIndex.drawer + 1,
+        transition: theme.transitions.create(['width', 'margin'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+        }),
+    },
+    
+    icon: {
+        display: 'block',
+        margin: theme.spacing(2),
+    },
+    
+    logo: {
+        display: 'none',
+        [theme.breakpoints.up('sm')]: {
+        display: 'block',
+        },
+        height: 'auto',
+        width: 'auto',
+        maxHeight: 200,
+        maxWidth: 400,
+    },
+    
+    search: {
+        position: 'relative',
+        borderRadius: theme.shape.borderRadius,
+        backgroundColor: fade(theme.palette.common.white, 0.45),
+        '&:hover': {
+        backgroundColor: fade(theme.palette.common.white, 0.25),
+        },
+        marginRight: theme.spacing(2),
+        marginLeft: 0,
+        width: '100%',
+        [theme.breakpoints.up('sm')]: {
+        marginLeft: theme.spacing(3),
+        width: 'auto',
+        },
+    },
+  
+    searchIcon: {
+        padding: theme.spacing(0, 2),
+        height: '100%',
+        position: 'absolute',
+        pointerEvents: 'none',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    
+    inputRoot: {
+        color: 'inherit',
+    },
+
+    inputInput: {
+        padding: theme.spacing(1, 1, 1, 0),
+        // vertical padding + font size from searchIcon
+        paddingLeft: `calc(1.5em + ${theme.spacing(4)}px)`,
+        transition: theme.transitions.create('width'),
+        width: '100%',
+        [theme.breakpoints.up('md')]: {
+        width: '60ch',
+        },
+    },
+
+    sectionDesktop: {
+        display: 'none',
+        [theme.breakpoints.up('md')]: {
+        display: 'flex',
+        },
+    },
+
+    sectionMobile: {
+        display: 'flex',
+        [theme.breakpoints.up('md')]: {
+        display: 'none',
+        },
+    },
+    
+    hide: {
+    display: 'none',
+    },
+    
+    drawer: {
+        width: drawerWidth,
+        flexShrink: 0,
+        whiteSpace: 'nowrap',
+    },
+
+    drawerOpen: {
+        width: drawerWidth,
+        transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+        }),
+    },
+     
+    drawerClose: {
+        transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+        }),
+        overflowX: 'hidden',
+        width: theme.spacing(7) + 1,
+        [theme.breakpoints.up('sm')]: {
+        width: theme.spacing(9) + 1,
+        },
+    },
+    
+    toolbar: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        padding: theme.spacing(0, 1),
+        // necessary for content to be below app bar
+        ...theme.mixins.toolbar,
+    },
+    
+    content: {
+        flexGrow: 1,
+        padding: theme.spacing(3),
+    },
 }));
 
 export default function TestBody() {
@@ -93,14 +179,42 @@ export default function TestBody() {
                     aria-label="open drawer"
                     onClick={handleDrawerState}
                     edge="start"
-                    className={clsx(classes.menuButton)}
+                    className={clsx(classes.icon)}
                 >
                     <MenuIcon />
                 </IconButton>
                   
-                <Typography variant="h6" noWrap>
-                    Previous header here
-                </Typography>
+                <div className={classes.logo}>
+                    <img className={classes.logo} src={logo} alt="logo"/>
+                </div>
+                  
+                <div className={classes.search}>
+                    <div className={classes.searchIcon}>
+                        <SearchIcon />
+                    </div>
+
+                    <InputBase
+                    placeholder="Search…"
+                    classes={{
+                         root: classes.inputRoot,
+                         input: classes.inputInput,
+                    }}
+                    inputProps={{ 'aria-label': 'search' }}
+                    />
+                </div>
+                  
+                <div className={classes.icon}>
+                    <IconButton>
+                        <Brightness6RoundedIcon />
+                    </IconButton>
+                </div>
+                
+                <div className={classes.icon}>
+                    <IconButton>
+                        <AccountCircleIcon />
+                    </IconButton>
+                </div>
+
             </Toolbar>
         </AppBar>
           
@@ -119,24 +233,72 @@ export default function TestBody() {
         >
             <div className={classes.toolbar}/>
          
-            <Divider />
             <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
+                  
+                <ListItem button>
+                    <ListItemIcon>
+                        <MenuBookRoundedIcon/>
+                    </ListItemIcon>
+                        <ListItemText primary="Current Read" />
                 </ListItem>
-            ))}
+              
+                <ListItem button>
+                    <ListItemIcon>
+                        <LibraryBooksRoundedIcon />
+                    </ListItemIcon>
+                        <ListItemText primary="Library" />
+                 </ListItem>
+          
+                <ListItem button>
+                    <ListItemIcon>
+                        <PlaylistAddRoundedIcon />
+                    </ListItemIcon>
+                        <ListItemText primary="TBR List" />
+                </ListItem>
+                    
+                <ListItem button>
+                    <ListItemIcon>
+                        <FunctionsRoundedIcon />
+                    </ListItemIcon>
+                        <ListItemText primary="Statistics" />
+                </ListItem>  
+            
             </List>
+              
             <Divider />
+                  
             <List>
-            {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
+                  
+                <ListItem button>
+                    <ListItemIcon>
+                        <MenuBookRoundedIcon/>
+                    </ListItemIcon>
+                        <ListItemText primary="Current Read" />
                 </ListItem>
-            ))}
+              
+                <ListItem button>
+                    <ListItemIcon>
+                        <LibraryBooksRoundedIcon />
+                    </ListItemIcon>
+                        <ListItemText primary="Library" />
+                 </ListItem>
+          
+                <ListItem button>
+                    <ListItemIcon>
+                        <PlaylistAddRoundedIcon />
+                    </ListItemIcon>
+                        <ListItemText primary="TBR List" />
+                </ListItem>
+                    
+                <ListItem button>
+                    <ListItemIcon>
+                        <FunctionsRoundedIcon />
+                    </ListItemIcon>
+                        <ListItemText primary="Statistics" />
+                </ListItem>  
+            
             </List>
+              
         </Drawer>
           
         <main className={classes.content}>
