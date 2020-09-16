@@ -1,20 +1,28 @@
 import React from 'react';
-import {Grid} from '@material-ui/core';
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
-import TestBody from '../Body/TestBody';
-import Header from '../Header/Header';
-import Body from '../Body/Body';
-import Footer from '../Footer/Footer';
+import Navigation from '../Navigation/Navigation';
+import ContentWindow from '../ContentWindow/ContentWindow';
 import theme from '../theme';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1
+    display: 'flex',
+    flexGrow: 1,
   },
-  paper: {
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary
+
+  toolbar: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+  },
+
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
   },
 }));
 
@@ -25,21 +33,11 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className={classes.root}>
-        <TestBody />
-          {/* <Grid container direction="column">
-            <Grid item xs={12}>
-              <Header />
-            </Grid>
-            <Grid item xs={12}>
-              
-            </Grid>
-            <Grid item xs={12}>
-              <Body />
-            </Grid>
-            <Grid item xs={12}>
-              <Footer />
-            </Grid>
-          </Grid> */}
+        <Navigation/>
+        <main className={classes.content}>
+          <div className={classes.toolbar} />
+          <ContentWindow/>
+        </main>
       </div>
     </ThemeProvider>
   );
