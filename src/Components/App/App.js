@@ -1,7 +1,9 @@
 import React from 'react';
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 import Navigation from '../Navigation/Navigation';
 import ContentWindow from '../ContentWindow/ContentWindow';
+import Copyright from '../Copyright';
 import theme from '../theme';
 
 
@@ -22,7 +24,13 @@ const useStyles = makeStyles((theme) => ({
 
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    padding: theme.spacing(5),
+    display: 'flex',
+    justifyContent: 'center',
+  },
+
+  footer: {
+  
   },
 }));
 
@@ -36,8 +44,14 @@ function App() {
         <Navigation/>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          <ContentWindow/>
+            <Paper>
+              <ContentWindow/>
+            </Paper>
         </main>
+        <div className={classes.toolbar} />
+        <footer className={classes.footer}>
+          <Copyright/>
+        </footer>
       </div>
     </ThemeProvider>
   );
