@@ -37,7 +37,7 @@ const JotForm = () => {
   return (
     <Container component="main">
       <CssBaseline />
-      <div className={classes.paper}>
+      <div className={classes.paper} overflow="visible">
         <Typography component="h1" variant="h6">
           New Jotting
           <Divider />
@@ -45,7 +45,7 @@ const JotForm = () => {
 
         
 
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate >
             <Grid container spacing={2} justify="center">
                 <Grid item xs={7}>
                     <TextField
@@ -73,7 +73,7 @@ const JotForm = () => {
                 </Grid>
                 
                 <Grid item xs={7}>
-                    <TextEditor  className={classes.textEditor}/>
+                    <TextEditor/>
                 </Grid>
             
               <Grid item container xs={12} justify="space-around" alignItems="center">
