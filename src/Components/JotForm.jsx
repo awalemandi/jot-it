@@ -1,17 +1,11 @@
 import React, { useState } from 'react';
-import ReactQuill from 'react-quill';
 
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import DatePicker from './DatePicker';
+import { CssBaseline, Grid, Divider, Typography, Container, makeStyles, TextField, IconButton, Button } from '@material-ui/core';
+
 import SaveRoundedIcon from '@material-ui/icons/SaveRounded';
 import DoneAllRoundedIcon from '@material-ui/icons/DoneAllRounded';
 
+import DatePicker from './DatePicker';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -40,19 +34,22 @@ const JotForm = () => {
   const classes = useStyles();
   const [content, setContent] = useState('');
   return (
-    <Container component="main" maxWidth="sm">
+    <Container component="main">
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
           New Jot
+          <Divider />
         </Typography>
+
+        
+
         <form className={classes.form} noValidate>
-            <Grid container spacing={2}>
-                <Grid item xs={12}>
+            <Grid container spacing={2} justify="center">
+                <Grid item xs={7}>
                     <TextField
                         name="title"
-                        variant="outlined"
-                        required
+                        // variant="outlined"
                         fullWidth
                         id="title"
                         label="Title"
@@ -60,10 +57,9 @@ const JotForm = () => {
                     />
                 </Grid>
 
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={7}>
                     <TextField
-                        variant="outlined"
-                        required
+                        // variant="outlined"
                         fullWidth
                         id="author"
                         label="Author"
@@ -71,7 +67,7 @@ const JotForm = () => {
                     />
                 </Grid>
 
-                <Grid item xs={12}>
+                <Grid item xs={7}>
                     <DatePicker/>
                 </Grid>
                 
@@ -79,39 +75,37 @@ const JotForm = () => {
                     <ReactQuill value={content}
                     onChange={event => setContent(event.target.value)}/>
                 </Grid> */}
-            </Grid>
-
-            <Grid container justify="center" alignItems="center">
-                <Grid item xs={3}></Grid>
-                <Grid item xs={2}>
-                    <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    className={classes.saveButton}
-                    >
-                    <SaveRoundedIcon/>
-                    </Button>
-                </Grid>
-
-                <Grid item xs={2}></Grid>
-
-                <Grid item xs={2}>
-                    <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    className={classes.completeButton}
-                    >
-                        <DoneAllRoundedIcon/>
-                    </Button>
-                </Grid>
-
-                <Grid item xs={3}></Grid>
             
+              <Grid item container xs={12} justify="space-around" alignItems="center">
+                <Grid item xs={4}></Grid>
+                <Grid item xs={2}>
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    size="large"
+                    className={classes.saveButton}
+                    startIcon={<SaveRoundedIcon />}
+                  >
+                  
+                  </Button>
+                </Grid>
+              
+                <Grid item xs={2}>
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    size="large"
+                    className={classes.completeButton}
+                    startIcon={<DoneAllRoundedIcon />}
+                  >
+                  
+                  </Button>
+                </Grid>
+                <Grid item xs={3}></Grid>
+              </Grid>
+
             </Grid>
+          
         </form>
       </div>
     </Container>

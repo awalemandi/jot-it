@@ -5,10 +5,10 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
+import { startOfToday } from 'date-fns';
 
 const DatePicker = () => {
-  // The first commit of Material-UI
-  const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
+  const [selectedDate, setSelectedDate] = React.useState(startOfToday());
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -23,7 +23,7 @@ const DatePicker = () => {
             format="MM/dd/yyyy"
             margin="normal"
             id="commenceDate"
-            label="Read Commence"
+            label="Commence: "
             value={selectedDate}
             onChange={handleDateChange}
             KeyboardButtonProps={{

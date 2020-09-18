@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
+import {Paper} from '@material-ui/core';
 import Navigation from '../Navigation/Navigation';
 import ContentWindow from '../ContentWindow/ContentWindow';
 import Copyright from '../Copyright';
