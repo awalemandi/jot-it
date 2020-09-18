@@ -8,8 +8,7 @@ import Link from '@material-ui/core/Link';
 const Copyright = () => {
     return (
         <>
-            <Box mt={5}>
-                <Typography variant="body2" color="textSecondary" align="center">
+                <Typography variant="subtitle" color="textSecondary" align="center">
                     {'Copyright © '}
                     <Link color="inherit" href="https://github.com/awalemandi/">
                     Jot.it
@@ -18,7 +17,6 @@ const Copyright = () => {
                     {'.'}
                     All Rights Reserved.
                 </Typography>
-            </Box>
         </>
     );
   }

@@ -6,17 +6,19 @@ import SaveRoundedIcon from '@material-ui/icons/SaveRounded';
 import DoneAllRoundedIcon from '@material-ui/icons/DoneAllRounded';
 
 import DatePicker from './DatePicker';
+import TextEditor from './TextEditor';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    margin: theme.spacing(1),
+    padding: theme.spacing(1),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    minHeight: 600,
   },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+  textEditor: {
+    minHeight: 400,
   },
   form: {
     width: '100%', // Fix IE 11 issue.
@@ -32,13 +34,12 @@ const useStyles = makeStyles((theme) => ({
 
 const JotForm = () => {
   const classes = useStyles();
-  const [content, setContent] = useState('');
   return (
     <Container component="main">
       <CssBaseline />
       <div className={classes.paper}>
-        <Typography component="h1" variant="h5">
-          New Jot
+        <Typography component="h1" variant="h6">
+          New Jotting
           <Divider />
         </Typography>
 
@@ -71,10 +72,9 @@ const JotForm = () => {
                     <DatePicker/>
                 </Grid>
                 
-                {/* <Grid item xs={12}>
-                    <ReactQuill value={content}
-                    onChange={event => setContent(event.target.value)}/>
-                </Grid> */}
+                <Grid item xs={7}>
+                    <TextEditor  className={classes.textEditor}/>
+                </Grid>
             
               <Grid item container xs={12} justify="space-around" alignItems="center">
                 <Grid item xs={4}></Grid>

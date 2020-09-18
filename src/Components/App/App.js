@@ -10,7 +10,14 @@ import theme from '../theme';
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     flexGrow: 1,
+    minHeight: 700,
+    height: 'auto',
+    minWidth: 300,
+    marginBottom: 0,
   },
 
   toolbar: {
@@ -24,13 +31,16 @@ const useStyles = makeStyles((theme) => ({
 
   content: {
     flexGrow: 1,
+    minHeight: 500,
+    width: 'auto',
     padding: theme.spacing(5),
-    display: 'flex',
-    justifyContent: 'center',
   },
 
   footer: {
-  
+    flexGrow: 1,
+    padding: theme.spacing(5),
+    minHeight: 250,
+    width: 'auto',
   },
 }));
 
@@ -50,7 +60,9 @@ function App() {
         </main>
         <div className={classes.toolbar} />
         <footer className={classes.footer}>
-          <Copyright/>
+          <Paper>
+            <Copyright />
+          </Paper>
         </footer>
       </div>
     </ThemeProvider>
