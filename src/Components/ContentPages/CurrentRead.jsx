@@ -5,8 +5,8 @@ import { CssBaseline, Grid, Divider, Typography, Container, makeStyles, TextFiel
 import SaveRoundedIcon from '@material-ui/icons/SaveRounded';
 import DoneAllRoundedIcon from '@material-ui/icons/DoneAllRounded';
 
-import DatePicker from './DatePicker';
-import TextEditor from './TextEditor';
+import DatePicker from '../DatePicker';
+import TextEditor from '../TextEditor';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 const JotForm = () => {
   const classes = useStyles();
   return (
-    <Container component="main">
+    <>
       <CssBaseline />
       <div className={classes.paper} overflow="visible">
         <Typography component="h1" variant="h6">
@@ -108,7 +108,7 @@ const JotForm = () => {
           
         </form>
       </div>
-    </Container>
+    </>
   );
 }
 

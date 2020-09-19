@@ -2,9 +2,9 @@ import React from 'react';
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import {Paper} from '@material-ui/core';
 import Navigation from '../Navigation/Navigation';
-import ContentWindow from '../ContentWindow/ContentWindow';
 import Copyright from '../Copyright';
 import theme from '../theme';
+import CurrentRead from '../ContentPages/CurrentRead';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
   content: {
     flexGrow: 1,
-    minHeight: 500,
+    maxHeight: 600,
     width: 'auto',
     padding: theme.spacing(5),
   },
@@ -55,7 +55,7 @@ function App() {
         <main className={classes.content}>
           <div className={classes.toolbar} />
             <Paper>
-              <ContentWindow/>
+              <CurrentRead/>
             </Paper>
         </main>
         <div className={classes.toolbar} />
