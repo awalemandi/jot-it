@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import {Paper} from '@material-ui/core';
 import Navigation from '../Navigation/Navigation';
 import Copyright from '../Copyright';
 import theme from '../theme';
 import CurrentRead from '../ContentPages/CurrentRead';
-
+import Library from '../ContentPages/Library';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,9 +44,31 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function App() {
 
+
+function App() {
+  const [content, setContent] = useState(<CurrentRead/>);
   const classes = useStyles();
+
+  const displayCurrentRead = () => {
+    setContent(CurrentRead)
+  }
+
+  const displayLibrary = () => {
+    setContent(Library)
+  }
+
+  // const displayCurrentRead = () => {
+  //   setContent(CurrentRead)
+  // }
+
+  // const displayCurrentRead = () => {
+  //   setContent(CurrentRead)
+  // }
+
+  // const displayCurrentRead = () => {
+  //   setContent(CurrentRead)
+  // }
 
   return (
     <ThemeProvider theme={theme}>
@@ -55,7 +77,7 @@ function App() {
         <main className={classes.content}>
           <div className={classes.toolbar} />
             <Paper>
-              <CurrentRead/>
+              {content}
             </Paper>
         </main>
         <div className={classes.toolbar} />
