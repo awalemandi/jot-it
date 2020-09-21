@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     },
     
     icon: {
-        display: 'block',
+        display: 'flex',
         margin: theme.spacing(2),
     },
     
@@ -85,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
         paddingLeft: `calc(1.5em + ${theme.spacing(4)}px)`,
         transition: theme.transitions.create('width'),
         width: '100%',
-        [theme.breakpoints.up('md')]: {
+        [theme.breakpoints.up('sm')]: {
         width: '60ch',
         },
     },
@@ -115,7 +115,7 @@ const useStyles = makeStyles((theme) => ({
     },
 
     drawerOpen: {
-        backgroundColor: '#00897b',
+        backgroundColor: '#4db6ac',
         width: drawerWidth,
         transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
@@ -124,7 +124,7 @@ const useStyles = makeStyles((theme) => ({
     },
      
     drawerClose: {
-        backgroundColor: '#00897b',
+        backgroundColor: '#4db6ac',
         transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
@@ -137,10 +137,9 @@ const useStyles = makeStyles((theme) => ({
     },
     
     toolbar: {
-        display: 'flex',
+        display: "flex",
         alignItems: 'center',
-        justifyContent: 'flex-end',
-        padding: theme.spacing(0, 1),
+        justifyContent: 'space-between',
         // necessary for content to be below app bar
         ...theme.mixins.toolbar,
     },
@@ -165,21 +164,23 @@ const Navigation = () => {
         <AppBar
         position="fixed"
         className={clsx(classes.appBar)}
+        
         >
-            <Toolbar>
+            <Toolbar className={classes.toolbar}>
                 <IconButton
                     color="default"
                     aria-label="open drawer"
                     onClick={handleDrawerState}
                     edge="start"
-                    className={clsx(classes.icon)}
+                    className={classes.icon}
                 >
                     <MenuIcon />
                 </IconButton>
                   
-                <div className={classes.logo}>
+                <div>
                     <img className={classes.logo} src={logo} alt="logo"/>
                 </div>
+                <div></div>
                   
                 <div className={classes.search}>
                     <div className={classes.searchIcon}>
@@ -196,20 +197,22 @@ const Navigation = () => {
                     />
                 </div>
                   
-                <div className={classes.icon}>
-                    <IconButton>
+                <div></div>
+                  
+                <div className={classes.icon} edge="end">
+                    <IconButton >
                         <LiveHelpIcon/>
                     </IconButton>
-                </div>
+              
                 
-                <div className={classes.icon}>
-                    <IconButton>
+             
+                    <IconButton >
                         <Brightness6RoundedIcon />
                     </IconButton>
-                </div>
+            
                   
-                <div className={classes.icon}>
-                    <IconButton>
+            
+                    <IconButton >
                         <AccountCircleIcon />
                     </IconButton>
                 </div>

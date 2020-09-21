@@ -10,25 +10,25 @@ import TextEditor from '../TextEditor';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    margin: theme.spacing(1),
-    padding: theme.spacing(1),
+    margin: theme.spacing(1,5),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    minHeight: 600,
+    height: '70%',
+    maxWidth: 800,
   },
   textEditor: {
-    minHeight: 400,
+    minHeight: 200,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%',
     marginTop: theme.spacing(3),
   },
   saveButton: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing(7),
   },
   completeButton: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing(7),
   },
 }));
 
@@ -47,7 +47,7 @@ const JotForm = () => {
 
         <form className={classes.form} noValidate >
             <Grid container spacing={2} justify="center">
-                <Grid item xs={7}>
+                <Grid item xs={4}>
                     <TextField
                         name="title"
                         // variant="outlined"
@@ -58,7 +58,7 @@ const JotForm = () => {
                     />
                 </Grid>
 
-                <Grid item xs={7}>
+                <Grid item xs={4}>
                     <TextField
                         // variant="outlined"
                         fullWidth
@@ -68,11 +68,11 @@ const JotForm = () => {
                     />
                 </Grid>
 
-                <Grid item xs={7}>
+                <Grid item xs={8}>
                     <DatePicker/>
                 </Grid>
                 
-                <Grid item xs={7}>
+                <Grid item xs={8} className={classes.textEditor}>
                     <TextEditor/>
                 </Grid>
             

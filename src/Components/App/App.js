@@ -30,9 +30,6 @@ const useStyles = makeStyles((theme) => ({
   },
 
   content: {
-    flexGrow: 1,
-    maxHeight: 600,
-    width: 'auto',
     padding: theme.spacing(5),
   },
 
