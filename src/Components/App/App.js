@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
-import {Backdrop, Paper} from '@material-ui/core';
+import { Paper } from '@material-ui/core';
 import Navigation from '../Navigation/Navigation';
 import Copyright from '../Copyright';
 import theme from '../theme';
 import CurrentRead from '../ContentPages/CurrentRead';
 import Library from '../ContentPages/Library';
+import ToBeRead from '../ContentPages/ToBeRead';
+import Statistics from '../ContentPages/Statistics';
+import Feedback from '../ContentPages/Feedback';
+import Bin from '../ContentPages/Bin';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   footer: {
     flexGrow: 1,
     padding: theme.spacing(5),
-    minHeight: 250,
+    minHeight: 100,
     width: 'auto',
   },
 }));
@@ -47,6 +51,27 @@ function App() {
   const [content, setContent] = useState(<CurrentRead/>);
   const classes = useStyles();
 
+  const displayPage = {
+    currentRead: function () {
+      setContent(<CurrentRead/>)
+    },
+    library: function () {
+      setContent(<Library/>)
+    },
+    toBeRead: function () {
+      setContent(<ToBeRead/>)
+    },
+    statistics: function () {
+      setContent(<Statistics/>)
+    },
+    feedback: function () {
+      setContent(<Feedback/>)
+    },
+    bin: function () {
+      setContent(<Bin/>)
+    }
+  }
+
   const displayCurrentRead = () => {
     setContent(CurrentRead)
   }
@@ -55,28 +80,25 @@ function App() {
     setContent(Library)
   }
 
-  // const displayCurrentRead = () => {
-  //   setContent(CurrentRead)
-  // }
-
-  // const displayCurrentRead = () => {
-  //   setContent(CurrentRead)
-  // }
-
-  // const displayCurrentRead = () => {
-  //   setContent(CurrentRead)
-  // }
+    // const displayCurrentRead = () => {
+    //   setContent(CurrentRead)
+    // }    
+    // const displayCurrentRead = () => {
+    //   setContent(CurrentRead)
+    // }
 
   return (
     <ThemeProvider theme={theme}>
       <div className={classes.root}>
-        <Navigation/>
+        <Navigation page={displayPage}/>
+        
         <main className={classes.content}>
           <div className={classes.toolbar} />
             <Paper>
               {content}
             </Paper>
         </main>
+
         <div className={classes.toolbar} />
         <footer className={classes.footer}>
           <Paper elevation={3}>

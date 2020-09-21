@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    height: '70%',
     maxWidth: 800,
   },
   textEditor: {
@@ -34,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
 
 const JotForm = () => {
   const classes = useStyles();
+  
   return (
     <>
       <CssBaseline />
@@ -103,7 +103,6 @@ const JotForm = () => {
                 </Grid>
                 <Grid item xs={3}></Grid>
               </Grid>
-
             </Grid>
           
         </form>

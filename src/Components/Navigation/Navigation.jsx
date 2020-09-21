@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import {CssBaseline, AppBar, Toolbar, Drawer, List, ListItem, ListItemIcon, ListItemText, Divider, IconButton, InputBase,} from '@material-ui/core';
 import clsx from 'clsx';
@@ -151,16 +151,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const Navigation = () => {
-  const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+const Navigation = ({page}) => {
+    const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
 
-  const handleDrawerState = () => {
-    (open) ? setOpen(false) : setOpen(true);
-  };
-  return (
-    <div>
-     <CssBaseline />
+    const handleDrawerState = () => {
+        (open) ? setOpen(false) : setOpen(true);
+    };
+    
+    
+
+    return (
+        <div>
+        <CssBaseline />
         <AppBar
         position="fixed"
         className={clsx(classes.appBar)}
@@ -237,28 +240,28 @@ const Navigation = () => {
          
             <List>
                   
-                <ListItem button>
+                <ListItem button onClick={page.currentRead}>
                     <ListItemIcon>
                         <FiberNewRoundedIcon/>
                     </ListItemIcon>
                         <ListItemText primary="Current Read" />
                 </ListItem>
               
-                <ListItem button>
+                <ListItem button onClick={page.library}>
                     <ListItemIcon>
                         <LayersRoundedIcon/>
                     </ListItemIcon>
                         <ListItemText primary="Library" />
                  </ListItem>
           
-                <ListItem button>
+                <ListItem button onClick={page.toBeRead}>
                     <ListItemIcon>
                         <StoreRoundedIcon/>
                     </ListItemIcon>
                         <ListItemText primary="To Be Read" />
                 </ListItem>
                     
-                <ListItem button>
+                <ListItem button onClick={page.statistics}>
                     <ListItemIcon>
                         <InsertChartRoundedIcon/>
                     </ListItemIcon>
@@ -271,14 +274,14 @@ const Navigation = () => {
                   
             <List>
                   
-                <ListItem button>
+                <ListItem button onClick={page.feedback}>
                     <ListItemIcon>
                         <FeedbackRoundedIcon/>
                     </ListItemIcon>
                         <ListItemText primary="Feedback" />
                 </ListItem>
               
-                <ListItem button>
+                <ListItem button onClick={page.bin}>
                     <ListItemIcon>
                         <DeleteRoundedIcon/>
                     </ListItemIcon>
@@ -289,7 +292,7 @@ const Navigation = () => {
               
         </Drawer>
     </div>
-  );
+    );
 }
 
 export default Navigation;

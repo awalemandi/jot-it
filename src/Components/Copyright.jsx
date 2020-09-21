@@ -1,5 +1,4 @@
 import React from 'react';
-import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 
@@ -19,6 +18,6 @@ const Copyright = () => {
                 </Typography>
         </>
     );
-  }
+}
 
-  export default Copyright;
+export default Copyright;
