@@ -14,7 +14,7 @@ import Brightness6RoundedIcon from '@material-ui/icons/Brightness6Rounded';
 import FeedbackRoundedIcon from '@material-ui/icons/FeedbackRounded';
 import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
 import LiveHelpIcon from '@material-ui/icons/LiveHelp';
-import logo from './Jotit-logo-small.png';
+import logo from './jotit_white.png';
 
 const drawerWidth = 200;
 
@@ -45,8 +45,8 @@ const useStyles = makeStyles((theme) => ({
         },
         height: 'auto',
         width: 'auto',
-        maxHeight: 200,
-        maxWidth: 400,
+        maxHeight: 40,
+        maxWidth: 'auto',
     },
     
     search: {
@@ -115,6 +115,7 @@ const useStyles = makeStyles((theme) => ({
     },
 
     drawerOpen: {
+        backgroundColor: '#00897b',
         width: drawerWidth,
         transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
@@ -123,6 +124,7 @@ const useStyles = makeStyles((theme) => ({
     },
      
     drawerClose: {
+        backgroundColor: '#00897b',
         transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
@@ -166,7 +168,7 @@ const Navigation = () => {
         >
             <Toolbar>
                 <IconButton
-                    color="inherit"
+                    color="default"
                     aria-label="open drawer"
                     onClick={handleDrawerState}
                     edge="start"

@@ -81,7 +81,7 @@ const JotForm = () => {
                 <Grid item xs={2}>
                   <Button
                     variant="outlined"
-                    color="primary"
+                    color="secondary"
                     size="large"
                     className={classes.saveButton}
                     startIcon={<SaveRoundedIcon />}
@@ -93,7 +93,7 @@ const JotForm = () => {
                 <Grid item xs={2}>
                   <Button
                     variant="outlined"
-                    color="primary"
+                    color="secondary"
                     size="large"
                     className={classes.completeButton}
                     startIcon={<DoneAllRoundedIcon />}

@@ -1,12 +1,21 @@
 import { createMuiTheme } from '@material-ui/core/styles';
-import cyan from '@material-ui/core/colors/cyan';
-import teal from '@material-ui/core/colors/teal';
+
 
 
 const theme = createMuiTheme({
   palette: {
-    primary: cyan,
-    secondary: teal,
+    primary: {
+      light: '#00897b',
+      main: '#00897b',
+      dark: '#005b4f',
+      contrastText: '#f5f5f5',
+    },
+    secondary: {
+      light: '#82e9de',
+      main: '#4db6ac',
+      dark: '#00867d',
+      contrastText: '#212121',
+    },
   },
 });
 

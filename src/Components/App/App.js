@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
-import {Paper} from '@material-ui/core';
+import {Backdrop, Paper} from '@material-ui/core';
 import Navigation from '../Navigation/Navigation';
 import Copyright from '../Copyright';
 import theme from '../theme';
@@ -82,7 +82,7 @@ function App() {
         </main>
         <div className={classes.toolbar} />
         <footer className={classes.footer}>
-          <Paper>
+          <Paper elevation={3}>
             <Copyright />
           </Paper>
         </footer>
