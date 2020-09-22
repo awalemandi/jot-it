@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { JotContext } from '../JotContext';
 
 import { CssBaseline, Grid, Divider, Typography, Container, makeStyles, TextField, IconButton, Button } from '@material-ui/core';
 
@@ -32,6 +33,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CurrentRead = () => {
+  const { info } = useContext(JotContext);
+  const [infoValue, setinfoValue] = info;
   const classes = useStyles();
   
   return (
@@ -39,7 +42,7 @@ const CurrentRead = () => {
       <CssBaseline />
       <div className={classes.paper} overflow="visible">
         <Typography component="h1" variant="h6">
-          New Title
+          New Insight
           <Divider />
         </Typography>
 

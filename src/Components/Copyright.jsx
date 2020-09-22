@@ -10,10 +10,10 @@ const Copyright = () => {
                 <Typography variant="subtitle" color="textSecondary" align="center">
                     {'Copyright © '}
                     <Link color="inherit" href="https://github.com/awalemandi/">
-                    Jot.it
+                    Jot it
                     </Link>{' '}
                     {new Date().getFullYear()}
-                    {'.'}
+                    {'. '}
                     All Rights Reserved.
                 </Typography>
         </>

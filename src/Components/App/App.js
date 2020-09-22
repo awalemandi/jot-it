@@ -50,9 +50,8 @@ const useStyles = makeStyles((theme) => ({
 
 
 function App() {
-  const { content, info } = useContext(JotContext);
+  const { content } = useContext(JotContext);
   const [contentValue, setContentValue] = content;
-  const [infoValue, setinfoValue] = info;
   const classes = useStyles();
 
   const displayPage = {

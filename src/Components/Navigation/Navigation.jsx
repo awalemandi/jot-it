@@ -181,50 +181,50 @@ const Navigation = props => {
                 >
                     <MenuIcon />
                 </IconButton>
-                  
+                
                 <div>
                     <img className={classes.logo} src={logo} alt="logo"/>
                 </div>
                 <div></div>
-                  
+                
                 <div className={classes.search}>
                     <div className={classes.searchIcon}>
                         <SearchIcon />
                     </div>
-
+                    
                     <InputBase
                     placeholder="Search…"
                     classes={{
-                         root: classes.inputRoot,
-                         input: classes.inputInput,
+                        root: classes.inputRoot,
+                        input: classes.inputInput,
                     }}
                     inputProps={{ 'aria-label': 'search' }}
                     />
                 </div>
-                  
+                
                 <div></div>
-                  
+                
                 <div className={classes.icon} edge="end">
                     <IconButton >
                         <LiveHelpIcon/>
                     </IconButton>
-              
-                
-             
+                    
+                    
+                    
                     <IconButton >
                         <Brightness6RoundedIcon />
                     </IconButton>
-            
-                  
-            
+                    
+                    
+                    
                     <IconButton >
                         <AccountCircleIcon />
                     </IconButton>
                 </div>
-
+                
             </Toolbar>
         </AppBar>
-          
+        
         <Drawer
             variant="permanent"
             className={clsx(classes.drawer, {
@@ -239,23 +239,23 @@ const Navigation = props => {
             }}
         >
             <div className={classes.toolbar}/>
-         
+            
             <List>
-                  
+                
                 <ListItem button onClick={props.page.currentRead}>
                     <ListItemIcon>
                         <FiberNewRoundedIcon/>
                     </ListItemIcon>
                         <ListItemText primary="Current Read" />
                 </ListItem>
-              
+
                 <ListItem button onClick={props.page.library}>
                     <ListItemIcon>
                         <LayersRoundedIcon/>
                     </ListItemIcon>
-                        <ListItemText primary="Library" />
-                 </ListItem>
-          
+                        <ListItemText primary="Insights Library" />
+                </ListItem>
+
                 <ListItem button onClick={props.page.toBeRead}>
                     <ListItemIcon>
                         <StoreRoundedIcon/>
@@ -271,18 +271,18 @@ const Navigation = props => {
                 </ListItem>  
             
             </List>
-              
+            
             <Divider />
-                  
+            
             <List>
-                  
+            
                 <ListItem button onClick={props.page.feedback}>
                     <ListItemIcon>
                         <FeedbackRoundedIcon/>
                     </ListItemIcon>
                         <ListItemText primary="Feedback" />
                 </ListItem>
-              
+
                 <ListItem button onClick={props.page.bin}>
                     <ListItemIcon>
                         <DeleteRoundedIcon/>
@@ -291,7 +291,7 @@ const Navigation = props => {
                 </ListItem>
                     
             </List>
-              
+            
         </Drawer>
     </div>
     );
