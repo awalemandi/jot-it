@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { JotContext} from '../JotContext';
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import { Paper } from '@material-ui/core';
 import Navigation from '../Navigation/Navigation';
@@ -10,6 +11,7 @@ import ToBeRead from '../ContentPages/ToBeRead';
 import Statistics from '../ContentPages/Statistics';
 import Feedback from '../ContentPages/Feedback';
 import Bin from '../ContentPages/Bin';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,64 +50,50 @@ const useStyles = makeStyles((theme) => ({
 
 
 function App() {
-  const [content, setContent] = useState(<CurrentRead/>);
+  const [content, setContent] = useContext(JotContext);
   const classes = useStyles();
 
   const displayPage = {
     currentRead: function () {
-      setContent(<CurrentRead/>)
+      setContent(<CurrentRead />)
     },
     library: function () {
-      setContent(<Library/>)
+      setContent(<Library />)
     },
     toBeRead: function () {
-      setContent(<ToBeRead/>)
+      setContent(<ToBeRead />)
     },
     statistics: function () {
-      setContent(<Statistics/>)
+      setContent(<Statistics />)
     },
     feedback: function () {
-      setContent(<Feedback/>)
+      setContent(<Feedback />)
     },
     bin: function () {
-      setContent(<Bin/>)
+      setContent(<Bin />)
     }
   }
-
-  const displayCurrentRead = () => {
-    setContent(CurrentRead)
-  }
-
-  const displayLibrary = () => {
-    setContent(Library)
-  }
-
-    // const displayCurrentRead = () => {
-    //   setContent(CurrentRead)
-    // }    
-    // const displayCurrentRead = () => {
-    //   setContent(CurrentRead)
-    // }
-
+  
+  
   return (
     <ThemeProvider theme={theme}>
-      <div className={classes.root}>
+        <div className={classes.root}>
         <Navigation page={displayPage}/>
-        
-        <main className={classes.content}>
-          <div className={classes.toolbar} />
+
+          <main className={classes.content}>
+            <div className={classes.toolbar} />
             <Paper>
               {content}
             </Paper>
-        </main>
+          </main>
 
-        <div className={classes.toolbar} />
-        <footer className={classes.footer}>
-          <Paper elevation={3}>
-            <Copyright />
-          </Paper>
-        </footer>
-      </div>
+          <div className={classes.toolbar} />
+          <footer className={classes.footer}>
+            <Paper elevation={3}>
+              <Copyright />
+            </Paper>
+          </footer>
+        </div>
     </ThemeProvider>
   );
 }

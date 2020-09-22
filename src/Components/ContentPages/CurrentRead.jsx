@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const JotForm = () => {
+const CurrentRead = () => {
   const classes = useStyles();
   
   return (
@@ -39,7 +39,7 @@ const JotForm = () => {
       <CssBaseline />
       <div className={classes.paper} overflow="visible">
         <Typography component="h1" variant="h6">
-          New Jotting
+          New Title
           <Divider />
         </Typography>
 
@@ -111,4 +111,4 @@ const JotForm = () => {
   );
 }
 
-export default JotForm;
+export default CurrentRead;

@@ -9,10 +9,10 @@ const TextEditor = () => {
         <CKEditor editor={ClassicEditor}
             data={content}
             onChange={(event, editor) => {
-                 const data = editor.getData();
-                 setContent(data);
-             }}
-         />
+                const data = editor.getData();
+                setContent(data);
+            }}
+        />
     )
 }
 

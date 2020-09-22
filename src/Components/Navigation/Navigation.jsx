@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, { useState, useContext } from 'react';
+import { JotContext} from '../JotContext';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import {CssBaseline, AppBar, Toolbar, Drawer, List, ListItem, ListItemIcon, ListItemText, Divider, IconButton, InputBase,} from '@material-ui/core';
 import clsx from 'clsx';
@@ -151,9 +152,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const Navigation = ({page}) => {
+const Navigation = props => {
+    const page = useContext(JotContext);
     const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
 
     const handleDrawerState = () => {
         (open) ? setOpen(false) : setOpen(true);
@@ -240,28 +242,28 @@ const Navigation = ({page}) => {
          
             <List>
                   
-                <ListItem button onClick={page.currentRead}>
+                <ListItem button onClick={props.page.currentRead}>
                     <ListItemIcon>
                         <FiberNewRoundedIcon/>
                     </ListItemIcon>
                         <ListItemText primary="Current Read" />
                 </ListItem>
               
-                <ListItem button onClick={page.library}>
+                <ListItem button onClick={props.page.library}>
                     <ListItemIcon>
                         <LayersRoundedIcon/>
                     </ListItemIcon>
                         <ListItemText primary="Library" />
                  </ListItem>
           
-                <ListItem button onClick={page.toBeRead}>
+                <ListItem button onClick={props.page.toBeRead}>
                     <ListItemIcon>
                         <StoreRoundedIcon/>
                     </ListItemIcon>
                         <ListItemText primary="To Be Read" />
                 </ListItem>
                     
-                <ListItem button onClick={page.statistics}>
+                <ListItem button onClick={props.page.statistics}>
                     <ListItemIcon>
                         <InsertChartRoundedIcon/>
                     </ListItemIcon>
@@ -274,14 +276,14 @@ const Navigation = ({page}) => {
                   
             <List>
                   
-                <ListItem button onClick={page.feedback}>
+                <ListItem button onClick={props.page.feedback}>
                     <ListItemIcon>
                         <FeedbackRoundedIcon/>
                     </ListItemIcon>
                         <ListItemText primary="Feedback" />
                 </ListItem>
               
-                <ListItem button onClick={page.bin}>
+                <ListItem button onClick={props.page.bin}>
                     <ListItemIcon>
                         <DeleteRoundedIcon/>
                     </ListItemIcon>
