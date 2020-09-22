@@ -50,27 +50,29 @@ const useStyles = makeStyles((theme) => ({
 
 
 function App() {
-  const [content, setContent] = useContext(JotContext);
+  const { content, info } = useContext(JotContext);
+  const [contentValue, setContentValue] = content;
+  const [infoValue, setinfoValue] = info;
   const classes = useStyles();
 
   const displayPage = {
     currentRead: function () {
-      setContent(<CurrentRead />)
+      setContentValue(<CurrentRead />)
     },
     library: function () {
-      setContent(<Library />)
+      setContentValue(<Library />)
     },
     toBeRead: function () {
-      setContent(<ToBeRead />)
+      setContentValue(<ToBeRead />)
     },
     statistics: function () {
-      setContent(<Statistics />)
+      setContentValue(<Statistics />)
     },
     feedback: function () {
-      setContent(<Feedback />)
+      setContentValue(<Feedback />)
     },
     bin: function () {
-      setContent(<Bin />)
+      setContentValue(<Bin />)
     }
   }
   
@@ -83,7 +85,7 @@ function App() {
           <main className={classes.content}>
             <div className={classes.toolbar} />
             <Paper>
-              {content}
+              {contentValue}
             </Paper>
           </main>
 

@@ -20,7 +20,7 @@ export const JotDistributor = props => {
         }
     ]);
     return (
-        <JotContext.Provider value={[content, setContent]}>
+        <JotContext.Provider value={{content: [content, setContent], info: [jotInfo, setJotInfo]}}>
             {props.children}
         </JotContext.Provider>
     );
