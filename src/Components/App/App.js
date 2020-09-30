@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react';
-import { JotContext} from '../JotContext';
+import { JotContext} from '../../Resources/JotContext';
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import { Paper } from '@material-ui/core';
 import Navigation from '../Navigation/Navigation';
 import Copyright from '../Copyright';
-import theme from '../theme';
+import theme from '../../Resources/theme';
 import CurrentRead from '../ContentPages/CurrentRead';
 import Library from '../ContentPages/Library';
 import ToBeRead from '../ContentPages/ToBeRead';

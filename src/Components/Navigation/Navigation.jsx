@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { JotContext} from '../JotContext';
+import { JotContext} from '../../Resources/JotContext';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import {CssBaseline, AppBar, Toolbar, Drawer, List, ListItem, ListItemIcon, ListItemText, Divider, IconButton, InputBase,} from '@material-ui/core';
 import clsx from 'clsx';

@@ -1,13 +1,13 @@
 import React, { useState, useContext } from 'react';
-import { JotContext } from '../JotContext';
+import { JotContext } from '../../Resources/JotContext';
 
 import { CssBaseline, Grid, Divider, Typography, Container, makeStyles, TextField, IconButton, Button } from '@material-ui/core';
 
 import SaveRoundedIcon from '@material-ui/icons/SaveRounded';
 import DoneAllRoundedIcon from '@material-ui/icons/DoneAllRounded';
 
-import DatePicker from '../DatePicker';
-import TextEditor from '../TextEditor';
+import DatePicker from '../../Resources/DatePicker';
+import TextEditor from '../../Resources/TextEditor';
 
 const useStyles = makeStyles((theme) => ({
   paper: {

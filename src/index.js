@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './Components/App/App';
-import { JotDistributor } from './Components/JotContext';
+import { JotDistributor } from './Resources/JotContext';
 
 ReactDOM.render(
     <JotDistributor>
