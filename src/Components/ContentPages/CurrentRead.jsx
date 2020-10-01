@@ -8,7 +8,9 @@ import SaveRoundedIcon from '@material-ui/icons/SaveRounded';
 import DoneAllRoundedIcon from '@material-ui/icons/DoneAllRounded';
 
 import DatePicker from '../../Resources/DatePicker';
-import TextEditor from '../../Resources/TextEditor';
+import CKEditor from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import ReactHtmlParser from 'react-html-parser';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -63,10 +65,10 @@ const CurrentRead = () => {
     },
 
     jots: function (e, editor) {
-      console.log(editor.getData());
+      const data = editor.getData();
       setInfoValue({
         ...infoValue,
-        jots: e.target.value
+        jots: data
       })
     },
 }
@@ -142,7 +144,10 @@ const CurrentRead = () => {
                 </Grid>
                 
                 <Grid item xs={8} className={classes.textEditor}>
-                  <TextEditor onUpdate={updateState.jots}/>
+                  <CKEditor editor={ClassicEditor}
+                    data={info.jots}
+                    onChange={updateState.jots}
+                  />
                 </Grid>
 
               <Grid item container xs={12} justify="space-around" alignItems="center">
