@@ -1,5 +1,6 @@
 import React, { useState, createContext } from 'react';
 import CurrentRead from '../Components/ContentPages/CurrentRead';
+import { startOfToday } from 'date-fns';
 
 
 export const JotContext = createContext();
@@ -12,7 +13,7 @@ export const JotDistributor = props => {
             title: '',
             author: '',
             commenceDate: '',
-            jots: '',
+            jots: 'Enter jots here...',
             completed: false,
             archived: false,
         }

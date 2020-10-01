@@ -7,7 +7,8 @@ import { CssBaseline, Grid, Divider, Typography, Container, makeStyles, TextFiel
 import SaveRoundedIcon from '@material-ui/icons/SaveRounded';
 import DoneAllRoundedIcon from '@material-ui/icons/DoneAllRounded';
 
-import DatePicker from '../../Resources/DatePicker';
+import DateFnsUtils from '@date-io/date-fns';
+import { MuiPickersUtilsProvider, KeyboardDatePicker } from "@material-ui/pickers";
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import ReactHtmlParser from 'react-html-parser';
@@ -60,7 +61,7 @@ const CurrentRead = () => {
     commenceDate: function (e) {
       setInfoValue({
         ...infoValue,
-        commenceDate: e.target.value
+        commenceDate: e
       })
     },
 
@@ -139,13 +140,21 @@ const CurrentRead = () => {
                     />
               </Grid>
 
-                <Grid item xs={8}>
-              <DatePicker onChange={updateState.commenceDate}/>
+              <Grid item xs={8}>
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardDatePicker
+                    clearable
+                    value={info[0].commenceDate}
+                    placeholder="01/01/2020"
+                    onChange={updateState.commenceDate}
+                    format="dd/MM/yyyy"
+                  />
+              </MuiPickersUtilsProvider>
                 </Grid>
                 
                 <Grid item xs={8} className={classes.textEditor}>
                   <CKEditor editor={ClassicEditor}
-                    data={info.jots}
+                    data={info[0].jots}
                     onChange={updateState.jots}
                   />
                 </Grid>
