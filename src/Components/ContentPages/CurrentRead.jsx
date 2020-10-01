@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { firebase } from '../../firebase';
+import { db } from '../../firebase';
 import { JotContext } from '../../Resources/JotContext';
 
 import { CssBaseline, Grid, Divider, Typography, Container, makeStyles, TextField, IconButton, Button } from '@material-ui/core';
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CurrentRead = ({id}) => {
+const CurrentRead = () => {
   const { info } = useContext(JotContext);
   const [infoValue, setInfoValue] = info;
   
@@ -62,7 +62,8 @@ const CurrentRead = ({id}) => {
       })
     },
 
-    jots: function (e) {
+    jots: function (e, editor) {
+      console.log(editor.getData());
       setInfoValue({
         ...infoValue,
         jots: e.target.value
@@ -71,33 +72,36 @@ const CurrentRead = ({id}) => {
 }
 
   const saveInsight = () => {
-    firebase
-      .firestore()
-      .collection('insights')
-      .doc(id)
-      .update({
-        title: info.title,
-        author: info.author,
-        commenceDate: info.commenceDate,
-        jots: info.jots,
-        completed: false,
-        archived: info.archived,
-      })
+    console.log(info[0].title);
+    console.log(info[0].commenceDate);
+    console.log(info[0].jots);
+    // db.collection('insights')
+    //   .add({
+    //     title: info.title,
+    //     author: info.author,
+    //     commenceDate: info.commenceDate,
+    //     jots: info.jots,
+    //     archived: info.archived,
+    //   })
+    //   .then(() => {
+    //     alert('Your progress has been saved! emoji ')
+    //   })
+    //   .catch(e => { console.log(e) });
   }
 
   const markAsComplete = () => {
-    firebase
-      .firestore()
-      .collection('insights')
-      .doc(id)
-      .update({
-        title: info.title,
-        author: info.author,
-        commenceDate: info.commenceDate,
-        jots: info.jots,
-        completed: true,
-        archived: info.archived,
-      })
+    // firebase
+    //   .firestore()
+    //   .collection('insights')
+    //   .doc(id)
+    //   .update({
+    //     title: info.title,
+    //     author: info.author,
+    //     commenceDate: info.commenceDate,
+    //     jots: info.jots,
+    //     completed: true,
+    //     archived: info.archived,
+    //   })
   } 
 
   return (
@@ -138,7 +142,7 @@ const CurrentRead = ({id}) => {
                 </Grid>
                 
                 <Grid item xs={8} className={classes.textEditor}>
-                  <TextEditor onChange={updateState.jots}/>
+                  <TextEditor onUpdate={updateState.jots}/>
                 </Grid>
 
               <Grid item container xs={12} justify="space-around" alignItems="center">

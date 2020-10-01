@@ -3,7 +3,7 @@ import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 
-const TextEditor = () => {
+const TextEditor = ({onUpdate}) => {
     const [content, setContent] = useState('');
     return (
         <CKEditor editor={ClassicEditor}

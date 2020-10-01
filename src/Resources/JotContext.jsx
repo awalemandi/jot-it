@@ -7,7 +7,7 @@ export const JotContext = createContext();
 export const JotDistributor = props => {
     const [content, setContent] = useState(<CurrentRead />);
     
-    const [jotInfo, setJotInfo] = useState([
+    const [jotInfo, setJotInfo] = useState(
         {
             title: '',
             author: '',
@@ -16,7 +16,7 @@ export const JotDistributor = props => {
             completed: false,
             archived: false,
         }
-    ]);
+    );
     return (
         <JotContext.Provider value={{content: [content, setContent], info: [jotInfo, setJotInfo]}}>
             {props.children}
