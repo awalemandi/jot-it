@@ -75,21 +75,18 @@ const CurrentRead = () => {
 }
 
   const saveInsight = () => {
-    console.log(info[0].title);
-    console.log(info[0].commenceDate);
-    console.log(info[0].jots);
-    // db.collection('insights')
-    //   .add({
-    //     title: info.title,
-    //     author: info.author,
-    //     commenceDate: info.commenceDate,
-    //     jots: info.jots,
-    //     archived: info.archived,
-    //   })
-    //   .then(() => {
-    //     alert('Your progress has been saved! emoji ')
-    //   })
-    //   .catch(e => { console.log(e) });
+    db.collection('insights')
+      .add({
+        title: info[0].title,
+        author: info[0].author,
+        commenceDate: info[0].commenceDate,
+        jots: info[0].jots,
+        archived: false,
+      })
+      .then(() => {
+        alert('Your progress has been saved! emoji ')
+      })
+      .catch(e => { console.log(e) });
   }
 
   const markAsComplete = () => {
