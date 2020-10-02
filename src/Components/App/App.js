@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { JotContext} from '../../Resources/JotContext';
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import { Paper } from '@material-ui/core';

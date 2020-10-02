@@ -1,5 +1,4 @@
-import React, { useState, useContext } from 'react';
-import { JotContext} from '../../Resources/JotContext';
+import React, { useState } from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import {CssBaseline, AppBar, Toolbar, Drawer, List, ListItem, ListItemIcon, ListItemText, Divider, IconButton, InputBase,} from '@material-ui/core';
 import clsx from 'clsx';
@@ -153,7 +152,6 @@ const useStyles = makeStyles((theme) => ({
 
 
 const Navigation = props => {
-    const page = useContext(JotContext);
     const classes = useStyles();
     const [open, setOpen] = useState(false);
 
