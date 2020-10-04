@@ -92,7 +92,7 @@ const CurrentRead = () => {
 
   const markAsComplete = () => {
     insightRef
-      .set({
+      .update({
         title: info[0].title,
         author: info[0].author,
         commenceDate: info[0].commenceDate,
@@ -100,8 +100,18 @@ const CurrentRead = () => {
         archived: false,
         completed: true,
       })
-    .then(() => {
-      alert('Wow, you finished your read! 👏' )
+      .then(() => {
+        setInfoValue({
+          title: '',
+          author: '',
+          commenceDate: '01/01/2020',
+          jots: 'Enter jots here...',
+          completed: false,
+          archived: false,
+        });
+        console.log(info);
+        db.collection('users/cussinstoic/insights/').doc();
+        alert('Wow, you finished your read! 👏' )
     })
     .catch(e => { console.log(e) });
   } 

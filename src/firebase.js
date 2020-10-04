@@ -16,5 +16,8 @@ const db = firebaseConfig.firestore();
 
 let insightRef = db.collection('users/cussinstoic/insights/').doc();
 
+const createNewInsightDocument = () => {
+    let insightRef = db.collection('users/cussinstoic/insights/').doc();
+}
 
 export { db, insightRef };
