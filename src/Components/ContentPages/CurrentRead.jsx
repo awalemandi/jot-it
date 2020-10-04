@@ -1,5 +1,5 @@
 import React, { useContext} from 'react';
-import { db } from '../../firebase';
+import { db, insightRef } from '../../firebase';
 import { JotContext } from '../../Resources/JotContext';
 
 import { CssBaseline, Grid, Divider, Typography, makeStyles, TextField, IconButton, Button } from '@material-ui/core';
@@ -75,8 +75,8 @@ const CurrentRead = () => {
 }
 
   const saveInsight = () => {
-    db.collection('users/cussinstoic/userData/insights/insights/')
-      .add({
+    insightRef
+      .set({
         title: info[0].title,
         author: info[0].author,
         commenceDate: info[0].commenceDate,
@@ -84,25 +84,26 @@ const CurrentRead = () => {
         archived: false,
         completed: false,
       })
-      .then(() => {
-        alert('Your progress has been saved! 👍' )
-      })
-      .catch(e => { console.log(e) });
+    .then(() => {
+      alert('Your progress has been saved! 👍' )
+    })
+    .catch(e => { console.log(e) });
   }
 
   const markAsComplete = () => {
-    // firebase
-    //   .firestore()
-    //   .collection('insights')
-    //   .doc(id)
-    //   .update({
-    //     title: info.title,
-    //     author: info.author,
-    //     commenceDate: info.commenceDate,
-    //     jots: info.jots,
-    //     completed: true,
-    //     archived: info.archived,
-    //   })
+    insightRef
+      .set({
+        title: info[0].title,
+        author: info[0].author,
+        commenceDate: info[0].commenceDate,
+        jots: info[0].jots,
+        archived: false,
+        completed: true,
+      })
+    .then(() => {
+      alert('Wow, you finished your read! 👏' )
+    })
+    .catch(e => { console.log(e) });
   } 
 
   return (

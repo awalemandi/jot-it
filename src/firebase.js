@@ -14,4 +14,7 @@ const firebaseConfig = firebase.initializeApp({
 
 const db = firebaseConfig.firestore();
 
-export { db };
+let insightRef = db.collection('users/cussinstoic/insights/').doc();
+
+
+export { db, insightRef };
