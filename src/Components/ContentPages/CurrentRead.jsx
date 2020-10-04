@@ -75,16 +75,17 @@ const CurrentRead = () => {
 }
 
   const saveInsight = () => {
-    db.collection('insights')
+    db.collection('users/cussinstoic/userData/insights/insights/')
       .add({
         title: info[0].title,
         author: info[0].author,
         commenceDate: info[0].commenceDate,
         jots: info[0].jots,
         archived: false,
+        completed: false,
       })
       .then(() => {
-        alert('Your progress has been saved! emoji ')
+        alert('Your progress has been saved! 👍' )
       })
       .catch(e => { console.log(e) });
   }

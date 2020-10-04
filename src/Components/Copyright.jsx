@@ -7,7 +7,7 @@ import Link from '@material-ui/core/Link';
 const Copyright = () => {
     return (
         <>
-                <Typography variant="subtitle" color="textSecondary" align="center">
+                <Typography variant="subtitle2" color="textSecondary" align="center">
                     {'Copyright © '}
                     <Link color="inherit" href="https://github.com/awalemandi/">
                     Jot it
