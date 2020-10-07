@@ -1,4 +1,4 @@
-import React, { useContext} from 'react';
+import React, { useContext, useEffect } from 'react';
 import { db, insightsDocRef } from '../../firebase';
 import { JotContext } from '../../Resources/JotContext';
 
@@ -42,6 +42,11 @@ const CurrentRead = () => {
   const [infoValue, setInfoValue] = info;
   
   const classes = useStyles();
+
+  useEffect(() => {
+
+  }, [info[0]]);
+  
 
   const updateState = {
     title: function (e) {
@@ -92,6 +97,7 @@ const CurrentRead = () => {
   };
 
   const handleComplete = () => {
+    handleSave();
     insightsDocRef
     .update({
       iinsightId: `${(info[0].title+info[0].author).toLowerCase()}`,
@@ -107,17 +113,15 @@ const CurrentRead = () => {
         title: '',
         author: '',
         commenceDate: '01/01/2020',
-        jots: 'Enter jots here...',
+        jots: 'Jots here..',
         completed: false,
         archived: false,
-      })
-        console.log(info)
-      })
-      .then(() => {
-        alert('Wow, you finished your read! 👏' )
-      })
-      .catch(e => { console.log(e) });
+      });
+      alert('Wow, you finished your read! 👏' );
+    })
+    .catch(e => { console.log(e) });
   };
+
 
   return (
     <>
@@ -133,6 +137,7 @@ const CurrentRead = () => {
                 <Grid item xs={4}>
                     <TextField
                       name="title"
+                      value={info[0].title}
                       fullWidth
                       id="title"
                       label="Title"
@@ -145,6 +150,7 @@ const CurrentRead = () => {
                     <TextField
                         // variant="outlined"
                         fullWidth
+                        value={info[0].author}
                         id="author"
                         label="Author"
                         name="author"
