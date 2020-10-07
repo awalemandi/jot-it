@@ -1,5 +1,5 @@
 import React, { useContext} from 'react';
-import { db, insightRef } from '../../firebase';
+import { db,saveInsight, markAsComplete } from '../../firebase';
 import { JotContext } from '../../Resources/JotContext';
 
 import { CssBaseline, Grid, Divider, Typography, makeStyles, TextField, IconButton, Button } from '@material-ui/core';
@@ -74,47 +74,6 @@ const CurrentRead = () => {
     },
 }
 
-  const saveInsight = () => {
-    insightRef
-      .set({
-        title: info[0].title,
-        author: info[0].author,
-        commenceDate: info[0].commenceDate,
-        jots: info[0].jots,
-        archived: false,
-        completed: false,
-      })
-    .then(() => {
-      alert('Your progress has been saved! 👍' )
-    })
-    .catch(e => { console.log(e) });
-  }
-
-  const markAsComplete = () => {
-    insightRef
-      .update({
-        title: info[0].title,
-        author: info[0].author,
-        commenceDate: info[0].commenceDate,
-        jots: info[0].jots,
-        archived: false,
-        completed: true,
-      })
-      .then(() => {
-        setInfoValue({
-          title: '',
-          author: '',
-          commenceDate: '01/01/2020',
-          jots: 'Enter jots here...',
-          completed: false,
-          archived: false,
-        });
-        console.log(info);
-        db.collection('users/cussinstoic/insights/').doc();
-        alert('Wow, you finished your read! 👏' )
-    })
-    .catch(e => { console.log(e) });
-  } 
 
   return (
     <>
@@ -177,7 +136,17 @@ const CurrentRead = () => {
                     size="large"
                     className={classes.saveButton}
                     startIcon={<SaveRoundedIcon />}
-                    onClick={saveInsight}
+                    onClick={() => {
+                      saveInsight({
+                        insightId: `${(info[0].title+info[0].author).toLowerCase()}`,
+                        title: info[0].title,
+                        author: info[0].author,
+                        commenceDate: info[0].commenceDate,
+                        jots: info[0].jots,
+                        archived: false,
+                        completed: false
+                      })
+                    }}
                   >
                   
                   </Button>
