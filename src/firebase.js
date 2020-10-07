@@ -14,46 +14,27 @@ const firebaseConfig = firebase.initializeApp({
 });
 
 const db = firebaseConfig.firestore();
-const insightsDocRef = db.collection('users/cussinstoic/insights');
+const insightsDocRef = db.collection('users/cussinstoic/insights').doc();
 
 
-const saveInsight = insightObject => {
-    insightsDocRef
-    .add({
-        insights: {
-            insightObject
-        }
-    })
-    .then(() => {
-        alert('Your progress has been saved! 👍')
-    })
-    .catch(e => { console.log(e) });
-}
+// const saveInsight = insightObject => {
+//     insightsDocRef
+//     .set({
+//         insights: {
+//             insightObject
+//         }
+//     })
+//     .then(() => {
+//         alert('Your progress has been saved! 👍')
+//     })
+//     .catch(e => { console.log(e) });
+// }
 
-  const markAsComplete = () => {
-    // insightRef
-    //   .update({
-    //     title: info[0].title,
-    //     author: info[0].author,
-    //     commenceDate: info[0].commenceDate,
-    //     jots: info[0].jots,
-    //     archived: false,
-    //     completed: true,
-    //   })
-    //   .then(() => {
-    //     setInfoValue({
-    //       title: '',
-    //       author: '',
-    //       commenceDate: '01/01/2020',
-    //       jots: 'Enter jots here...',
-    //       completed: false,
-    //       archived: false,
-    //     });
-    //     console.log(info);
-    //     db.collection('users/cussinstoic/insights/').doc();
-    //     alert('Wow, you finished your read! 👏' )
-    // })
-    // .catch(e => { console.log(e) });
-  } 
+//   const markAsComplete = insightObject => {
+//     insightsDocRef
+//       .update({
+//         insightObject
+//       })
+//     } 
 
-export { db, saveInsight, markAsComplete };
+export { db, insightsDocRef };
