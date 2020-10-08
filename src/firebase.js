@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 
@@ -14,7 +15,10 @@ const firebaseConfig = firebase.initializeApp({
 });
 
 const db = firebaseConfig.firestore();
-const insightsDocRef = db.collection('users/cussinstoic/insights').doc();
+
+const insightsDocRef = db.collection('users/cussinstoic/insights');
+
+
 
 
 // const saveInsight = insightObject => {
