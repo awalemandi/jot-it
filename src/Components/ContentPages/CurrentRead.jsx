@@ -107,7 +107,7 @@ const CurrentRead = () => {
   const handleComplete = () => {
     console.log('Mark as complete function started')
     insightsDocRef.doc()
-    .update({
+    .set({
       insightId: `${(info[0].title+info[0].author).toLowerCase()}`,
       title: info[0].title,
       author: info[0].author,
