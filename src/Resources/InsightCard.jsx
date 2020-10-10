@@ -1,4 +1,6 @@
 import React from 'react'
+import { insightsDocRef } from '../firebase';
+
 import { Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -19,9 +21,18 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const InsightCard = ({title, author, commenceDate, jots}) => {
-    const classes = useStyles();
+const handleDelete = insightId => {
+    // console.log(`insight being deleted: ${insightId}`)
+    insightsDocRef.doc(insightId)
+    .delete()
+    .then(() => {
+        alert('Insight deleted! 🗑');
+    })
+    .catch(e => { console.log(e) });
+};
 
+const InsightCard = ({ docId, insightId, title, author, jots }) => {
+    const classes = useStyles();
     return (
         <Card className={classes.root} variant="outlined">
             <CardContent>
@@ -36,7 +47,7 @@ const InsightCard = ({title, author, commenceDate, jots}) => {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small">Delete</Button>
+                <Button size="small" onClick={() => handleDelete(docId)}>Delete</Button>
             </CardActions>
         </Card>
     )

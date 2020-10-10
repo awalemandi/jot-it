@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+
 const useInsightsArray = () => {
     const [insightsArray, setInsightsArray] = useState([]);
 
@@ -20,9 +21,10 @@ const useInsightsArray = () => {
         const unsubcribe = insightsDocRef
             .onSnapshot(snapshot => {
                 const newInsights = snapshot.docs.map(doc => ({
+                    id: doc.id,
                     ...doc.data()
                 }));
-            console.log(newInsights);
+            // console.log(newInsights);
             setInsightsArray(newInsights);
         });
         
@@ -47,7 +49,8 @@ const Library = () => {
                         <Grid item xs={8} sm={5} md={4}>
                             {userInsights.map((insight) =>
                                 <InsightCard 
-                                    key={insight.insightId}
+                                    docId={insight.id}
+                                    insightId={insight.insightId}
                                     title={insight.title} 
                                     author={insight.author}
                                     commenceDate={insight.commenceDate}
