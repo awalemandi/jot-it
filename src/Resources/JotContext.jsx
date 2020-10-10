@@ -13,7 +13,7 @@ export const JotDistributor = props => {
             title: '',
             author: '',
             commenceDate: '01/01/2020',
-            jots: 'Jot here ...',
+            jots: 'Jots here ...',
             completed: false,
             archived: false,
         }

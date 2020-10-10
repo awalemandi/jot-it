@@ -17,14 +17,16 @@ const useInsightsArray = () => {
     const [insightsArray, setInsightsArray] = useState([]);
 
     useEffect(() => {
-        insightsDocRef
+        const unsubcribe = insightsDocRef
             .onSnapshot(snapshot => {
                 const newInsights = snapshot.docs.map(doc => ({
                     ...doc.data()
                 }));
-                console.log(newInsights);
-                setInsightsArray(newInsights);
-            });
+            console.log(newInsights);
+            setInsightsArray(newInsights);
+        });
+        
+        return unsubcribe;
     }, [])
     return insightsArray;
 };

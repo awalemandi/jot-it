@@ -79,8 +79,16 @@ const CurrentRead = () => {
     },
   };
 
+  const progressSavedAlert = () => {
+    alert('Your progress has been saved! 👍');
+  };
+
+  const finishedReadAlert = () => {
+    alert('Wow, you finished your read! 👏' );
+  };
+
   const handleSave = () => {
-    insightsDocRef
+    insightsDocRef.doc()
     .set({
       insightId: `${(info[0].title+info[0].author).toLowerCase()}`,
       title: info[0].title,
@@ -90,17 +98,17 @@ const CurrentRead = () => {
       archived: false,
       completed: false
     })
-    .then(() => {
-        alert('Your progress has been saved! 👍')
-    })
+    .then(() => 
+      progressSavedAlert()
+    )
     .catch(e => { console.log(e) });
   };
 
   const handleComplete = () => {
-    handleSave();
-    insightsDocRef
+    console.log('Mark as complete function started')
+    insightsDocRef.doc()
     .update({
-      iinsightId: `${(info[0].title+info[0].author).toLowerCase()}`,
+      insightId: `${(info[0].title+info[0].author).toLowerCase()}`,
       title: info[0].title,
       author: info[0].author,
       commenceDate: info[0].commenceDate,
@@ -117,7 +125,8 @@ const CurrentRead = () => {
         completed: false,
         archived: false,
       });
-      alert('Wow, you finished your read! 👏' );
+      console.log('Mark as complete fucntion finished')
+      finishedReadAlert()
     })
     .catch(e => { console.log(e) });
   };
