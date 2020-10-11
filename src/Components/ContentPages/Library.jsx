@@ -24,10 +24,10 @@ const useInsightsArray = () => {
                     id: doc.id,
                     ...doc.data()
                 }));
-            // console.log(newInsights);
-            setInsightsArray(newInsights);
-        });
-        
+                // console.log(newInsights);
+                setInsightsArray(newInsights);
+            });
+
         return unsubcribe;
     }, [])
     return insightsArray;
@@ -38,29 +38,28 @@ const Library = () => {
     const userInsights = useInsightsArray();
 
     return (
-        <>
-            <div className={classes.paper} overflow="visible">
+        <Grid container className={classes.paper} spacing={2} justify="space-evenly">
+            <Grid item xs={2}></Grid>
+            <Grid item xs={8}>
                 <Typography component="h1" variant="h6">
                     Your Insights Library
-                    <Divider />
+                        <Divider />
                 </Typography>
-
-                <Grid container spacing={2} justify="center">
-                            {userInsights.map((insight) =>
-                        <Grid item xs={8} sm={5} md={4}>
-                                <InsightCard 
-                                    docId={insight.id}
-                                    insightId={insight.insightId}
-                                    title={insight.title} 
-                                    author={insight.author}
-                                    commenceDate={insight.commenceDate}
-                                    jots={insight.jots}
-                                />
-                        </Grid>
-                            )}
+            </Grid>
+            <Grid item xs={2}></Grid>
+            {userInsights.map((insight) =>
+                <Grid item xs={8} sm={5} md={4}>
+                    <InsightCard
+                        docId={insight.id}
+                        insightId={insight.insightId}
+                        title={insight.title}
+                        author={insight.author}
+                        commenceDate={insight.commenceDate}
+                        jots={insight.jots}
+                    />
                 </Grid>
-            </div>
-        </>
+            )}
+        </Grid>
     )
 };
 

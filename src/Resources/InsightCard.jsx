@@ -6,13 +6,14 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        minWidth: 200,
+        maxWidth: 200,
         height: 'auto',
     },
     title: {
         fontSize: 14,
     },
-    pos: {
+    text: {
+        height: 150,
         marginBottom: 12,
     },
 }));
@@ -33,17 +34,16 @@ const InsightCard = ({ docId, insightId, title, author, jots }) => {
         <Card className={classes.root} variant="outlined">
             <CardContent>
                 <Typography className={classes.title} color="textSecondary" gutterBottom>
-                    {/* {commenceDate} */}
-                </Typography>
-                <Typography variant="h5" component="h2">
                     {title} by {author}
                 </Typography>
-                <Typography className={classes.pos} color="textSecondary">
+                <Typography variant="h5" component="h2">
+                </Typography>
+                <Typography className={classes.text} variant="body2" component="p">
                     {jots}
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small" onClick={() => handleDelete(docId)}>Delete</Button>
+                <Button variant="outlined" className={classes.button} size="small" onClick={() => handleDelete(docId)}>Delete</Button>
             </CardActions>
         </Card>
     )

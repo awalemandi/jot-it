@@ -12,7 +12,7 @@ const Copyright = () => {
           Jot it
         </Link>{' '}
         {new Date().getFullYear()}
-        {'.'}
+        {'. '}
         All Rights Reserved.
       </Typography>
     );
@@ -25,7 +25,7 @@ const Footer = () => {
     <div>
       <CssBaseline />
         <Container maxWidth="sm">
-          <Typography variant="body1">...</Typography>
+          <Typography variant="body1">  </Typography>
           <Copyright />
         </Container>
     </div>
