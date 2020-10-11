@@ -3,7 +3,7 @@ import { JotContext} from '../../Resources/JotContext';
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import { Paper } from '@material-ui/core';
 import Navigation from '../Navigation/Navigation';
-import Copyright from '../Copyright';
+import Footer from '../Footer';
 import theme from '../../Resources/theme';
 import CurrentRead from '../ContentPages/CurrentRead';
 import Library from '../ContentPages/Library';
@@ -42,8 +42,7 @@ const useStyles = makeStyles((theme) => ({
   footer: {
     flexGrow: 1,
     padding: theme.spacing(5),
-    minHeight: 100,
-    width: 'auto',
+    height: 'auto',
   },
 }));
 
@@ -91,7 +90,7 @@ function App() {
           <div className={classes.toolbar} />
           <footer className={classes.footer}>
             <Paper elevation={3}>
-              <Copyright />
+              <Footer />
             </Paper>
           </footer>
         </div>

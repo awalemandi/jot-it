@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { db, insightsDocRef } from '../../firebase';
+import { insightsDocRef } from '../../firebase';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Divider, Grid } from '@material-ui/core';
 

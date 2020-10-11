@@ -1,8 +1,10 @@
-import React, { useContext, useEffect } from 'react';
-import { db, insightsDocRef } from '../../firebase';
+import React, { useState, useContext, useEffect } from 'react';
+import { insightsDocRef } from '../../firebase';
 import { JotContext } from '../../Resources/JotContext';
 
-import { CssBaseline, Grid, Divider, Typography, makeStyles, TextField, IconButton, Button } from '@material-ui/core';
+import { CssBaseline, Grid, Divider, Typography, makeStyles, TextField, Button, Snackbar } from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert';
+
 
 import SaveRoundedIcon from '@material-ui/icons/SaveRounded';
 import DoneAllRoundedIcon from '@material-ui/icons/DoneAllRounded';
@@ -12,7 +14,6 @@ import { MuiPickersUtilsProvider, KeyboardDatePicker } from "@material-ui/picker
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 // import ReactHtmlParser from 'react-html-parser';
-
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -40,13 +41,20 @@ const useStyles = makeStyles((theme) => ({
 const CurrentRead = () => {
   const { info } = useContext(JotContext);
   const [infoValue, setInfoValue] = info;
+  const [alertOpen, setAlertOpen] = useState(false);
+
+  const handleAlertOpen = () => {
+    setAlertOpen(true);
+  };
+
+  const handleAlertClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setAlertOpen(false);
+  };
   
   const classes = useStyles();
-
-  useEffect(() => {
-
-  }, [info[0]]);
-  
 
   const updateState = {
     title: function (e) {
@@ -79,6 +87,36 @@ const CurrentRead = () => {
     },
   };
 
+  function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
+  
+  const saveSuccessAlert = () => {
+    console.log(`snackbar being returned ${alertOpen}`);
+    console.log(alertOpen);
+    return  <Snackbar open={alertOpen} autoHideDuration={6000} onClose={handleAlertClose}>
+              <Alert onClose={handleAlertClose} severity="success">
+                Your progress has been saved! 👍
+              </Alert>
+            </Snackbar>;
+    };
+  
+  const completeSuccessAlert = () => {
+      return <Snackbar open={alertOpen} autoHideDuration={6000} onClose={handleAlertClose}>
+                  <Alert onClose={handleAlertClose} severity="success">
+                  Wow, you finished your read! 👏
+                  </Alert>
+              </Snackbar>
+    };
+  
+  const deleteWarningAlert = () => {
+      return <Snackbar open={alertOpen} autoHideDuration={6000} onClose={handleAlertClose}>
+                  <Alert onClose={handleAlertClose} severity="warning">
+                      Your progress has been saved! 👍
+                  </Alert>
+              </Snackbar>
+    };
+  
   const progressSavedAlert = () => {
     alert('Your progress has been saved! 👍');
   };
@@ -88,6 +126,7 @@ const CurrentRead = () => {
   };
 
   const handleSave = () => {
+    handleAlertOpen();
     insightsDocRef.doc()
     .set({
       insightId: `${(info[0].title+info[0].author).toLowerCase()}`,
@@ -98,16 +137,17 @@ const CurrentRead = () => {
       archived: false,
       completed: false
     })
-    .then(() => 
-      progressSavedAlert()
-    )
+    .then(() => {
+      console.log(`State befoer alert: ${alertOpen}`)
+      progressSavedAlert();
+    })
     .catch(e => { console.log(e) });
   };
 
   const handleComplete = () => {
     console.log('Mark as complete function started')
     insightsDocRef.doc()
-    .set({
+    .update({
       insightId: `${(info[0].title+info[0].author).toLowerCase()}`,
       title: info[0].title,
       author: info[0].author,
@@ -137,7 +177,7 @@ const CurrentRead = () => {
       <CssBaseline />
       <div className={classes.paper} overflow="visible">
         <Typography component="h1" variant="h6">
-          New Insight
+          New Insight 
           <Divider />
         </Typography>
         
