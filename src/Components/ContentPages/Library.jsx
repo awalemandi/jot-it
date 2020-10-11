@@ -46,8 +46,8 @@ const Library = () => {
                 </Typography>
 
                 <Grid container spacing={2} justify="center">
-                        <Grid item xs={8} sm={5} md={4}>
                             {userInsights.map((insight) =>
+                        <Grid item xs={8} sm={5} md={4}>
                                 <InsightCard 
                                     docId={insight.id}
                                     insightId={insight.insightId}
@@ -56,8 +56,8 @@ const Library = () => {
                                     commenceDate={insight.commenceDate}
                                     jots={insight.jots}
                                 />
-                            )}
                         </Grid>
+                            )}
                 </Grid>
             </div>
         </>

@@ -19,7 +19,7 @@ import logo from './jotit_white.png';
 const drawerWidth = 200;
 
 const useStyles = makeStyles((theme) => ({
-     root: {
+    root: {
         display: 'flex',
         flexGrow: 1,
     },
@@ -115,12 +115,17 @@ const useStyles = makeStyles((theme) => ({
     },
 
     drawerOpen: {
-        backgroundColor: '#4db6ac',
-        width: drawerWidth,
-        transition: theme.transitions.create('width', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
+    
+    [theme.breakpoints.up('md')]: {
+            backgroundColor: '#4db6ac',
+            width: drawerWidth,
+            transition: theme.transitions.create('width', {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.enteringScreen,
         }),
+    },  
+    backgroundColor: '#4db6ac',
+    width: theme.spacing(9) + 1,
     },
      
     drawerClose: {

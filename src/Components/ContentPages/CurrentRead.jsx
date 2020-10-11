@@ -16,25 +16,14 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 // import ReactHtmlParser from 'react-html-parser';
 
 const useStyles = makeStyles((theme) => ({
-  paper: {
-    margin: theme.spacing(1,5),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    maxWidth: 800,
-  },
   textEditor: {
-    minHeight: 200,
-  },
-  form: {
-    width: '100%',
-    marginTop: theme.spacing(3),
+    maxHeight: 300,
   },
   saveButton: {
-    margin: theme.spacing(7),
+    margin: theme.spacing(2),
   },
   completeButton: {
-    margin: theme.spacing(7),
+    margin: theme.spacing(2),
   },
 }));
 
