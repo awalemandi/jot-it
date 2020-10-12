@@ -164,7 +164,7 @@ const CurrentRead = () => {
   return (
     <>
       <CssBaseline />
-      <form noValidate >
+      <form Validate >
         <Grid container spacing={2} justify="center">
           <Grid item xs={2}></Grid>
           <Grid item xs={8}>

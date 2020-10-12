@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Divider, List, ListItem, ListItemIcon, ListItemSecondaryAction, ListItemText, Checkbox, IconButton } from '@material-ui/core';
+import { Typography, Divider, List, ListItem, ListItemIcon, ListItemSecondaryAction, ListItemText, Checkbox, IconButton, TextField, Button, Grid, Icon } from '@material-ui/core';
 import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
 
 const useStyles = makeStyles((theme) => ({
@@ -16,9 +16,15 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+
 const ToBeRead = () => {
     const classes = useStyles();
     const [checked, setChecked] = React.useState([0]);
+    const [input, setInput] = React.useState('');
+    
+    const handleChange = e => {
+        setInput(e.target.value);
+    }
 
     const handleToggle = (value) => () => {
         const currentIndex = checked.indexOf(value);
@@ -34,38 +40,64 @@ const ToBeRead = () => {
     };
 
     return (
-        <div className={classes.paper} overflow="visible">
-            <Typography component="h1" variant="h6">
+        <Grid container className={classes.paper} spacing={2} justify="center">
+            <Grid item xs={2}></Grid>
+            <Grid item xs={8}>
+                <Typography component="h1" variant="h6">
                     To Be Read
-                    <Divider />
-            </Typography>
+                        <Divider />
+                </Typography>
+            </Grid>
+            <Grid item xs={2}></Grid>
+
+            <Grid item xs={8}>
+                <TextField
+                    name="input"
+                    value={input}
+                    fullWidth
+                    placeholder="Add a new book"
+                    autoFocus
+                    onChange={handleChange}
+                />
+            </Grid>
+
+            <Grid item xs={2}>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}
+                    endIcon={<Icon></Icon>}
+                >
+                    Add
+                </Button>
+            </Grid>
 
             <List className={classes.root}>
-            {[0, 1, 2, 3].map((value) => {
-                const labelId = `checkbox-list-label-${value}`;
+                {[0, 1, 2, 3].map((value) => {
+                    const labelId = `checkbox-list-label-${value}`;
 
-                return (
-                    <ListItem key={value} role={undefined} dense button onClick={handleToggle(value)}>
-                        <ListItemIcon>
-                            <Checkbox
-                                edge="start"
-                                checked={checked.indexOf(value) !== -1}
-                                tabIndex={-1}
-                                disableRipple
-                                inputProps={{ 'aria-labelledby': labelId }}
-                            />
-                        </ListItemIcon>
-                        <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
-                        <ListItemSecondaryAction>
-                            <IconButton edge="end" aria-label="comments">
-                                <CancelRoundedIcon />
-                            </IconButton>
-                        </ListItemSecondaryAction>
-                    </ListItem>
-                );
-            })}
-        </List>
-        </div>
+                    return (
+                        <ListItem key={value} role={undefined} dense button onClick={handleToggle(value)}>
+                            <ListItemIcon>
+                                <Checkbox
+                                    edge="start"
+                                    checked={checked.indexOf(value) !== -1}
+                                    tabIndex={-1}
+                                    disableRipple
+                                    inputProps={{ 'aria-labelledby': labelId }}
+                                />
+                            </ListItemIcon>
+                            <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
+                            <ListItemSecondaryAction>
+                                <IconButton edge="end" aria-label="comments">
+                                    <CancelRoundedIcon />
+                                </IconButton>
+                            </ListItemSecondaryAction>
+                        </ListItem>
+                    );
+                })}
+            </List>
+        </Grid>
     )
 };
 
