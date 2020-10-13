@@ -1,13 +1,12 @@
 import React from 'react';
 import firebase from 'firebase/app';
 import { userDocRef } from '../../firebase';
-import firestore from  'firebase/firestore';
 
 
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Divider, List, ListItem, ListItemIcon, ListItemSecondaryAction, ListItemText, Checkbox, IconButton, TextField, Button, Grid, Icon } from '@material-ui/core';
-import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
+import TbrList from '../TbrList';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -29,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
 
 const ToBeRead = () => {
     const classes = useStyles();
-    const [checked, setChecked] = React.useState([0]);
     const [input, setInput] = React.useState('');
     
     const handleChange = e => {
@@ -40,7 +38,7 @@ const ToBeRead = () => {
         item = input;
         userDocRef
         .update({
-            ToBeRead: firebase.firestore.FieldValue.arrayUnion(item)
+            toBeRead: firebase.firestore.FieldValue.arrayUnion(item)
         })
         .then(() => {
             setInput('');
@@ -48,19 +46,7 @@ const ToBeRead = () => {
         .catch(e => { console.log(e) });
     };
 
-    const handleToggle = (value) => () => {
-        const currentIndex = checked.indexOf(value);
-        const newChecked = [...checked];
-
-        if (currentIndex === -1) {
-            newChecked.push(value);
-        } else {
-            newChecked.splice(currentIndex, 1);
-        }
-
-        setChecked(newChecked);
-    };
-
+  
     return (
         <Grid container className={classes.paper} spacing={2} justify="center">
             <Grid item xs={2}></Grid>
@@ -96,31 +82,9 @@ const ToBeRead = () => {
                 </IconButton>
             </Grid>
 
-            <List className={classes.root}>
-                {[0, 1, 2, 3].map((value) => {
-                    const labelId = `checkbox-list-label-${value}`;
+            <TbrList/>
 
-                    return (
-                        <ListItem key={value} role={undefined} dense button onClick={handleToggle(value)}>
-                            <ListItemIcon>
-                                <Checkbox
-                                    edge="start"
-                                    checked={checked.indexOf(value) !== -1}
-                                    tabIndex={-1}
-                                    disableRipple
-                                    inputProps={{ 'aria-labelledby': labelId }}
-                                />
-                            </ListItemIcon>
-                            <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
-                            <ListItemSecondaryAction>
-                                <IconButton edge="end" aria-label="comments">
-                                    <CancelRoundedIcon />
-                                </IconButton>
-                            </ListItemSecondaryAction>
-                        </ListItem>
-                    );
-                })}
-            </List>
+            
         </Grid>
     )
 };
