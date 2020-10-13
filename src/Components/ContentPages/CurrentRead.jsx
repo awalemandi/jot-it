@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     margin: theme.spacing(2),
-    backgroundColor: '#E8F8F5',
+    backgroundColor: '#F8F9F9',
   },
 }));
 

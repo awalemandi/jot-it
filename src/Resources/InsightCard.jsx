@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
     },
     button: {
         margin: theme.spacing(0,1,0,0),
+        backgroundColor: '#F8F9F9',
     }
 }));
 
@@ -55,7 +56,7 @@ const InsightCard = ({ docId, insightId, title, author, jots }) => {
                 </Typography>
             </CardContent>
             <CardActions>
-                <IconButton variant="outlined" className={classes.button} size="medium" onClick={() => handleDelete(docId)}>
+                <IconButton variant="outlined" color="secondary" className={classes.button} size="medium" onClick={() => handleDelete(docId)}>
                     <DeleteOutlineRoundedIcon />
                 </IconButton>
             </CardActions>

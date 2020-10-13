@@ -1,4 +1,9 @@
 import React from 'react';
+import firebase from 'firebase/app';
+import { userDocRef } from '../../firebase';
+import firestore from  'firebase/firestore';
+
+
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Divider, List, ListItem, ListItemIcon, ListItemSecondaryAction, ListItemText, Checkbox, IconButton, TextField, Button, Grid, Icon } from '@material-ui/core';
 import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
@@ -17,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     },
     button: {
         margin: theme.spacing(0,1,1,0),
-        backgroundColor: '#E8F8F5',
+        backgroundColor: '#F8F9F9',
     },
 }));
 
@@ -30,6 +35,18 @@ const ToBeRead = () => {
     const handleChange = e => {
         setInput(e.target.value);
     }
+
+    const handleAddItem = item => {
+        item = input;
+        userDocRef
+        .update({
+            ToBeRead: firebase.firestore.FieldValue.arrayUnion(item)
+        })
+        .then(() => {
+            setInput('');
+        })
+        .catch(e => { console.log(e) });
+    };
 
     const handleToggle = (value) => () => {
         const currentIndex = checked.indexOf(value);
@@ -71,8 +88,9 @@ const ToBeRead = () => {
                 <IconButton
                     variant="contained"
                     size="large"
-                    color="primary"
+                    color="secondary"
                     className={classes.button}
+                    onClick={handleAddItem}
                 >
                     <AddRoundedIcon />
                 </IconButton>

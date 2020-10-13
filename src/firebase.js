@@ -1,5 +1,5 @@
 import firebase from 'firebase/app';
-import 'firebase/firestore';
+import firestore from  'firebase/firestore';
 
 
 const firebaseConfig = firebase.initializeApp({
@@ -15,7 +15,9 @@ const firebaseConfig = firebase.initializeApp({
 
 const db = firebaseConfig.firestore();
 
+const userDocRef = db.collection('users').doc('cussinstoic');
 const insightsDocRef = db.collection('users/cussinstoic/insights');
+
 
 
 
@@ -40,4 +42,4 @@ const insightsDocRef = db.collection('users/cussinstoic/insights');
 //       })
 //     } 
 
-export { db, insightsDocRef };
+export { db, userDocRef, insightsDocRef };
