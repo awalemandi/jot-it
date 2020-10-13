@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import firebase from 'firebase/app';
 import { userDocRef } from '../firebase';
 import { makeStyles } from '@material-ui/core/styles';
 import { List, ListItem, ListItemIcon, ListItemSecondaryAction, ListItemText, Checkbox, IconButton } from '@material-ui/core';
@@ -13,7 +14,12 @@ const useStyles = makeStyles((theme) => ({
         height: 'auto',
         overflow: 'auto',
     },
+    complete: {
+        textDecoration: 'line-through',
+        opacity: 0.4,
+    }
 }));
+
 
 
 const useListItemsArray = () => {
@@ -33,11 +39,16 @@ const useListItemsArray = () => {
     return itemsArray;
 };
 
-// handleItemDelete = item => {
-//     //need to create method to remove array items
-// };
+const handleItemDelete = item => {
+    userDocRef.update({
+        toBeRead: firebase.firestore.FieldValue.arrayRemove(item)
+    })
+    .catch(e=> {console.log(e)});
+};
 
-
+// handleCheck = () => {
+//    return !checked ? true : false;
+// }
 
 // const handleToggle = (value) => () => {
     
@@ -58,12 +69,6 @@ const TbrList = () => {
     const classes = useStyles();
     const [checked, setChecked] = React.useState(false);
 
-    const handleCheck = () => {
-        checked ? setChecked(false) : setChecked(true);
-    };
-
-    
-
     const listItemsArray = useListItemsArray();
     return (
         <List className={classes.paper}>
@@ -75,16 +80,15 @@ const TbrList = () => {
                         <ListItemIcon>
                             <Checkbox
                                 edge="start"
-                                checked={checked}
-                                onChange={handleCheck}
+                                onClick={()=> {}}
                             />
                         </ListItemIcon>
-                        <ListItemText primary={item} />
+                        <ListItemText className={classes.itemText} primary={item} />
                         <ListItemSecondaryAction>
                             <IconButton 
                                 edge="end" 
                                 aria-label="comments"
-                                // onClick={handleItemDelete}
+                                onClick={()=> {handleItemDelete(item)}}
                                 >
                                 <CancelRoundedIcon />
                             </IconButton>

@@ -4,7 +4,7 @@ import { userDocRef } from '../../firebase';
 
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Divider, List, ListItem, ListItemIcon, ListItemSecondaryAction, ListItemText, Checkbox, IconButton, TextField, Button, Grid, Icon } from '@material-ui/core';
+import { Typography, Divider, IconButton, TextField, Button, Grid, Icon } from '@material-ui/core';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
 import TbrList from '../TbrList';
 
@@ -59,7 +59,7 @@ const ToBeRead = () => {
             <Grid item xs={2}></Grid>
 
             <Grid item xs={1}></Grid>
-            <Grid item xs={7}>
+            <Grid item xs={5}>
                 <TextField
                     name="input"
                     value={input}
@@ -82,7 +82,9 @@ const ToBeRead = () => {
                 </IconButton>
             </Grid>
 
-            <TbrList/>
+            <Grid item xs ={7}>
+                <TbrList/>
+            </Grid>
 
             
         </Grid>
