@@ -18,10 +18,9 @@ const useStyles = makeStyles((theme) => ({
 root: {
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'center',
+  justifyContent: 'space-between',
   alignItems: 'center',
   flexGrow: 1,
-  minHeight: 700,
   height: 'auto',
   margin: theme.spacing(1, 4, 0, 9),
   padding: theme.spacing(1, 5, 0, 9)
@@ -41,21 +40,22 @@ toolbar: {
 },
 
 content: {
-  padding: theme.spacing(2, 0, 0, 0),
+  position: 'relative',
+  padding: theme.spacing(2, 1, 1, 1),
   alignItems: 'center',
   justifyContent: 'space-evenly',
-  minWidth: 700,
-  maxWidth: 900,
-  margin: theme.spacing(1, 8, 0, 8),
+  width: '75%',
+  margin: theme.spacing(0, 0, 10, 0),
   height: 'auto',
+  overflow: 'scroll',
 },
 
 footer: {
-  flexGrow: 1,
+  position: "absolute",
+  bottom: 0,
   padding: theme.spacing(5),
   margin: theme.spacing(1, 8, 0, 8),
-  minWidth: 800,
-  maxWidth: 900,
+  width: '68%',
   height: 'auto',
 },
 

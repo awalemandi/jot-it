@@ -5,11 +5,15 @@ import { Typography, Divider, Grid } from '@material-ui/core';
 
 import InsightCard from '../../Resources/InsightCard';
 
+
+
 const useStyles = makeStyles((theme) => ({
     paper: {
         margin: theme.spacing(0, 0, 0, 2),
         padding: theme.spacing(0, 0, 0, 2),
-        minHeight: 400,
+        width: '100%',
+        height: 'auto',
+        overflow: 'auto',
     },
 }));
 

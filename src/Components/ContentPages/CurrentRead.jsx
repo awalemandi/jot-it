@@ -17,7 +17,9 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 const useStyles = makeStyles((theme) => ({
   textEditor: {
-    maxHeight: 300,
+    height: 150,
+    overflow: 'scroll',
+
   },
   saveButton: {
     margin: theme.spacing(2),
@@ -211,8 +213,8 @@ const CurrentRead = () => {
             </MuiPickersUtilsProvider>
           </Grid>
 
-          <Grid item xs={8} className={classes.textEditor}>
-            <CKEditor editor={ClassicEditor}
+          <Grid className={classes.textEditor} item xs={8}>
+            <CKEditor  editor={ClassicEditor}
               data={info[0].jots}
               onChange={updateState.jots}
             />
