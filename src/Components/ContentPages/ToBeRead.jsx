@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Divider, List, ListItem, ListItemIcon, ListItemSecondaryAction, ListItemText, Checkbox, IconButton, TextField, Button, Grid, Icon } from '@material-ui/core';
 import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
+import AddRoundedIcon from '@material-ui/icons/AddRounded';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -13,6 +14,10 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         maxWidth: 360,
         backgroundColor: theme.palette.background.paper,
+    },
+    button: {
+        margin: theme.spacing(0,1,1,0),
+        backgroundColor: '#E8F8F5',
     },
 }));
 
@@ -50,7 +55,8 @@ const ToBeRead = () => {
             </Grid>
             <Grid item xs={2}></Grid>
 
-            <Grid item xs={8}>
+            <Grid item xs={1}></Grid>
+            <Grid item xs={7}>
                 <TextField
                     name="input"
                     value={input}
@@ -62,14 +68,14 @@ const ToBeRead = () => {
             </Grid>
 
             <Grid item xs={2}>
-                <Button
+                <IconButton
                     variant="contained"
+                    size="large"
                     color="primary"
                     className={classes.button}
-                    endIcon={<Icon></Icon>}
                 >
-                    Add
-                </Button>
+                    <AddRoundedIcon />
+                </IconButton>
             </Grid>
 
             <List className={classes.root}>

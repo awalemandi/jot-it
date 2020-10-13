@@ -1,8 +1,9 @@
 import React from 'react'
 import { insightsDocRef } from '../firebase';
 
-import { Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
+import { Card, CardActions, CardContent, IconButton, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import DeleteOutlineRoundedIcon from '@material-ui/icons/DeleteOutlineRounded';
 
 import ReactHtmlParser from 'react-html-parser';
 
@@ -12,18 +13,18 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         justifyContent: 'space-between',
         width: 250,
-        height: 300,
+        height: 280,
         overflow: 'scroll',
     },
     text: {
         margin: theme.spacing(2,1,0,1),
         width: '100%',
-        height: 150,
+        height: 130,
         overflow: 'scroll',
         padding: 0,
     },
     button: {
-        marginTop: 0,
+        margin: theme.spacing(0,1,0,0),
     }
 }));
 
@@ -42,17 +43,21 @@ const InsightCard = ({ docId, insightId, title, author, jots }) => {
     return (
         <Card className={classes.root} variant="outlined">
             <CardContent>
-                <Typography variant="button" gutterBottom>
-                    {title} by {author}
-                </Typography>
-                <Typography variant="h5" component="h2">
-                </Typography>
+                <div>
+                    <Typography variant="button" gutterBottom>
+                        {title}
+                    </Typography>
+                    
+                    <Typography variant="caption" color="textSecondary">  by {author}</Typography>
+                </div>
                 <Typography className={classes.text} variant="body2" component="p">
                     {ReactHtmlParser(jots)}
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button variant="outlined" className={classes.button} size="small" onClick={() => handleDelete(docId)}>Delete</Button>
+                <IconButton variant="outlined" className={classes.button} size="medium" onClick={() => handleDelete(docId)}>
+                    <DeleteOutlineRoundedIcon />
+                </IconButton>
             </CardActions>
         </Card>
     )

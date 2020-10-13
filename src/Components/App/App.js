@@ -47,6 +47,7 @@ content: {
   width: '75%',
   margin: theme.spacing(0, 0, 10, 0),
   height: 'auto',
+  maxHeight: 650,
   overflow: 'scroll',
 },
 

@@ -9,8 +9,8 @@ import InsightCard from '../../Resources/InsightCard';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
-        margin: theme.spacing(0, 0, 0, 2),
-        padding: theme.spacing(0, 0, 0, 2),
+        margin: theme.spacing(0, 0, 0, 1),
+        padding: theme.spacing(0, 0, 0, 1),
         width: '100%',
         height: 'auto',
         overflow: 'auto',
@@ -43,16 +43,16 @@ const Library = () => {
 
     return (
         <Grid container className={classes.paper} spacing={2} justify="space-evenly">
-            <Grid item xs={2}></Grid>
+            <Grid item xs={0} lg={2}></Grid>
             <Grid item xs={8}>
                 <Typography component="h1" variant="h6">
                     Your Insights Library
                         <Divider />
                 </Typography>
             </Grid>
-            <Grid item xs={2}></Grid>
+            <Grid item sm={0} lg={2}></Grid>
             {userInsights.map((insight) =>
-                <Grid item xs={8} sm={5} md={4}>
+                <Grid item xs={7} sm={7} md={5} lg={4}>
                     <InsightCard
                         docId={insight.id}
                         insightId={insight.insightId}

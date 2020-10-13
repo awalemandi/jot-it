@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
-import {CssBaseline, AppBar, Toolbar, Drawer, List, ListItem, ListItemIcon, ListItemText, Divider, IconButton, InputBase,} from '@material-ui/core';
+import {CssBaseline, AppBar, Toolbar, Drawer, List, ListItem, ListItemIcon, ListItemText, Divider, IconButton, InputBase, ListItemSecondaryAction,} from '@material-ui/core';
 import clsx from 'clsx';
 
 import SearchIcon from '@material-ui/icons/Search';
@@ -12,7 +12,7 @@ import InsertChartRoundedIcon from '@material-ui/icons/InsertChartRounded';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Brightness6RoundedIcon from '@material-ui/icons/Brightness6Rounded';
 import FeedbackRoundedIcon from '@material-ui/icons/FeedbackRounded';
-import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
+import DeleteForeverRoundedIcon from '@material-ui/icons/DeleteForeverRounded';
 import LiveHelpIcon from '@material-ui/icons/LiveHelp';
 import logo from './jotit_white.png';
 
@@ -244,7 +244,8 @@ const Navigation = props => {
             <div className={classes.toolbar}/>
             
             <List>
-                
+                <ListItem></ListItem>
+                <ListItem></ListItem>
                 <ListItem button onClick={props.page.currentRead}>
                     <ListItemIcon>
                         <FiberNewRoundedIcon/>
@@ -272,13 +273,13 @@ const Navigation = props => {
                     </ListItemIcon>
                         <ListItemText primary="Statistics" />
                 </ListItem>  
-            
+                <ListItem></ListItem>
             </List>
             
             <Divider />
             
             <List>
-            
+            <ListItem></ListItem>
                 <ListItem button onClick={props.page.feedback}>
                     <ListItemIcon>
                         <FeedbackRoundedIcon/>
@@ -288,7 +289,7 @@ const Navigation = props => {
 
                 <ListItem button onClick={props.page.bin}>
                     <ListItemIcon>
-                        <DeleteRoundedIcon/>
+                        <DeleteForeverRoundedIcon/>
                     </ListItemIcon>
                         <ListItemText primary="Bin" />
                 </ListItem>

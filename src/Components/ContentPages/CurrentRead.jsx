@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { insightsDocRef } from '../../firebase';
 import { JotContext } from '../../Resources/JotContext';
 
-import { CssBaseline, Grid, Divider, Typography, makeStyles, TextField, Button, Snackbar } from '@material-ui/core';
+import { CssBaseline, Grid, Divider, Typography, makeStyles, TextField, IconButton, Snackbar } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
 
 
@@ -18,14 +18,12 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 const useStyles = makeStyles((theme) => ({
   textEditor: {
     height: 150,
+    width: 'auto',
     overflow: 'scroll',
-
   },
-  saveButton: {
+  button: {
     margin: theme.spacing(2),
-  },
-  completeButton: {
-    margin: theme.spacing(2),
+    backgroundColor: '#E8F8F5',
   },
 }));
 
@@ -167,7 +165,7 @@ const CurrentRead = () => {
     <>
       <CssBaseline />
       <form Validate >
-        <Grid container spacing={2} justify="center">
+        <Grid container spacing={5} justify="center">
           <Grid item xs={2}></Grid>
           <Grid item xs={8}>
             <Typography component="h1" variant="h6">
@@ -179,6 +177,7 @@ const CurrentRead = () => {
 
           <Grid item xs={4}>
             <TextField
+              required
               name="title"
               value={info[0].title}
               fullWidth
@@ -191,7 +190,7 @@ const CurrentRead = () => {
 
           <Grid item xs={4}>
             <TextField
-              // variant="outlined"
+              required
               fullWidth
               value={info[0].author}
               id="author"
@@ -223,29 +222,26 @@ const CurrentRead = () => {
           <Grid item container xs={12} justify="space-around" alignItems="center">
             <Grid item xs={4}></Grid>
             <Grid item xs={2}>
-              <Button
-                variant="outlined"
+              <IconButton
                 color="secondary"
                 size="large"
-                className={classes.saveButton}
-                startIcon={<SaveRoundedIcon />}
+                className={classes.button}
                 onClick={handleSave}
               >
-
-              </Button>
+                <SaveRoundedIcon />
+              </IconButton>
             </Grid>
 
             <Grid item xs={2}>
-              <Button
-                variant="outlined"
+              <IconButton
+                
                 color="secondary"
                 size="large"
-                className={classes.completeButton}
-                startIcon={<DoneAllRoundedIcon />}
+                className={classes.button}
                 onClick={handleComplete}
               >
-
-              </Button>
+                <DoneAllRoundedIcon />
+              </IconButton>
             </Grid>
             <Grid item xs={3}></Grid>
           </Grid>
