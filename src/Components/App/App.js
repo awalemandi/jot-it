@@ -9,9 +9,10 @@ import CurrentRead from '../ContentPages/CurrentRead';
 import Library from '../ContentPages/Library';
 import ToBeRead from '../ContentPages/ToBeRead';
 import Statistics from '../ContentPages/Statistics';
-import Feedback from '../ContentPages/Feedback';
 import Bin from '../ContentPages/Bin';
 
+import Feedback from "feeder-react-feedback"; // import Feedback component
+import "feeder-react-feedback/dist/feeder-react-feedback.css"; // import stylesheet
 
 const useStyles = makeStyles((theme) => ({
 
@@ -88,9 +89,6 @@ function App() {
     statistics: function () {
       setContentValue(<Statistics />)
     },
-    feedback: function () {
-      setContentValue(<Feedback />)
-    },
     bin: function () {
       setContentValue(<Bin />)
     }
@@ -117,6 +115,11 @@ function App() {
               <Footer />
             </Paper>
           </footer>
+
+          <Feedback
+            primaryColor="#00897b"
+            projectId="5f864c3404ba4d0004fb43a1"
+          />
         </div>
     </ThemeProvider>
   );

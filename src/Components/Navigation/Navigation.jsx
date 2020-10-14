@@ -11,7 +11,6 @@ import LayersRoundedIcon from '@material-ui/icons/LayersRounded';
 import InsertChartRoundedIcon from '@material-ui/icons/InsertChartRounded';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Brightness6RoundedIcon from '@material-ui/icons/Brightness6Rounded';
-import FeedbackRoundedIcon from '@material-ui/icons/FeedbackRounded';
 import DeleteForeverRoundedIcon from '@material-ui/icons/DeleteForeverRounded';
 import LiveHelpIcon from '@material-ui/icons/LiveHelp';
 import logo from './jotit_white.png';
@@ -280,12 +279,6 @@ const Navigation = props => {
             
             <List>
             <ListItem></ListItem>
-                <ListItem button onClick={props.page.feedback}>
-                    <ListItemIcon>
-                        <FeedbackRoundedIcon/>
-                    </ListItemIcon>
-                        <ListItemText primary="Feedback" />
-                </ListItem>
 
                 <ListItem button onClick={props.page.bin}>
                     <ListItemIcon>

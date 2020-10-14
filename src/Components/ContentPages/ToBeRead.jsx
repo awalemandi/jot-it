@@ -11,7 +11,7 @@ import TbrList from '../TbrList';
 const useStyles = makeStyles((theme) => ({
     paper: {
         margin: theme.spacing(0, 0, 0, 2),
-        padding: theme.spacing(0, 0, 0, 2),
+        padding: theme.spacing(0, 2, 0, 2),
         minHeight: 400,
     },
     root: {
@@ -58,8 +58,8 @@ const ToBeRead = () => {
             </Grid>
             <Grid item xs={2}></Grid>
 
-            <Grid item xs={1}></Grid>
-            <Grid item xs={5}>
+            <Grid item xs={2}></Grid>
+            <Grid item xs={6}>
                 <TextField
                     name="input"
                     value={input}
@@ -69,8 +69,7 @@ const ToBeRead = () => {
                     onChange={handleChange}
                 />
             </Grid>
-
-            <Grid item xs={2}>
+            <Grid item xs={1}>
                 <IconButton
                     variant="contained"
                     size="large"
@@ -81,11 +80,12 @@ const ToBeRead = () => {
                     <AddRoundedIcon />
                 </IconButton>
             </Grid>
-
-            <Grid item xs ={7}>
+            <Grid item xs={2}></Grid>
+            <Grid item xs={3}></Grid>
+            <Grid item xs ={6}>
                 <TbrList/>
             </Grid>
-
+            <Grid item xs={3}></Grid>
             
         </Grid>
     )
