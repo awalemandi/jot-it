@@ -17,11 +17,10 @@ const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
         maxWidth: 360,
-        backgroundColor: theme.palette.background.paper,
     },
     button: {
         margin: theme.spacing(0,1,1,0),
-        backgroundColor: '#F8F9F9',
+        backgroundColor: theme.palette.common.white,
     },
 }));
 

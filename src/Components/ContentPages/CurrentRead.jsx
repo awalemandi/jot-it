@@ -15,6 +15,17 @@ import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 // import ReactHtmlParser from 'react-html-parser';
 
+ClassicEditor
+    .create( document.querySelector( '#editor' ), {
+        placeholder: 'Enter jots here!'
+    } )
+    .then( editor => {
+        console.log( editor );
+    } )
+    .catch( error => {
+        console.error( error );
+    } );
+
 const useStyles = makeStyles((theme) => ({
   textEditor: {
     height: 150,
@@ -23,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     margin: theme.spacing(2),
-    backgroundColor: '#F8F9F9',
+    backgroundColor: theme.palette.common.white,
   },
 }));
 
@@ -213,7 +224,11 @@ const CurrentRead = () => {
           </Grid>
 
           <Grid className={classes.textEditor} item xs={8}>
-            <CKEditor  editor={ClassicEditor}
+            <CKEditor  
+              onInit={editor=> {
+                  
+              }}
+              editor={ClassicEditor}
               data={info[0].jots}
               onChange={updateState.jots}
             />

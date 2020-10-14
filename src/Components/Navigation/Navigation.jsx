@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
-import {CssBaseline, AppBar, Toolbar, Drawer, List, ListItem, ListItemIcon, ListItemText, Divider, IconButton, InputBase, ListItemSecondaryAction,} from '@material-ui/core';
+import {CssBaseline, AppBar, Toolbar, Drawer, List, ListItem, ListItemIcon, ListItemText, Divider, IconButton, InputBase, } from '@material-ui/core';
 import clsx from 'clsx';
 
 import SearchIcon from '@material-ui/icons/Search';
@@ -10,7 +10,6 @@ import StoreRoundedIcon from '@material-ui/icons/StoreRounded';
 import LayersRoundedIcon from '@material-ui/icons/LayersRounded';
 import InsertChartRoundedIcon from '@material-ui/icons/InsertChartRounded';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import Brightness6RoundedIcon from '@material-ui/icons/Brightness6Rounded';
 import DeleteForeverRoundedIcon from '@material-ui/icons/DeleteForeverRounded';
 import LiveHelpIcon from '@material-ui/icons/LiveHelp';
 import logo from './jotit_white.png';
@@ -116,19 +115,19 @@ const useStyles = makeStyles((theme) => ({
     drawerOpen: {
     
     [theme.breakpoints.up('md')]: {
-            backgroundColor: '#4db6ac',
+            backgroundColor: theme.palette.secondary.main,
             width: drawerWidth,
             transition: theme.transitions.create('width', {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
         }),
     },  
-    backgroundColor: '#4db6ac',
+    backgroundColor: theme.palette.secondary.main,
     width: theme.spacing(9) + 1,
     },
      
     drawerClose: {
-        backgroundColor: '#4db6ac',
+        backgroundColor: theme.palette.secondary.main,
         transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
@@ -211,14 +210,6 @@ const Navigation = props => {
                         <LiveHelpIcon/>
                     </IconButton>
                     
-                    
-                    
-                    <IconButton >
-                        <Brightness6RoundedIcon />
-                    </IconButton>
-                    
-                    
-                    
                     <IconButton >
                         <AccountCircleIcon />
                     </IconButton>
@@ -254,7 +245,7 @@ const Navigation = props => {
 
                 <ListItem button onClick={props.page.library}>
                     <ListItemIcon>
-                        <LayersRoundedIcon/>
+                        <LayersRoundedIcon color="action"/>
                     </ListItemIcon>
                         <ListItemText primary="Insights Library" />
                 </ListItem>
@@ -272,13 +263,11 @@ const Navigation = props => {
                     </ListItemIcon>
                         <ListItemText primary="Statistics" />
                 </ListItem>  
-                <ListItem></ListItem>
             </List>
             
             <Divider />
             
             <List>
-            <ListItem></ListItem>
 
                 <ListItem button onClick={props.page.bin}>
                     <ListItemIcon>

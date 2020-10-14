@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { JotContext} from '../../Resources/JotContext';
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
-import { Paper } from '@material-ui/core';
+import { Paper, CssBaseline } from '@material-ui/core';
 import Navigation from '../Navigation/Navigation';
 import Footer from '../Footer';
-import theme from '../../Resources/theme';
+import { lightTheme, darkTheme } from '../../Resources/theme';
 import CurrentRead from '../ContentPages/CurrentRead';
 import Library from '../ContentPages/Library';
 import ToBeRead from '../ContentPages/ToBeRead';
@@ -22,9 +22,10 @@ root: {
   justifyContent: 'space-between',
   alignItems: 'center',
   flexGrow: 1,
-  height: 'auto',
-  margin: theme.spacing(1, 4, 0, 9),
-  padding: theme.spacing(1, 5, 0, 9)
+  width: '100%',
+  height: '100%',
+  margin: theme.spacing(1, 5, 0, 9),
+  padding: theme.spacing(1, 12, 4, 9)
 },
 
 navigation: {
@@ -35,7 +36,7 @@ toolbar: {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'flex-end',
-  padding: theme.spacing(0, 1),
+  padding: theme.spacing(0, 1, 2, 0),
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 },
@@ -45,7 +46,7 @@ content: {
   padding: theme.spacing(2, 1, 1, 1),
   alignItems: 'center',
   justifyContent: 'space-evenly',
-  width: '75%',
+  width: '70%',
   margin: theme.spacing(0, 0, 10, 0),
   height: 'auto',
   maxHeight: 650,
@@ -57,7 +58,7 @@ footer: {
   bottom: 0,
   padding: theme.spacing(5),
   margin: theme.spacing(1, 8, 0, 8),
-  width: '68%',
+  width: '66%',
   height: 'auto',
 },
 
@@ -96,8 +97,9 @@ function App() {
   
   
   return (
-    <ThemeProvider theme={theme}>
-        <div className={classes.root}>
+    <ThemeProvider theme={lightTheme}>
+      <CssBaseline/>
+        <Paper className={classes.root}>
           <header className={classes.navigation}>
             <Navigation page={displayPage}/>
           </header>
@@ -120,7 +122,7 @@ function App() {
             primaryColor="#00897b"
             projectId="5f864c3404ba4d0004fb43a1"
           />
-        </div>
+        </Paper>
     </ThemeProvider>
   );
 }
