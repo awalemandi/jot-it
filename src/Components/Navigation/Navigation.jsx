@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
-import {CssBaseline, AppBar, Toolbar, Drawer, List, ListItem, ListItemIcon, ListItemText, Divider, IconButton, InputBase, } from '@material-ui/core';
+import {CssBaseline, AppBar, Toolbar, Drawer, List, ListItem, ListItemIcon, ListItemText, Divider, IconButton, InputBase, Hidden } from '@material-ui/core';
 import clsx from 'clsx';
 
 import SearchIcon from '@material-ui/icons/Search';
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     
     icon: {
         display: 'flex',
-        margin: theme.spacing(2),
+        margin: theme.spacing(0, 2, 0, 1),
     },
     
     logo: {
@@ -78,29 +78,16 @@ const useStyles = makeStyles((theme) => ({
     },
 
     inputInput: {
+        flexGrow: 2,
         padding: theme.spacing(1, 1, 1, 0),
         // vertical padding + font size from searchIcon
         paddingLeft: `calc(1.5em + ${theme.spacing(4)}px)`,
         transition: theme.transitions.create('width'),
         width: '100%',
-        [theme.breakpoints.up('sm')]: {
-        width: '60ch',
+        [theme.breakpoints.up('xs')]: {
         },
     },
 
-    sectionDesktop: {
-        display: 'none',
-        [theme.breakpoints.up('md')]: {
-        display: 'flex',
-        },
-    },
-
-    sectionMobile: {
-        display: 'flex',
-        [theme.breakpoints.up('md')]: {
-        display: 'none',
-        },
-    },
     
     hide: {
     display: 'none',
@@ -202,14 +189,14 @@ const Navigation = props => {
                     inputProps={{ 'aria-label': 'search' }}
                     />
                 </div>
-                
+                <div></div>
                 <div></div>
                 
                 <div className={classes.icon} edge="end">
                     <IconButton >
                         <LiveHelpIcon/>
                     </IconButton>
-                    
+                    <div></div>
                     <IconButton >
                         <AccountCircleIcon />
                     </IconButton>

@@ -10,10 +10,10 @@ import InsightCard from '../../Resources/InsightCard';
 const useStyles = makeStyles((theme) => ({
     paper: {
         margin: theme.spacing(0, 0, 0, 1),
-        padding: theme.spacing(0, 0, 0, 1),
+        padding: theme.spacing(1, 4, 1, 2),
         width: '100%',
         height: 'auto',
-        overflow: 'auto',
+        overflowY: 'auto',
     },
 }));
 
@@ -42,7 +42,7 @@ const Library = () => {
     const userInsights = useInsightsArray();
 
     return (
-        <Grid container className={classes.paper} spacing={2} justify="space-evenly">
+        <Grid container className={classes.paper} spacing={2} justify="space-around">
             <Grid item xs={0} lg={2}></Grid>
             <Grid item xs={8}>
                 <Typography component="h1" variant="h6">

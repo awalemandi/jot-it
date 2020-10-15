@@ -27,13 +27,19 @@ ClassicEditor
     } );
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '80%',
+    height: 'auto',
+    flexShrink: 5,
+  },
   textEditor: {
-    height: 150,
-    width: 'auto',
-    overflow: 'scroll',
+    height: 130,
+    width: '100%',
+    overflowY: 'auto',
+    overflowX: 'hidden'
   },
   button: {
-    margin: theme.spacing(2),
+    margin: theme.spacing(0),
     backgroundColor: theme.palette.common.white,
   },
 }));
@@ -175,18 +181,18 @@ const CurrentRead = () => {
   return (
     <>
       <CssBaseline />
-      <form Validate >
+      <form Validate className={classes.root}>
         <Grid container spacing={5} justify="center">
-          <Grid item xs={2}></Grid>
+          <Grid item xs={0} lg={2}></Grid>
           <Grid item xs={8}>
             <Typography component="h1" variant="h6">
               New Insight
                 <Divider />
             </Typography>
           </Grid>
-          <Grid item xs={2}></Grid>
+          <Grid item xs={0} lg={2}></Grid>
 
-          <Grid item xs={4}>
+          <Grid item xs={8} lg={4}>
             <TextField
               required
               name="title"
@@ -199,7 +205,7 @@ const CurrentRead = () => {
             />
           </Grid>
 
-          <Grid item xs={4}>
+          <Grid item xs={8} lg={4}>
             <TextField
               required
               fullWidth
@@ -211,10 +217,11 @@ const CurrentRead = () => {
             />
           </Grid>
 
-          <Grid item xs={8}>
+          <Grid item xs={7} lg={5}>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardDatePicker
                 clearable
+                label="Commence"
                 value={info[0].commenceDate}
                 placeholder="01/01/2020"
                 onChange={updateState.commenceDate}
@@ -222,6 +229,7 @@ const CurrentRead = () => {
               />
             </MuiPickersUtilsProvider>
           </Grid>
+          <Grid item xs={0} lg={3}></Grid>
 
           <Grid className={classes.textEditor} item xs={8}>
             <CKEditor  

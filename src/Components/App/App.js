@@ -25,7 +25,8 @@ root: {
   width: '100%',
   height: '100%',
   margin: theme.spacing(1, 5, 0, 9),
-  padding: theme.spacing(1, 12, 4, 9)
+  padding: theme.spacing(1, 12, 4, 9),
+  overflow: 'auto',
 },
 
 navigation: {
@@ -49,8 +50,8 @@ content: {
   width: '70%',
   margin: theme.spacing(0, 0, 10, 0),
   height: 'auto',
-  maxHeight: 650,
-  overflow: 'scroll',
+  maxHeight: 700,
+  overflow: 'auto',
 },
 
 footer: {
@@ -99,7 +100,7 @@ function App() {
   return (
     <ThemeProvider theme={lightTheme}>
       <CssBaseline/>
-        <Paper className={classes.root}>
+        <div className={classes.root}>
           <header className={classes.navigation}>
             <Navigation page={displayPage}/>
           </header>
@@ -122,7 +123,7 @@ function App() {
             primaryColor="#00897b"
             projectId="5f864c3404ba4d0004fb43a1"
           />
-        </Paper>
+        </div>
     </ThemeProvider>
   );
 }

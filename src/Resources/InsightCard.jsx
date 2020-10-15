@@ -14,14 +14,13 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'space-between',
         width: 250,
         height: 280,
-        overflow: 'scroll',
         backgroundColor: fade(theme.palette.common.white),
     },
     text: {
         margin: theme.spacing(2, 1, 0, 1),
         width: '100%',
         height: 130,
-        overflow: 'scroll',
+        overflow: 'auto',
         padding: 0,
     },
     button: {
