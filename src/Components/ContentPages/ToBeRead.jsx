@@ -3,24 +3,22 @@ import firebase from 'firebase/app';
 import { userDocRef } from '../../firebase';
 
 
-import { makeStyles } from '@material-ui/core/styles';
+import { fade, makeStyles } from '@material-ui/core/styles';
 import { Typography, Divider, IconButton, TextField, Button, Grid, Icon } from '@material-ui/core';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
 import TbrList from '../TbrList';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
-        margin: theme.spacing(0, 0, 0, 2),
+        margin: theme.spacing(0, 0, 8, 2),
         padding: theme.spacing(0, 2, 0, 2),
         minHeight: 400,
     },
     root: {
         width: '100%',
-        maxWidth: 360,
     },
     button: {
         margin: theme.spacing(0,1,1,0),
-        backgroundColor: theme.palette.common.white,
     },
 }));
 
@@ -70,7 +68,7 @@ const ToBeRead = () => {
             </Grid>
             <Grid item xs={1}>
                 <IconButton
-                    variant="contained"
+                    variant="outlined"
                     size="large"
                     color="secondary"
                     className={classes.button}

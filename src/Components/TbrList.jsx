@@ -3,8 +3,8 @@ import firebase from 'firebase/app';
 import { userDocRef } from '../firebase';
 import { makeStyles } from '@material-ui/core/styles';
 import { List, ListItem, ListItemIcon, ListItemSecondaryAction, ListItemText, Checkbox, IconButton } from '@material-ui/core';
-import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
-
+import ChevronRightRoundedIcon from '@material-ui/icons/ChevronRightRounded';
+import HighlightOffRoundedIcon from '@material-ui/icons/HighlightOffRounded';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -46,42 +46,19 @@ const handleItemDelete = item => {
     .catch(e=> {console.log(e)});
 };
 
-// handleCheck = () => {
-//    return !checked ? true : false;
-// }
-
-// const handleToggle = (value) => () => {
-    
-    // const currentIndex = checked.indexOf(value);
-    // const newChecked = [...checked];
-
-    // if (currentIndex === -1) {
-    //     newChecked.push(value);
-    // } else {
-    //     newChecked.splice(currentIndex, 1);
-    // }
-
-    // setChecked(newChecked);
-// };
  
 
 const TbrList = () => {
     const classes = useStyles();
-    const [checked, setChecked] = React.useState(false);
 
     const listItemsArray = useListItemsArray();
     return (
         <List className={classes.paper}>
             {listItemsArray.map(item => {
-                // const labelId = `checkbox-list-label-${value}`;
-
                 return (
                     <ListItem dense>
                         <ListItemIcon>
-                            <Checkbox
-                                edge="start"
-                                onClick={()=> {}}
-                            />
+                            <ChevronRightRoundedIcon color="primary"/>
                         </ListItemIcon>
                         <ListItemText className={classes.itemText} primary={item} />
                         <ListItemSecondaryAction>
@@ -90,7 +67,7 @@ const TbrList = () => {
                                 aria-label="comments"
                                 onClick={()=> {handleItemDelete(item)}}
                                 >
-                                <CancelRoundedIcon />
+                                <HighlightOffRoundedIcon color="primary" />
                             </IconButton>
                         </ListItemSecondaryAction>
                     </ListItem>
