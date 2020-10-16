@@ -11,9 +11,6 @@ const useStyles = makeStyles((theme) => ({
     paper: {
         margin: theme.spacing(0, 0, 0, 1),
         padding: theme.spacing(1, 4, 1, 2),
-        width: '100%',
-        height: 'auto',
-        overflowY: 'auto',
     },
 }));
 
@@ -28,7 +25,6 @@ const useInsightsArray = () => {
                     id: doc.id,
                     ...doc.data()
                 }));
-                // console.log(newInsights);
                 setInsightsArray(newInsights);
             });
 

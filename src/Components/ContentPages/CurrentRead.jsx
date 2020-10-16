@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { insightsDocRef } from '../../firebase';
+import { db, insightsDocRef } from '../../firebase';
 import { JotContext } from '../../Resources/JotContext';
 
 import { CssBaseline, Grid, Divider, Typography, makeStyles, TextField, IconButton, Snackbar } from '@material-ui/core';
@@ -13,18 +13,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from "@material-ui/pickers";
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-// import ReactHtmlParser from 'react-html-parser';
 
-ClassicEditor
-    .create( document.querySelector( '#editor' ), {
-        placeholder: 'Enter jots here!'
-    } )
-    .then( editor => {
-        console.log( editor );
-    } )
-    .catch( error => {
-        console.error( error );
-    } );
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,10 +33,60 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// const useCurrentRead = () => {
+//     const [insightDetails, setInsightDetails] = useState({});
+
+    // useEffect(() => {
+    //     insightsDocRef.where('completed', '==', 'false')
+    //         .get()
+    //         .then(doc => {
+    //             let incompleteInsight = {};
+    //             doc.exists ?
+    //             incompleteInsight = doc.data() : console.log("No incomplete insight in the library!");
+    //             console.log(incompleteInsight);
+    //         })
+    //         .catch(e => { console.log(e) });
+        
+    // }, []);
+// }
+
 const CurrentRead = () => {
   const { info } = useContext(JotContext);
   const [infoValue, setInfoValue] = info;
-  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertOpen, setAlertOpen] = useState(false); 
+
+  
+// const useCurrentRead = () => {
+//     const [insightDetails, setInsightDetails] = useState({});
+
+  useEffect(() => {
+    let currentInsight = {};
+      insightsDocRef
+        .where('completed', '==', false)
+        .get()
+        .then(querySnapshot => {
+          if (querySnapshot) {
+            querySnapshot.forEach(doc => {
+              console.log(doc.data())
+            })
+          } else {
+            console.log("No such document!")
+          }
+        }).catch(function (error) {
+          console.log("Error getting document:", error)
+        });
+        // console.log(currentInsight)
+      // setInfoValue({
+      //   title: '',
+      //   author: '',
+      //   commenceDate: startOfToday(),
+      //   completeDate: '',
+      //   jots: '',
+      //   completed: false,
+      //   archived: false,
+      // })
+    }, []);
+// }
 
   const handleAlertOpen = () => {
     setAlertOpen(true);
@@ -93,35 +132,35 @@ const CurrentRead = () => {
     },
   };
 
-  function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
-  }
+  // function Alert(props) {
+  //   return <MuiAlert elevation={6} variant="filled" {...props} />;
+  // }
 
-  const saveSuccessAlert = () => {
-    console.log(`snackbar being returned ${alertOpen}`);
-    console.log(alertOpen);
-    return <Snackbar open={alertOpen} autoHideDuration={6000} onClose={handleAlertClose}>
-      <Alert onClose={handleAlertClose} severity="success">
-        Your progress has been saved! 👍
-              </Alert>
-    </Snackbar>;
-  };
+  // const saveSuccessAlert = () => {
+  //   console.log(`snackbar being returned ${alertOpen}`);
+  //   console.log(alertOpen);
+  //   return <Snackbar open={alertOpen} autoHideDuration={6000} onClose={handleAlertClose}>
+  //     <Alert onClose={handleAlertClose} severity="success">
+  //       Your progress has been saved! 👍
+  //             </Alert>
+  //   </Snackbar>;
+  // };
 
-  const completeSuccessAlert = () => {
-    return <Snackbar open={alertOpen} autoHideDuration={6000} onClose={handleAlertClose}>
-      <Alert onClose={handleAlertClose} severity="success">
-        Wow, you finished your read! 👏
-                  </Alert>
-    </Snackbar>
-  };
+  // const completeSuccessAlert = () => {
+  //   return <Snackbar open={alertOpen} autoHideDuration={6000} onClose={handleAlertClose}>
+  //     <Alert onClose={handleAlertClose} severity="success">
+  //       Wow, you finished your read! 👏
+  //                 </Alert>
+  //   </Snackbar>
+  // };
 
-  const deleteWarningAlert = () => {
-    return <Snackbar open={alertOpen} autoHideDuration={6000} onClose={handleAlertClose}>
-      <Alert onClose={handleAlertClose} severity="warning">
-        Your progress has been saved! 👍
-                  </Alert>
-    </Snackbar>
-  };
+  // const deleteWarningAlert = () => {
+  //   return <Snackbar open={alertOpen} autoHideDuration={6000} onClose={handleAlertClose}>
+  //     <Alert onClose={handleAlertClose} severity="warning">
+  //       Your progress has been saved! 👍
+  //                 </Alert>
+  //   </Snackbar>
+  // };
 
   const progressSavedAlert = () => {
     alert('Your progress has been saved! 👍');
@@ -139,12 +178,12 @@ const CurrentRead = () => {
         title: info[0].title,
         author: info[0].author,
         commenceDate: info[0].commenceDate,
+        completeDate: info[0].completeDate,
         jots: info[0].jots,
         archived: false,
         completed: false
       })
       .then(() => {
-        console.log(`State befoer alert: ${alertOpen}`)
         progressSavedAlert();
       })
       .catch(e => { console.log(e) });
@@ -223,7 +262,7 @@ const CurrentRead = () => {
                 clearable
                 label="Commence"
                 value={info[0].commenceDate}
-                placeholder="01/01/2020"
+                placeholder="dd/mm/yyyy"
                 onChange={updateState.commenceDate}
                 format="dd/MM/yyyy"
               />
@@ -233,9 +272,6 @@ const CurrentRead = () => {
 
           <Grid className={classes.textEditor} item xs={8}>
             <CKEditor  
-              onInit={editor=> {
-                  
-              }}
               editor={ClassicEditor}
               data={info[0].jots}
               onChange={updateState.jots}

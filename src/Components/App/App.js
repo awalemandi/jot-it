@@ -24,9 +24,8 @@ root: {
   flexGrow: 1,
   width: '100%',
   height: '100%',
-  margin: theme.spacing(1, 5, 0, 9),
-  padding: theme.spacing(1, 12, 4, 9),
-  overflow: 'auto',
+  margin: theme.spacing(0),
+  padding: theme.spacing(1, 4, 4, 9),
 },
 
 navigation: {
