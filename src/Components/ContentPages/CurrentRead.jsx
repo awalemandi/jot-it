@@ -36,31 +36,54 @@ const useStyles = makeStyles((theme) => ({
 // const useCurrentRead = () => {
 //     const [insightDetails, setInsightDetails] = useState({});
 
-    // useEffect(() => {
-    //     insightsDocRef.where('completed', '==', 'false')
-    //         .get()
-    //         .then(doc => {
-    //             let incompleteInsight = {};
-    //             doc.exists ?
-    //             incompleteInsight = doc.data() : console.log("No incomplete insight in the library!");
-    //             console.log(incompleteInsight);
-    //         })
-    //         .catch(e => { console.log(e) });
-        
-    // }, []);
+// useEffect(() => {
+//     insightsDocRef.where('completed', '==', 'false')
+//         .get()
+//         .then(doc => {
+//             let incompleteInsight = {};
+//             doc.exists ?
+//             incompleteInsight = doc.data() : console.log("No incomplete insight in the library!");
+//             console.log(incompleteInsight);
+//         })
+//         .catch(e => { console.log(e) });
+
+// }, []);
 // }
 
 const CurrentRead = () => {
   const { info } = useContext(JotContext);
   const [infoValue, setInfoValue] = info;
-  const [alertOpen, setAlertOpen] = useState(false); 
+  const [alertOpen, setAlertOpen] = useState(false);
 
+
+  // useEffect(() => {
+  //   const unsubcribe = insightsDocRef
+  //     .where('completed', '==', false)
+  //     .get()
+  //     .then(snapshot => {
+  //       snapshot.forEach(doc => {
+  //         const currentInsight = (doc.id, "=>", doc.data())
+  //         // console.log(currentInsight)
+  //         setInfoValue(
+  //           {
+  //             title: currentInsight.title,
+  //             author: currentInsight.author,
+  //             commenceDate: currentInsight.commenceDate,
+  //             completeDate: '',
+  //             jots: currentInsight.jots,
+  //             completed: false,
+  //             archived: false,
+  //           })
+  //       })
+  //     })
+  //     .catch(e => {console.log(e)});
+  //     return unsubcribe;
+  // }, []);
 
   useEffect(() => {
-    const unsubcribe = insightsDocRef
-      .where('completed', '==', false)
-      .get()
-      .then(snapshot => {
+    (async function () {
+      try {
+        let snapshot = await insightsDocRef.where('completed', '==', false).get()
         snapshot.forEach(doc => {
           const currentInsight = (doc.id, "=>", doc.data())
           console.log(currentInsight)
@@ -75,12 +98,11 @@ const CurrentRead = () => {
               archived: false,
             })
         })
-      })
-      .catch(e => {console.log(e)});
-      return unsubcribe;
+      } catch (e) {
+        console.log(e);
+      }
+    })()
   }, []);
-  
-
 
   const handleAlertOpen = () => {
     setAlertOpen(true);
@@ -214,16 +236,16 @@ const CurrentRead = () => {
   return (
     <>
       <CssBaseline />
-      <form Validate className={classes.root}>
+      <form className={classes.root}>
         <Grid container spacing={5} justify="center">
-          <Grid item xs={0} lg={2}></Grid>
+          <Grid item xs={false} lg={2}></Grid>
           <Grid item xs={8}>
             <Typography component="h1" variant="h6">
               New Insight
                 <Divider />
             </Typography>
           </Grid>
-          <Grid item xs={0} lg={2}></Grid>
+          <Grid item xs={false} lg={2}></Grid>
 
           <Grid item xs={8} lg={4}>
             <TextField
@@ -262,10 +284,10 @@ const CurrentRead = () => {
               />
             </MuiPickersUtilsProvider>
           </Grid>
-          <Grid item xs={0} lg={3}></Grid>
+          <Grid item xs={false} lg={3}></Grid>
 
           <Grid className={classes.textEditor} item xs={8}>
-            <CKEditor  
+            <CKEditor
               editor={ClassicEditor}
               data={info[0].jots}
               onChange={updateState.jots}
@@ -277,7 +299,7 @@ const CurrentRead = () => {
             <Grid item xs={2}>
               <IconButton
                 color="secondary"
-                size="large"
+                size="medium"
                 className={classes.button}
                 onClick={handleSave}
               >
@@ -287,9 +309,9 @@ const CurrentRead = () => {
 
             <Grid item xs={2}>
               <IconButton
-                
+
                 color="secondary"
-                size="large"
+                size="medium"
                 className={classes.button}
                 onClick={handleComplete}
               >
