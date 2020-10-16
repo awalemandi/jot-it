@@ -1,6 +1,7 @@
 import React, { useState, createContext } from 'react';
 import CurrentRead from '../Components/ContentPages/CurrentRead';
 import { startOfToday } from 'date-fns';
+import { format } from 'date-fns/esm';
 
 
 
@@ -13,7 +14,7 @@ export const JotDistributor = props => {
         {
             title: '',
             author: '',
-            commenceDate: startOfToday(),
+            commenceDate: format(startOfToday(), 'dd/MM/yyyy'),
             completeDate: '',
             jots: '',
             completed: false,

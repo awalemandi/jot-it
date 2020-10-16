@@ -55,38 +55,32 @@ const CurrentRead = () => {
   const [infoValue, setInfoValue] = info;
   const [alertOpen, setAlertOpen] = useState(false); 
 
-  
-// const useCurrentRead = () => {
-//     const [insightDetails, setInsightDetails] = useState({});
 
   useEffect(() => {
-    let currentInsight = {};
-      insightsDocRef
-        .where('completed', '==', false)
-        .get()
-        .then(querySnapshot => {
-          if (querySnapshot) {
-            querySnapshot.forEach(doc => {
-              console.log(doc.data())
+    const unsubcribe = insightsDocRef
+      .where('completed', '==', false)
+      .get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          const currentInsight = (doc.id, "=>", doc.data())
+          console.log(currentInsight)
+          setInfoValue(
+            {
+              title: currentInsight.title,
+              author: currentInsight.author,
+              commenceDate: currentInsight.commenceDate,
+              completeDate: '',
+              jots: currentInsight.jots,
+              completed: false,
+              archived: false,
             })
-          } else {
-            console.log("No such document!")
-          }
-        }).catch(function (error) {
-          console.log("Error getting document:", error)
-        });
-        // console.log(currentInsight)
-      // setInfoValue({
-      //   title: '',
-      //   author: '',
-      //   commenceDate: startOfToday(),
-      //   completeDate: '',
-      //   jots: '',
-      //   completed: false,
-      //   archived: false,
-      // })
-    }, []);
-// }
+        })
+      })
+      .catch(e => {console.log(e)});
+      return unsubcribe;
+  }, []);
+  
+
 
   const handleAlertOpen = () => {
     setAlertOpen(true);
