@@ -10,6 +10,7 @@ import SaveRoundedIcon from '@material-ui/icons/SaveRounded';
 import DoneAllRoundedIcon from '@material-ui/icons/DoneAllRounded';
 
 import DateFnsUtils from '@date-io/date-fns';
+import { startOfToday } from 'date-fns';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from "@material-ui/pickers";
 import { format } from 'date-fns/esm';
 import CKEditor from '@ckeditor/ckeditor5-react';
@@ -35,77 +36,39 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// const useCurrentRead = () => {
-//     const [insightDetails, setInsightDetails] = useState({});
 
-// useEffect(() => {
-//     insightsDocRef.where('completed', '==', 'false')
-//         .get()
-//         .then(doc => {
-//             let incompleteInsight = {};
-//             doc.exists ?
-//             incompleteInsight = doc.data() : console.log("No incomplete insight in the library!");
-//             console.log(incompleteInsight);
-//         })
-//         .catch(e => { console.log(e) });
-
-// }, []);
-// }
 
 const CurrentRead = () => {
+  const classes = useStyles();
   const { info } = useContext(JotContext);
   const [infoValue, setInfoValue] = info;
   const [alertOpen, setAlertOpen] = useState(false);
 
-
-  // useEffect(() => {
-  //   const unsubcribe = insightsDocRef
-  //     .where('completed', '==', false)
-  //     .get()
-  //     .then(snapshot => {
-  //       snapshot.forEach(doc => {
-  //         const currentInsight = (doc.id, "=>", doc.data())
-  //         // console.log(currentInsight)
-  //         setInfoValue(
-  //           {
-  //             title: currentInsight.title,
-  //             author: currentInsight.author,
-  //             commenceDate: currentInsight.commenceDate,
-  //             completeDate: '',
-  //             jots: currentInsight.jots,
-  //             completed: false,
-  //             archived: false,
-  //           })
-  //       })
-  //     })
-  //     .catch(e => {console.log(e)});
-  //     return unsubcribe;
-  // }, []);
-
+//preload current read information
   useEffect(() => {
     (async function () {
       try {
         let snapshot = await insightsDocRef.where('completed', '==', false).get()
         snapshot.forEach(doc => {
-          currentInsight = (doc.id, "=>", doc.data())
-          console.log(currentInsight)
-          console.log(currentInsight.title)
-          setInfoValue(
-            {
-              title: currentInsight.title,
-              author: currentInsight.author,
-              commenceDate: currentInsight.commenceDate,
-              completeDate: '',
-              jots: currentInsight.jots,
-              completed: false,
-              archived: false,
-            })
+          currentInsight = {id: doc.id, ...doc.data()}
+          console.log(currentInsight.insightId)
+          // setInfoValue(
+          //   {
+          //     title: currentInsight.title,
+          //     author: currentInsight.author,
+          //     commenceDate: currentInsight.commenceDate,
+          //     completeDate: '',
+          //     jots: currentInsight.jots,
+          //     completed: false,
+          //     archived: false,
+          //   })
         })
       } catch (e) {
         console.log(e);
       }
     })()
   }, []);
+
 
   const handleAlertOpen = () => {
     setAlertOpen(true);
@@ -118,8 +81,7 @@ const CurrentRead = () => {
     setAlertOpen(false);
   };
 
-  const classes = useStyles();
-
+  //onChange handlers for updating state
   const updateState = {
     title: function (e) {
       setInfoValue({
@@ -189,8 +151,8 @@ const CurrentRead = () => {
     alert('Wow, you finished your read! 👏');
   };
 
+  //onClick handlers for save and markAsComplete button
   const handleSave = () => {
-    handleAlertOpen();
     insightsDocRef.doc()
       .set({
         insightId: `${(info[0].title + info[0].author).toLowerCase()}`,
@@ -210,7 +172,7 @@ const CurrentRead = () => {
 
   const handleComplete = () => {
     console.log('Mark as complete function started')
-    insightsDocRef.doc()
+    insightsDocRef.doc(currentInsight.id)
       .update({
         insightId: `${(info[0].title + info[0].author).toLowerCase()}`,
         title: info[0].title,
@@ -221,16 +183,17 @@ const CurrentRead = () => {
         completed: true
       })
       .then(() => {
-        setInfoValue({
-          title: '',
-          author: '',
-          commenceDate: '01/01/2020',
-          jots: 'Jots here..',
-          completed: false,
-          archived: false,
-        });
-        console.log('Mark as complete fucntion finished')
-        finishedReadAlert()
+        currentInsight = {};
+        // setInfoValue({
+        //   title: '',
+        //   author: '',
+        //   commenceDate: '',
+        //   completeDate: '',
+        //   jots: '',
+        //   completed: false,
+        //   archived: false,
+        // });
+        finishedReadAlert();
       })
       .catch(e => { console.log(e) });
   };
