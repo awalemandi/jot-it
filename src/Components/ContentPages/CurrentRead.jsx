@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { db, insightsDocRef } from '../../firebase';
 import { JotContext } from '../../Resources/JotContext';
 
-import { CssBaseline, Grid, Divider, Typography, makeStyles, TextField, IconButton, Snackbar } from '@material-ui/core';
+import { CssBaseline, Grid, Divider, Typography, makeStyles, TextField, IconButton, Input, Snackbar } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
 
 
@@ -11,9 +11,11 @@ import DoneAllRoundedIcon from '@material-ui/icons/DoneAllRounded';
 
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from "@material-ui/pickers";
+import { format } from 'date-fns/esm';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
+let currentInsight = {};
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -85,8 +87,9 @@ const CurrentRead = () => {
       try {
         let snapshot = await insightsDocRef.where('completed', '==', false).get()
         snapshot.forEach(doc => {
-          const currentInsight = (doc.id, "=>", doc.data())
+          currentInsight = (doc.id, "=>", doc.data())
           console.log(currentInsight)
+          console.log(currentInsight.title)
           setInfoValue(
             {
               title: currentInsight.title,
@@ -236,7 +239,7 @@ const CurrentRead = () => {
   return (
     <>
       <CssBaseline />
-      <form className={classes.root}>
+      <form noValidate className={classes.root}>
         <Grid container spacing={5} justify="center">
           <Grid item xs={false} lg={2}></Grid>
           <Grid item xs={8}>
@@ -248,27 +251,26 @@ const CurrentRead = () => {
           <Grid item xs={false} lg={2}></Grid>
 
           <Grid item xs={8} lg={4}>
-            <TextField
-              required
+            <Input
+              value={currentInsight.title}
               name="title"
-              value={info[0].title}
+              placeholder="Title"
               fullWidth
-              id="title"
-              label="Title"
-              autoFocus
               onChange={updateState.title}
+              required
+              inputProps={{ 'aria-label': 'description' }} 
             />
           </Grid>
 
           <Grid item xs={8} lg={4}>
-            <TextField
-              required
-              fullWidth
-              value={info[0].author}
-              id="author"
-              label="Author"
+            <Input
+              value={currentInsight.author}
               name="author"
+              placeholder="Author"
+              fullWidth
               onChange={updateState.author}
+              required
+              inputProps={{ 'aria-label': 'description' }} 
             />
           </Grid>
 
@@ -277,7 +279,7 @@ const CurrentRead = () => {
               <KeyboardDatePicker
                 clearable
                 label="Commence"
-                value={info[0].commenceDate}
+                value={currentInsight.commenceDate}
                 placeholder="dd/mm/yyyy"
                 onChange={updateState.commenceDate}
                 format="dd/MM/yyyy"
@@ -289,7 +291,7 @@ const CurrentRead = () => {
           <Grid className={classes.textEditor} item xs={8}>
             <CKEditor
               editor={ClassicEditor}
-              data={info[0].jots}
+              data={currentInsight.jots}
               onChange={updateState.jots}
             />
           </Grid>
