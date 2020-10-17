@@ -22,8 +22,7 @@ const useInsightsArray = () => {
     const [insightsArray, setInsightsArray] = useState([]);
 
     useEffect(() => {
-        const unsubcribe = insightsDocRef.where('completed', '==', true)
-            insightsDocRef.where('archived', '==', true)
+        const unsubcribe = insightsDocRef.where('archived', '==', true)
             .onSnapshot(snapshot => {
                 const newInsights = snapshot.docs.map(doc => ({
                     id: doc.id,
@@ -43,14 +42,14 @@ const Bin = () => {
 
     return (
         <Grid container className={classes.paper} spacing={2} justify="space-evenly">
-            <Grid item xs={0} lg={2}></Grid>
+            <Grid item xs={false} lg={2}></Grid>
             <Grid item xs={8}>
                 <Typography component="h1" variant="h6">
                     Archived Insights
                         <Divider />
                 </Typography>
             </Grid>
-            <Grid item sm={0} lg={2}></Grid>
+            <Grid item sm={false} lg={2}></Grid>
             {userInsights.map((insight) =>
                 <Grid item xs={7} sm={7} md={5} lg={4}>
                     <InsightCard
