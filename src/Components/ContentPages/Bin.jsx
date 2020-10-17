@@ -22,13 +22,13 @@ const useInsightsArray = () => {
     const [insightsArray, setInsightsArray] = useState([]);
 
     useEffect(() => {
-        const unsubcribe = insightsDocRef
+        const unsubcribe = insightsDocRef.where('completed', '==', true)
+            insightsDocRef.where('archived', '==', true)
             .onSnapshot(snapshot => {
                 const newInsights = snapshot.docs.map(doc => ({
                     id: doc.id,
                     ...doc.data()
                 }));
-                // console.log(newInsights);
                 setInsightsArray(newInsights);
             });
 

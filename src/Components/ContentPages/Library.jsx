@@ -19,7 +19,8 @@ const useInsightsArray = () => {
     const [insightsArray, setInsightsArray] = useState([]);
 
     useEffect(() => {
-        const unsubcribe = insightsDocRef
+        const unsubcribe = insightsDocRef.where('completed', '==', true)
+            insightsDocRef.where('archived', '==', false)
             .onSnapshot(snapshot => {
                 const newInsights = snapshot.docs.map(doc => ({
                     id: doc.id,
