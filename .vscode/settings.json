@@ -1,3 +1,8 @@
 {
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "workbench.editorAssociations": [
+    
+    ],
+    "workbench.colorTheme": "Atom One Dark",
+    "workbench.preferredDarkColorTheme": "Atom One Dark"
 }

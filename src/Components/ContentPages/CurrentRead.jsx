@@ -46,30 +46,27 @@ const CurrentRead = () => {
 
 //preload current read information
   useEffect(() => {
-    (async function () {
-      try {
-        let snapshot = await insightsDocRef.where('completed', '==', false).get()
-        snapshot.forEach(doc => {
-          currentInsight = {id: doc.id, ...doc.data()}
-          console.log(currentInsight.insightId)
-          // setInfoValue(
-          //   {
-          //     title: currentInsight.title,
-          //     author: currentInsight.author,
-          //     commenceDate: currentInsight.commenceDate,
-          //     completeDate: '',
-          //     jots: currentInsight.jots,
-          //     completed: false,
-          //     archived: false,
-          //   })
+    let unsubcribe = insightsDocRef.where('completed', '==', false)
+        .onSnapshot(snapshot => {
+          snapshot.forEach(doc => {
+            currentInsight = { id: doc.id, ...doc.data() }
+            console.log(currentInsight.insightId)
+          })
+          setInfoValue(
+            {
+              title: currentInsight.title,
+              author: currentInsight.author,
+              commenceDate: currentInsight.commenceDate,
+              completeDate: '',
+              jots: currentInsight.jots,
+              completed: false,
+              archived: false,
+            })
         })
-      } catch (e) {
-        console.log(e);
-      }
-    })()
+        return unsubcribe;
   }, []);
 
-
+  
   const handleAlertOpen = () => {
     setAlertOpen(true);
   };
@@ -184,15 +181,15 @@ const CurrentRead = () => {
       })
       .then(() => {
         currentInsight = {};
-        // setInfoValue({
-        //   title: '',
-        //   author: '',
-        //   commenceDate: '',
-        //   completeDate: '',
-        //   jots: '',
-        //   completed: false,
-        //   archived: false,
-        // });
+        setInfoValue({
+          title: '',
+          author: '',
+          commenceDate: '',
+          completeDate: '',
+          jots: '',
+          completed: false,
+          archived: false,
+        });
         finishedReadAlert();
       })
       .catch(e => { console.log(e) });
