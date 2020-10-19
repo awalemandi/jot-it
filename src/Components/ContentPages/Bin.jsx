@@ -11,18 +11,14 @@ const useStyles = makeStyles((theme) => ({
     paper: {
         margin: theme.spacing(0, 0, 0, 1),
         padding: theme.spacing(0, 0, 0, 1),
-        width: '100%',
-        height: 'auto',
-        overflow: 'auto',
     },
 }));
 
 
 const useInsightsArray = () => {
     const [insightsArray, setInsightsArray] = useState([]);
-
     useEffect(() => {
-        const unsubcribe = insightsDocRef.where('archived', '==', true)
+            const unsubcribe = insightsDocRef.where('archived', '==', true)
             .onSnapshot(snapshot => {
                 const newInsights = snapshot.docs.map(doc => ({
                     id: doc.id,
@@ -31,7 +27,7 @@ const useInsightsArray = () => {
                 setInsightsArray(newInsights);
             });
 
-        return unsubcribe;
+        return () => unsubcribe;
     }, [])
     return insightsArray;
 };
@@ -50,10 +46,13 @@ const Bin = () => {
                 </Typography>
             </Grid>
             <Grid item sm={false} lg={2}></Grid>
-            {userInsights.map((insight) =>
+            {
+                !userInsights ?
+                    <Typography variant="h10">🗑  Bin is empty. Archived insights will show up here.</Typography>
+                : userInsights.map((insight) =>
                 <Grid item xs={7} sm={7} md={5} lg={4}>
                     <InsightCard
-                        docId={insight.id}
+                        key={insight.id}
                         insightId={insight.insightId}
                         title={insight.title}
                         author={insight.author}
@@ -61,7 +60,8 @@ const Bin = () => {
                         jots={insight.jots}
                     />
                 </Grid>
-            )}
+            )
+            }
         </Grid>
     )
 };

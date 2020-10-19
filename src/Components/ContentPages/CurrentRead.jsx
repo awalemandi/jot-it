@@ -46,7 +46,7 @@ const CurrentRead = () => {
 
 //preload current read information
   useEffect(() => {
-    let unsubcribe = insightsDocRef.where('completed', '==', false)
+    const unsubcribe = insightsDocRef.where('completed', '==', false)
         .onSnapshot(snapshot => {
           snapshot.forEach(doc => {
             currentInsight = { id: doc.id, ...doc.data() }
@@ -63,7 +63,7 @@ const CurrentRead = () => {
               archived: false,
             })
         })
-        return unsubcribe;
+        return () => unsubcribe;
   }, []);
 
   
