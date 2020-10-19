@@ -151,7 +151,8 @@ const CurrentRead = () => {
 
   //onClick handlers for save and markAsComplete button
   const handleSave = () => {
-    insightsDocRef.doc()
+    if (currentInsight.id) {
+        insightsDocRef.doc(currentInsight.id)
       .set({
         title: info[0].title,
         author: info[0].author,
@@ -164,7 +165,23 @@ const CurrentRead = () => {
       .then(() => {
         progressSavedAlert();
       })
-      .catch(e => { console.log(e) });
+      .catch(e => { console.log(e) })
+    } else {
+        insightsDocRef.doc()
+        .set({
+          title: info[0].title,
+          author: info[0].author,
+          commenceDate: info[0].commenceDate,
+          completeDate: '',
+          jots: info[0].jots,
+          archived: false,
+          completed: false
+        })
+        .then(() => {
+          progressSavedAlert();
+        })
+        .catch(e => { console.log(e) })
+    }
   };
 
   const handleComplete = () => {
@@ -182,13 +199,13 @@ const CurrentRead = () => {
       .then(() => {
         currentInsight = {};
         setInfoValue({
-          title: '',
-          author: '',
-          commenceDate: '',
-          completeDate: '',
-          jots: '',
-          completed: false,
-          archived: false,
+            title: '',
+            author: '',
+            commenceDate: format(startOfToday(), 'dd/MM/yyyy'),
+            completeDate: '',
+            jots: '',
+            completed: false,
+            archived: false,
         });
         finishedReadAlert();
       })

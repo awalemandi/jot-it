@@ -12,8 +12,8 @@ export const JotDistributor = props => {
     
     const [jotInfo, setJotInfo] = useState(
         {
-            title: 'ttle',
-            author: 'athr',
+            title: '',
+            author: '',
             commenceDate: format(startOfToday(), 'dd/MM/yyyy'),
             completeDate: '',
             jots: '',

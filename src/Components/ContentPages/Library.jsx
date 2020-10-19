@@ -49,6 +49,7 @@ const Library = () => {
                 <Grid item xs={7} sm={7} md={5} lg={4}>
                     <InsightCard
                         key={insight.id}
+                        id={insight.id}
                         title={insight.title}
                         author={insight.author}
                         commenceDate={insight.commenceDate}

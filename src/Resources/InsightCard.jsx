@@ -39,7 +39,7 @@ const handleDelete = insightId => {
         .catch(e => { console.log(e) });
 };
 
-const InsightCard = ({ docId, insightId, title, author, jots }) => {
+const InsightCard = ({ id, title, author, jots }) => {
     const classes = useStyles();
     return (
         <Card raised={true} className={classes.root} variant="outlined">
@@ -56,7 +56,7 @@ const InsightCard = ({ docId, insightId, title, author, jots }) => {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <IconButton variant="outlined" color="secondary" className={classes.button} size="medium" onClick={() => handleDelete(docId)}>
+                    <IconButton variant="outlined" color="secondary" className={classes.button} size="medium" onClick={() => handleDelete(id)}>
                         <DeleteOutlineRoundedIcon />
                     </IconButton>
                 </CardActions>
