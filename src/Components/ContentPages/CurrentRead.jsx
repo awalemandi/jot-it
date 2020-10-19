@@ -64,23 +64,6 @@ const CurrentRead = () => {
               archived: currentInsight.archived,
             })
         })
-    // const unsubcribe = insightsDocRef.where('completed', '==', false)
-    //     .onSnapshot(snapshot => {
-    //       snapshot.forEach(doc => {
-    //         currentInsight = { id: doc.id, ...doc.data() }
-    //         console.log(currentInsight.insightId)
-    //       })
-    //       setInfoValue(
-    //         {
-    //           title: currentInsight.title,
-    //           author: currentInsight.author,
-    //           commenceDate: currentInsight.commenceDate,
-    //           completeDate: currentInsight.completeDate,
-    //           jots: currentInsight.jots,
-    //           completed: currentInsight.completed,
-    //           archived: currentInsight.archived,
-    //         })
-    //     })
         return () => unsubcribe;
   }, []);
 
@@ -170,11 +153,10 @@ const CurrentRead = () => {
   const handleSave = () => {
     insightsDocRef.doc()
       .set({
-        insightId: `${(info[0].title + info[0].author).toLowerCase()}`,
         title: info[0].title,
         author: info[0].author,
         commenceDate: info[0].commenceDate,
-        completeDate: info[0].completeDate,
+        completeDate: '',
         jots: info[0].jots,
         archived: false,
         completed: false
@@ -192,6 +174,7 @@ const CurrentRead = () => {
         title: info[0].title,
         author: info[0].author,
         commenceDate: info[0].commenceDate,
+        completeDate:format(startOfToday(), 'dd/MM/yyyy'),
         jots: info[0].jots,
         archived: false,
         completed: true
@@ -240,7 +223,6 @@ const CurrentRead = () => {
 
           <Grid item xs={8} lg={4}>
             <Input
-              // value={info[0].author}
               defaultValue={preloadData.author}
               name="author"
               placeholder="Author"
@@ -300,7 +282,6 @@ const CurrentRead = () => {
             <Grid item xs={3}></Grid>
           </Grid>
         </Grid>
-
       </form>
     </>
   )

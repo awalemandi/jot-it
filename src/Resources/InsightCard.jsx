@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        width: 250,
+        width: 240,
         height: 280,
         backgroundColor: fade(theme.palette.common.white),
     },

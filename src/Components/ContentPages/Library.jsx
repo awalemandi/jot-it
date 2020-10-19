@@ -10,13 +10,15 @@ import InsightCard from '../../Resources/InsightCard';
 const useStyles = makeStyles((theme) => ({
     paper: {
         margin: theme.spacing(0, 0, 0, 1),
-        padding: theme.spacing(1, 4, 1, 2),
+        padding: theme.spacing(1, 1, 1, 3),
     },
 }));
 
 
-const useInsightsArray = () => {
-    const [insightsArray, setInsightsArray] = useState([]);
+const Library = () => {
+    const [insightsArray, setInsightsArray] = useState(null);
+    const classes = useStyles();
+
     useEffect(() => {
         const unsubcribe = insightsDocRef.where('completed', '==', true)
             .where('archived', '==', false)
@@ -28,15 +30,9 @@ const useInsightsArray = () => {
                 setInsightsArray(newInsights);
             });
         return () => unsubcribe;
-    }, [])
-    return insightsArray;
-};
+    }, []);
 
-const Library = () => {
-    const classes = useStyles();
-    const userInsights = useInsightsArray();
-
-    return userInsights ? (
+    return insightsArray ? (
         <Grid container className={classes.paper} spacing={2} justify="space-around">
             <Grid item xs={false} lg={2}></Grid>
             <Grid item xs={8}>
@@ -47,13 +43,12 @@ const Library = () => {
             </Grid>
             <Grid item sm={false} lg={2}></Grid>
             {
-                !userInsights ?
+                !insightsArray?
                     <Typography variant="h10">😐 You don't have any insights yet. Complete your current read to add!</Typography>
-                : userInsights.map((insight) =>
+                : insightsArray.map((insight) =>
                 <Grid item xs={7} sm={7} md={5} lg={4}>
                     <InsightCard
                         key={insight.id}
-                        insightId={insight.insightId}
                         title={insight.title}
                         author={insight.author}
                         commenceDate={insight.commenceDate}
@@ -64,7 +59,7 @@ const Library = () => {
             }
         </Grid>
     )
-    : <>Loading ... </>
+    : <>Loading... </>
 };
 
 export default Library;

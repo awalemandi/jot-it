@@ -43,10 +43,10 @@ toolbar: {
 
 content: {
   position: 'relative',
-  padding: theme.spacing(2, 1, 1, 1),
+  padding: theme.spacing(2, 1, 2, 1),
   alignItems: 'center',
   justifyContent: 'space-evenly',
-  width: '70%',
+  width: '60%',
   margin: theme.spacing(0, 0, 10, 0),
   height: 'auto',
   maxHeight: 700,
@@ -56,7 +56,7 @@ content: {
 footer: {
   position: "absolute",
   bottom: 0,
-  padding: theme.spacing(5),
+  padding: theme.spacing(5, 1, 1, 1),
   margin: theme.spacing(1, 8, 0, 8),
   width: '66%',
   height: 'auto',

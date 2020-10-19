@@ -20,10 +20,17 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+const handleItemDelete = item => {
+    userDocRef.update({
+        toBeRead: firebase.firestore.FieldValue.arrayRemove(item)
+    })
+    .catch(e=> {console.log(e)});
+};
 
 
-const useListItemsArray = () => {
-    const [itemsArray, setItemsArray] = useState([]);
+const TbrList = () => {
+    const classes = useStyles();
+    const [itemsArray, setItemsArray] = useState(null);
 
     useEffect(() => {
         const unsubcribe = userDocRef
@@ -34,39 +41,24 @@ const useListItemsArray = () => {
                 });
                 setItemsArray(newItems);
             })
-        return unsubcribe;
+        return () => unsubcribe;
     }, [])
-    return itemsArray;
-};
-
-const handleItemDelete = item => {
-    userDocRef.update({
-        toBeRead: firebase.firestore.FieldValue.arrayRemove(item)
-    })
-    .catch(e=> {console.log(e)});
-};
-
- 
-
-const TbrList = () => {
-    const classes = useStyles();
-
-    const listItemsArray = useListItemsArray();
-    return (
+    
+    return itemsArray ? (
         <List className={classes.paper}>
-            {listItemsArray.map(item => {
+            {itemsArray.map(item => {
                 return (
                     <ListItem dense>
                         <ListItemIcon>
-                            <ChevronRightRoundedIcon color="primary"/>
+                            <ChevronRightRoundedIcon color="primary" />
                         </ListItemIcon>
                         <ListItemText className={classes.itemText} primary={item} />
                         <ListItemSecondaryAction>
-                            <IconButton 
-                                edge="end" 
+                            <IconButton
+                                edge="end"
                                 aria-label="comments"
-                                onClick={()=> {handleItemDelete(item)}}
-                                >
+                                onClick={() => { handleItemDelete(item) }}
+                            >
                                 <HighlightOffRoundedIcon color="primary" />
                             </IconButton>
                         </ListItemSecondaryAction>
@@ -75,6 +67,7 @@ const TbrList = () => {
             })}
         </List>
     )
-}
+        : <>Loading...</>
+};
 
 export default TbrList;
