@@ -42,6 +42,7 @@ const CurrentRead = () => {
   const classes = useStyles();
   const { info } = useContext(JotContext);
   const [infoValue, setInfoValue] = info;
+  const [preloadData, setPreloadData] = useState(null);
   const [alertOpen, setAlertOpen] = useState(false);
 
 //preload current read information
@@ -52,17 +53,34 @@ const CurrentRead = () => {
             currentInsight = { id: doc.id, ...doc.data() }
             console.log(currentInsight.insightId)
           })
-          setInfoValue(
+          setPreloadData(
             {
               title: currentInsight.title,
               author: currentInsight.author,
               commenceDate: currentInsight.commenceDate,
-              completeDate: '',
+              completeDate: currentInsight.completeDate,
               jots: currentInsight.jots,
-              completed: false,
-              archived: false,
+              completed: currentInsight.completed,
+              archived: currentInsight.archived,
             })
         })
+    // const unsubcribe = insightsDocRef.where('completed', '==', false)
+    //     .onSnapshot(snapshot => {
+    //       snapshot.forEach(doc => {
+    //         currentInsight = { id: doc.id, ...doc.data() }
+    //         console.log(currentInsight.insightId)
+    //       })
+    //       setInfoValue(
+    //         {
+    //           title: currentInsight.title,
+    //           author: currentInsight.author,
+    //           commenceDate: currentInsight.commenceDate,
+    //           completeDate: currentInsight.completeDate,
+    //           jots: currentInsight.jots,
+    //           completed: currentInsight.completed,
+    //           archived: currentInsight.archived,
+    //         })
+    //     })
         return () => unsubcribe;
   }, []);
 
@@ -168,7 +186,6 @@ const CurrentRead = () => {
   };
 
   const handleComplete = () => {
-    console.log('Mark as complete function started')
     insightsDocRef.doc(currentInsight.id)
       .update({
         insightId: `${(info[0].title + info[0].author).toLowerCase()}`,
@@ -196,7 +213,7 @@ const CurrentRead = () => {
   };
 
 
-  return (
+  return preloadData ? (
     <>
       <CssBaseline />
       <form noValidate className={classes.root}>
@@ -209,10 +226,9 @@ const CurrentRead = () => {
             </Typography>
           </Grid>
           <Grid item xs={false} lg={2}></Grid>
-
           <Grid item xs={8} lg={4}>
             <Input
-              value={currentInsight.title}
+              defaultValue={preloadData.title}
               name="title"
               placeholder="Title"
               fullWidth
@@ -224,7 +240,8 @@ const CurrentRead = () => {
 
           <Grid item xs={8} lg={4}>
             <Input
-              value={currentInsight.author}
+              // value={info[0].author}
+              defaultValue={preloadData.author}
               name="author"
               placeholder="Author"
               fullWidth
@@ -239,7 +256,7 @@ const CurrentRead = () => {
               <KeyboardDatePicker
                 clearable
                 label="Commence"
-                value={currentInsight.commenceDate}
+                defaultValue={preloadData.commenceDate}
                 placeholder="dd/mm/yyyy"
                 onChange={updateState.commenceDate}
                 format="dd/MM/yyyy"
@@ -251,7 +268,7 @@ const CurrentRead = () => {
           <Grid className={classes.textEditor} item xs={8}>
             <CKEditor
               editor={ClassicEditor}
-              data={currentInsight.jots}
+              data={preloadData.jots}
               onChange={updateState.jots}
             />
           </Grid>
@@ -286,7 +303,8 @@ const CurrentRead = () => {
 
       </form>
     </>
-  );
+  )
+  : <>Loading..</>
 }
 
 export default CurrentRead;

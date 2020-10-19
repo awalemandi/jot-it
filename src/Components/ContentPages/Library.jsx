@@ -19,7 +19,7 @@ const useInsightsArray = () => {
     const [insightsArray, setInsightsArray] = useState([]);
     useEffect(() => {
         const unsubcribe = insightsDocRef.where('completed', '==', true)
-            insightsDocRef.where('archived', '==', false)
+            .where('archived', '==', false)
             .onSnapshot(snapshot => {
                 const newInsights = snapshot.docs.map(doc => ({
                     id: doc.id,
@@ -36,7 +36,7 @@ const Library = () => {
     const classes = useStyles();
     const userInsights = useInsightsArray();
 
-    return (
+    return userInsights ? (
         <Grid container className={classes.paper} spacing={2} justify="space-around">
             <Grid item xs={false} lg={2}></Grid>
             <Grid item xs={8}>
@@ -64,6 +64,7 @@ const Library = () => {
             }
         </Grid>
     )
+    : <>Loading ... </>
 };
 
 export default Library;
