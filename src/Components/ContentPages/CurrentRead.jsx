@@ -51,7 +51,6 @@ const CurrentRead = () => {
         .onSnapshot(snapshot => {
           snapshot.forEach(doc => {
             currentInsight = { id: doc.id, ...doc.data() }
-            console.log(currentInsight.insightId)
           })
           setPreloadData(
             {

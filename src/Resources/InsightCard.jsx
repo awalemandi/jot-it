@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { insightsDocRef } from '../firebase';
+import { JotContext} from '../Resources/JotContext';
 
 import {Card, CardActions, CardContent, IconButton, Typography } from '@material-ui/core';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import DeleteOutlineRoundedIcon from '@material-ui/icons/DeleteOutlineRounded';
 
 import ReactHtmlParser from 'react-html-parser';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -29,17 +31,11 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const handleDelete = insightId => {
-    // console.log(`insight being deleted: ${insightId}`)
-    insightsDocRef.doc(insightId)
-        .delete()
-        .then(() => {
-            alert('Insight deleted! 🗑');
-        })
-        .catch(e => { console.log(e) });
-};
 
-const InsightCard = ({ id, title, author, jots }) => {
+const InsightCard = ({ id, title, author, jots, onDelete }) => {
+    const { content } = useContext(JotContext);
+    const [contentValue, setContentValue] = content;
+
     const classes = useStyles();
     return (
         <Card raised={true} className={classes.root} variant="outlined">
@@ -56,7 +52,7 @@ const InsightCard = ({ id, title, author, jots }) => {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <IconButton variant="outlined" color="secondary" className={classes.button} size="medium" onClick={() => handleDelete(id)}>
+                    <IconButton variant="outlined" color="secondary" className={classes.button} size="medium" onClick={onDelete}>
                         <DeleteOutlineRoundedIcon />
                     </IconButton>
                 </CardActions>

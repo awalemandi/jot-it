@@ -14,6 +14,17 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+//moves insight from library to bin
+const handleArchive = insightId => {
+    insightsDocRef.doc(insightId)
+        .update({
+            archived: true
+        })
+        .then(() => {
+            alert('Insight has been moved to the bin!');
+        })
+        .catch(e => console.log(e));
+}
 
 const Library = () => {
     const [insightsArray, setInsightsArray] = useState(null);
@@ -54,6 +65,7 @@ const Library = () => {
                         author={insight.author}
                         commenceDate={insight.commenceDate}
                         jots={insight.jots}
+                        onDelete={() => handleArchive(insight.id)}
                     />
                 </Grid>
             )

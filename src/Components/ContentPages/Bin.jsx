@@ -14,6 +14,15 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+//deletes insight from the database
+const handleDelete = insightId => {
+    insightsDocRef.doc(insightId)
+        .delete()
+        .then(() => {
+            alert('Insight deleted! 🗑');
+        })
+        .catch(e => { console.log(e) });
+};
 
 const Bin = () => {
     const [insightsArray, setInsightsArray] = useState(null);
@@ -53,6 +62,7 @@ const Bin = () => {
                         author={insight.author}
                         commenceDate={insight.commenceDate}
                         jots={insight.jots}
+                        onDelete={() => handleDelete(insight.id)}
                     />
                 </Grid>
             )
