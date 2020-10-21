@@ -184,13 +184,13 @@ const CurrentRead = () => {
   };
 
   const handleComplete = () => {
+    console.log(info[0].title)
     insightsDocRef.doc(currentInsight.id)
       .update({
-        insightId: `${(info[0].title + info[0].author).toLowerCase()}`,
         title: info[0].title,
         author: info[0].author,
         commenceDate: info[0].commenceDate,
-        completeDate:format(startOfToday(), 'dd/MM/yyyy'),
+        completeDate: format(startOfToday(), 'dd/MM/yyyy'),
         jots: info[0].jots,
         archived: false,
         completed: true
