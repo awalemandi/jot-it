@@ -96,10 +96,10 @@ const CurrentRead = () => {
       })
     },
 
-    commenceDate: function (e) {
+    commenceDate: function (date) {
       setInfoValue({
         ...infoValue,
-        commenceDate: e
+        commenceDate: date
       })
     },
 
@@ -195,7 +195,7 @@ const CurrentRead = () => {
         title: info[0].title,
         author: info[0].author,
         commenceDate: info[0].commenceDate,
-        completeDate: format(startOfToday(), 'dd/MM/yyyy'),
+        completeDate: startOfToday(),
         jots: info[0].jots,
         completed: true,
         archived: false
@@ -205,7 +205,7 @@ const CurrentRead = () => {
         setInfoValue({
             title: '',
             author: '',
-            commenceDate: format(startOfToday(), 'dd/MM/yyyy'),
+            commenceDate: startOfToday(),
             completeDate: '',
             jots: '',
             completed: false,
@@ -220,7 +220,7 @@ const CurrentRead = () => {
         title: info[0].title,
         author: info[0].author,
         commenceDate: info[0].commenceDate,
-        completeDate: format(startOfToday(), 'dd/MM/yyyy'),
+        completeDate: startOfToday(),
         jots: info[0].jots,
         completed: true,
         archived: false
@@ -230,10 +230,10 @@ const CurrentRead = () => {
         setInfoValue({
             title: '',
             author: '',
-            commenceDate: format(startOfToday(), 'dd/MM/yyyy'),
+            commenceDate: startOfToday(),
             completeDate: '',
             jots: '',
-            completed: true,
+            completed: false,
             archived: false
         });
         finishedReadAlert();
@@ -283,12 +283,20 @@ const CurrentRead = () => {
           <Grid item xs={7} lg={5}>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardDatePicker
-                clearable
-                label="Commence"
-                defaultValue={preloadData.commenceDate}
-                placeholder="dd/mm/yyyy"
+                disableToolbar
+                variant="inline"
+                // format="dd/MM/yyyy"
+                margin="normal"
+                label="commenceDate"
+                value={
+                  preloadData.commenceDate ?
+                  preloadData.commenceDate : info[0].commenceDate
+                }
+                placeholder="dd/MM/yyyy"
                 onChange={updateState.commenceDate}
-                format="dd/MM/yyyy"
+                KeyboardButtonProps={{
+                  'aria-label': 'change date',
+                }}
               />
             </MuiPickersUtilsProvider>
           </Grid>

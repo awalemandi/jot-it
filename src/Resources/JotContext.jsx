@@ -14,7 +14,7 @@ export const JotDistributor = props => {
         {
             title: '',
             author: '',
-            commenceDate: format(startOfToday(), 'dd/MM/yyyy'),
+            commenceDate: startOfToday(),
             completeDate: '',
             jots: '',
             completed: false,
