@@ -16,6 +16,8 @@ import { format } from 'date-fns/esm';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
+
+//emptry object to store saved data
 let currentInsight = {};
 
 const useStyles = makeStyles((theme) => ({
@@ -149,10 +151,11 @@ const CurrentRead = () => {
   };
 
   //onClick handlers for save and markAsComplete button
+  //if !currentInsight create new document, else update currentInsight
   const handleSave = () => {
     if (currentInsight.id) {
         insightsDocRef.doc(currentInsight.id)
-      .set({
+      .update({
         title: info[0].title,
         author: info[0].author,
         commenceDate: info[0].commenceDate,
@@ -183,17 +186,19 @@ const CurrentRead = () => {
     }
   };
 
+  //if !currentInsight create new document, else update currentInsight to completed
   const handleComplete = () => {
     console.log(info[0].title)
-    insightsDocRef.doc(currentInsight.id)
+    if (currentInsight.id) {
+      insightsDocRef.doc(currentInsight.id)
       .update({
         title: info[0].title,
         author: info[0].author,
         commenceDate: info[0].commenceDate,
         completeDate: format(startOfToday(), 'dd/MM/yyyy'),
         jots: info[0].jots,
-        archived: false,
-        completed: true
+        completed: true,
+        archived: false
       })
       .then(() => {
         currentInsight = {};
@@ -204,11 +209,37 @@ const CurrentRead = () => {
             completeDate: '',
             jots: '',
             completed: false,
-            archived: false,
+            archived: false
         });
         finishedReadAlert();
       })
       .catch(e => { console.log(e) });
+    } else {
+      insightsDocRef.doc()
+      .set({
+        title: info[0].title,
+        author: info[0].author,
+        commenceDate: info[0].commenceDate,
+        completeDate: format(startOfToday(), 'dd/MM/yyyy'),
+        jots: info[0].jots,
+        completed: true,
+        archived: false
+      })
+      .then(() => {
+        currentInsight = {};
+        setInfoValue({
+            title: '',
+            author: '',
+            commenceDate: format(startOfToday(), 'dd/MM/yyyy'),
+            completeDate: '',
+            jots: '',
+            completed: true,
+            archived: false
+        });
+        finishedReadAlert();
+      })
+      .catch(e => { console.log(e) });
+    }
   };
 
 
