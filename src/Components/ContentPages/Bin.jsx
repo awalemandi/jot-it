@@ -19,7 +19,7 @@ const handleDelete = insightId => {
     insightsDocRef.doc(insightId)
         .delete()
         .then(() => {
-            alert('Insight deleted! 🗑');
+            alert('Insight has been permanently deleted! ❌' );
         })
         .catch(e => { console.log(e) });
 };
@@ -57,7 +57,7 @@ const Bin = () => {
             <Grid item xs={false} lg={2}></Grid>
             <Grid item xs={8}>
                 <Typography component="h1" variant="h6">
-                    Your Insights Library
+                    Archive
                         <Divider />
                 </Typography>
             </Grid>

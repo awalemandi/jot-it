@@ -21,7 +21,7 @@ const handleArchive = insightId => {
             archived: true
         })
         .then(() => {
-            alert('Insight has been moved to the bin!');
+            alert('Insight has archived! You can restore it from the bin. 🗑');
         })
         .catch(e => console.log(e));
 }

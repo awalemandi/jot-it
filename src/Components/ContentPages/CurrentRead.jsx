@@ -17,8 +17,6 @@ import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 
-//emptry object to store saved data
-let currentInsight = {};
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,25 +45,26 @@ const CurrentRead = () => {
   const [preloadData, setPreloadData] = useState(null);
   const [alertOpen, setAlertOpen] = useState(false);
 
-//preload current read information
+  //preload current read information
   useEffect(() => {
     const unsubcribe = insightsDocRef.where('completed', '==', false)
-        .onSnapshot(snapshot => {
-          snapshot.forEach(doc => {
-            currentInsight = { id: doc.id, ...doc.data() }
-          })
-          setPreloadData(
-            {
-              title: currentInsight.title,
-              author: currentInsight.author,
-              commenceDate: currentInsight.commenceDate,
-              completeDate: currentInsight.completeDate,
-              jots: currentInsight.jots,
-              completed: currentInsight.completed,
-              archived: currentInsight.archived,
-            })
+      .onSnapshot(snapshot => {
+        let currentInsight = {};
+        snapshot.forEach(doc => {
+          currentInsight = { id: doc.id, ...doc.data() }
         })
-        return () => unsubcribe;
+        setPreloadData(
+          {
+            title: currentInsight.title,
+            author: currentInsight.author,
+            commenceDate: currentInsight.commenceDate,
+            completeDate: currentInsight.completeDate,
+            jots: currentInsight.jots,
+            completed: currentInsight.completed,
+            archived: currentInsight.archived,
+          })
+      })
+    return () => unsubcribe;
   }, []);
 
   
@@ -153,23 +152,23 @@ const CurrentRead = () => {
   //onClick handlers for save and markAsComplete button
   //if !currentInsight create new document, else update currentInsight
   const handleSave = () => {
-    if (currentInsight.id) {
-        insightsDocRef.doc(currentInsight.id)
-      .update({
-        title: info[0].title,
-        author: info[0].author,
-        commenceDate: info[0].commenceDate,
-        completeDate: '',
-        jots: info[0].jots,
-        archived: false,
-        completed: false
-      })
-      .then(() => {
-        progressSavedAlert();
-      })
-      .catch(e => { console.log(e) })
+    if (preloadData.id) {
+      insightsDocRef.doc(preloadData.id)
+        .update({
+          title: info[0].title,
+          author: info[0].author,
+          commenceDate: info[0].commenceDate,
+          completeDate: '',
+          jots: info[0].jots,
+          archived: false,
+          completed: false
+        })
+        .then(() => {
+          progressSavedAlert();
+        })
+        .catch(e => { console.log(e) })
     } else {
-        insightsDocRef.doc()
+      insightsDocRef.doc()
         .set({
           title: info[0].title,
           author: info[0].author,
@@ -189,20 +188,20 @@ const CurrentRead = () => {
   //if !currentInsight create new document, else update currentInsight to completed
   const handleComplete = () => {
     console.log(info[0].title)
-    if (currentInsight.id) {
-      insightsDocRef.doc(currentInsight.id)
-      .update({
-        title: info[0].title,
-        author: info[0].author,
-        commenceDate: info[0].commenceDate,
-        completeDate: startOfToday(),
-        jots: info[0].jots,
-        completed: true,
-        archived: false
-      })
-      .then(() => {
-        currentInsight = {};
-        setInfoValue({
+    if (preloadData.id) {
+      insightsDocRef.doc(preloadData.id)
+        .update({
+          title: info[0].title,
+          author: info[0].author,
+          commenceDate: info[0].commenceDate,
+          completeDate: startOfToday(),
+          jots: info[0].jots,
+          completed: true,
+          archived: false
+        })
+        .then(() => {
+          setPreloadData(null);
+          setInfoValue({
             title: '',
             author: '',
             commenceDate: startOfToday(),
@@ -210,24 +209,24 @@ const CurrentRead = () => {
             jots: '',
             completed: false,
             archived: false
-        });
-        finishedReadAlert();
-      })
-      .catch(e => { console.log(e) });
+          });
+          finishedReadAlert();
+        })
+        .catch(e => { console.log(e) });
     } else {
       insightsDocRef.doc()
-      .set({
-        title: info[0].title,
-        author: info[0].author,
-        commenceDate: info[0].commenceDate,
-        completeDate: startOfToday(),
-        jots: info[0].jots,
-        completed: true,
-        archived: false
-      })
-      .then(() => {
-        currentInsight = {};
-        setInfoValue({
+        .set({
+          title: info[0].title,
+          author: info[0].author,
+          commenceDate: info[0].commenceDate,
+          completeDate: startOfToday(),
+          jots: info[0].jots,
+          completed: true,
+          archived: false
+        })
+        .then(() => {
+          setPreloadData(null);
+          setInfoValue({
             title: '',
             author: '',
             commenceDate: startOfToday(),
@@ -235,15 +234,15 @@ const CurrentRead = () => {
             jots: '',
             completed: false,
             archived: false
-        });
-        finishedReadAlert();
-      })
-      .catch(e => { console.log(e) });
+          });
+          finishedReadAlert();
+        })
+        .catch(e => { console.log(e) });
     }
   };
 
 
-  return preloadData ? (
+  return (
     <>
       <CssBaseline />
       <form noValidate className={classes.root}>
@@ -258,25 +257,31 @@ const CurrentRead = () => {
           <Grid item xs={false} lg={2}></Grid>
           <Grid item xs={8} lg={4}>
             <Input
-              defaultValue={preloadData.title}
+              defaultValue={
+                  preloadData ?
+                    preloadData.title : info[0].title
+                }
               name="title"
               placeholder="Title"
               fullWidth
               onChange={updateState.title}
               required
-              inputProps={{ 'aria-label': 'description' }} 
+              inputProps={{ 'aria-label': 'description' }}
             />
           </Grid>
 
           <Grid item xs={8} lg={4}>
             <Input
-              defaultValue={preloadData.author}
+              defaultValue={
+                  preloadData ?
+                    preloadData.author : info[0].author
+                }
               name="author"
               placeholder="Author"
               fullWidth
               onChange={updateState.author}
               required
-              inputProps={{ 'aria-label': 'description' }} 
+              inputProps={{ 'aria-label': 'description' }}
             />
           </Grid>
 
@@ -289,8 +294,8 @@ const CurrentRead = () => {
                 margin="normal"
                 label="commenceDate"
                 value={
-                  preloadData.commenceDate ?
-                  preloadData.commenceDate : info[0].commenceDate
+                  preloadData ?
+                    preloadData.commenceDate : info[0].commenceDate
                 }
                 placeholder="dd/MM/yyyy"
                 onChange={updateState.commenceDate}
@@ -305,7 +310,10 @@ const CurrentRead = () => {
           <Grid className={classes.textEditor} item xs={8}>
             <CKEditor
               editor={ClassicEditor}
-              data={preloadData.jots}
+              data={
+                  preloadData ?
+                    preloadData.jots : info[0].jots
+                }
               onChange={updateState.jots}
             />
           </Grid>
@@ -340,7 +348,6 @@ const CurrentRead = () => {
       </form>
     </>
   )
-  : <>Loading..</>
 }
 
 export default CurrentRead;
