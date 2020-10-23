@@ -5,6 +5,7 @@ import clsx from 'clsx';
 
 import SearchIcon from '@material-ui/icons/Search';
 import MenuIcon from '@material-ui/icons/Menu';
+import MenuOpenRoundedIcon from '@material-ui/icons/MenuOpenRounded';
 import FiberNewRoundedIcon from '@material-ui/icons/FiberNewRounded';
 import StoreRoundedIcon from '@material-ui/icons/StoreRounded';
 import LayersRoundedIcon from '@material-ui/icons/LayersRounded';
@@ -167,7 +168,9 @@ const Navigation = props => {
                     edge="start"
                     className={classes.icon}
                 >
-                    <MenuIcon />
+                        {
+                            !open ? <MenuIcon /> : <MenuOpenRoundedIcon />
+                    }
                 </IconButton>
                 
                 <div>
