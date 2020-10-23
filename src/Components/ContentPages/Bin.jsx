@@ -6,7 +6,7 @@ import { Typography, Divider, Grid } from '@material-ui/core';
 import InsightCard from '../../Resources/InsightCard';
 
 
-
+const renderRestoreButton = true ;
 const useStyles = makeStyles((theme) => ({
     paper: {
         margin: theme.spacing(0, 0, 0, 1),
@@ -23,6 +23,18 @@ const handleDelete = insightId => {
         })
         .catch(e => { console.log(e) });
 };
+
+//restores insight back from bin to library
+const handleRestore = insightId => {
+    insightsDocRef.doc(insightId)
+        .update({
+            archived: false
+        })
+        .then(() => {
+            alert('Insight has been restored to library!');
+        })
+        .catch(e => console.log(e));
+}
 
 const Bin = () => {
     const [insightsArray, setInsightsArray] = useState(null);
@@ -63,6 +75,8 @@ const Bin = () => {
                         commenceDate={insight.commenceDate}
                         jots={insight.jots}
                         onDelete={() => handleDelete(insight.id)}
+                        renderRestore={renderRestoreButton}
+                        onRestore={() => handleRestore(insight.id)}
                     />
                 </Grid>
             )

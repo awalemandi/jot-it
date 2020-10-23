@@ -2,12 +2,12 @@ import React, { useContext } from 'react'
 import { insightsDocRef } from '../firebase';
 import { JotContext} from '../Resources/JotContext';
 
-import {Card, CardActions, CardContent, IconButton, Typography } from '@material-ui/core';
+import {Card, CardActions, CardContent, IconButton, Typography, Grid } from '@material-ui/core';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import DeleteOutlineRoundedIcon from '@material-ui/icons/DeleteOutlineRounded';
+import RestoreFromTrashRoundedIcon from '@material-ui/icons/RestoreFromTrashRounded';
 
 import ReactHtmlParser from 'react-html-parser';
-
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const InsightCard = ({ id, title, author, jots, onDelete }) => {
+const InsightCard = ({ id, title, author, jots, onDelete, renderRestore, onRestore }) => {
     const { content } = useContext(JotContext);
     const [contentValue, setContentValue] = content;
 
@@ -52,9 +52,24 @@ const InsightCard = ({ id, title, author, jots, onDelete }) => {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <IconButton variant="outlined" color="secondary" className={classes.button} size="medium" onClick={onDelete}>
-                        <DeleteOutlineRoundedIcon />
-                    </IconButton>
+                    <Grid container justify="space-between">
+                        <Grid item xs={2}>
+                            <IconButton variant="outlined" color="inherit" className={classes.button} size="medium" onClick={onDelete}>
+                                <DeleteOutlineRoundedIcon />
+                            </IconButton>
+                        </Grid>
+                        <Grid item xs={6}></Grid>
+                        <Grid item xs={3}>
+                            {
+                            renderRestore ?
+                            <IconButton variant="outlined" color="secondary" className={classes.button} size="medium" onClick={onRestore}>
+                                <RestoreFromTrashRoundedIcon />
+                            </IconButton>
+                            :
+                            <></>
+                            }
+                        </Grid>
+                    </Grid>
                 </CardActions>
         </Card>
     )

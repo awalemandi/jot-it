@@ -57,7 +57,7 @@ const Library = () => {
                 !insightsArray?
                     <Typography variant="h10">😐 You don't have any insights yet. Complete your current read to add!</Typography>
                 : insightsArray.map((insight) =>
-                <Grid item xs={7} sm={7} md={5} lg={4}>
+                <Grid item xs={10} md={6} xl={4}>
                     <InsightCard
                         key={insight.id}
                         id={insight.id}
