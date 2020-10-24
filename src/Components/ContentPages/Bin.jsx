@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { JotContext } from '../../Resources/JotContext';
 import { insightsDocRef } from '../../firebase';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Divider, Grid } from '@material-ui/core';
@@ -37,8 +38,11 @@ const handleRestore = insightId => {
 }
 
 const Bin = () => {
-    const [insightsArray, setInsightsArray] = useState(null);
     const classes = useStyles();
+    const { search } = useContext(JotContext);
+    const [searchField, setSearchField] = search;
+    const [insightsArray, setInsightsArray] = useState([]);
+    const [filteredInsightsArray, setFilteredInsightsArray] = useState([]);
 
     useEffect(() => {
         const unsubcribe = insightsDocRef.where('archived', '==', true)
@@ -52,7 +56,18 @@ const Bin = () => {
         return () => unsubcribe;
     }, []);
 
-    return insightsArray ? (
+    useEffect(() => {
+        setFilteredInsightsArray(
+            insightsArray.filter(insight => {
+                return (
+                    insight.title.toLowerCase().includes(searchField.toLowerCase())
+                    || insight.author.toLowerCase().includes(searchField.toLowerCase())
+                )
+            })
+        )
+    }, [searchField, insightsArray]);
+
+    return filteredInsightsArray ? (
         <Grid container className={classes.paper} spacing={2} justify="space-around">
             <Grid item xs={false} lg={2}></Grid>
             <Grid item xs={8}>
@@ -63,10 +78,10 @@ const Bin = () => {
             </Grid>
             <Grid item sm={false} lg={2}></Grid>
             {
-                !insightsArray?
+                !filteredInsightsArray?
                     <Typography variant="h10">😐 You don't have any insights yet. Complete your current read to add!</Typography>
-                : insightsArray.map((insight) =>
-                <Grid item xs={7} sm={7} md={5} lg={4}>
+                : filteredInsightsArray.map((insight) =>
+                <Grid item xs={10} md={6} xl={4}>
                     <InsightCard
                         key={insight.id}
                         id={insight.id}

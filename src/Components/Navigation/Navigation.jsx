@@ -115,7 +115,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
     width: theme.spacing(9) + 1,
     },
-     
+    
     drawerClose: {
         backgroundColor: theme.palette.secondary.main,
         transition: theme.transitions.create('width', {
@@ -154,6 +154,9 @@ const Navigation = props => {
         (open) ? setOpen(false) : setOpen(true);
     };
     
+    const handleSearch = e => {
+        setSearchField(e.target.value);
+    };
     
 
     return (
@@ -188,8 +191,8 @@ const Navigation = props => {
                     </div>
                     
                     <InputBase
-                            placeholder="Search…"
-                            onChange={e => setSearchField(e.target.value)}
+                            placeholder="Search library.."
+                            onChange={handleSearch}
                     classes={{
                         root: classes.inputRoot,
                         input: classes.inputInput,
