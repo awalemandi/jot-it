@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
         width: 'auto',
         },
     },
-  
+
     searchIcon: {
         padding: theme.spacing(0, 2),
         height: '100%',
@@ -191,7 +191,7 @@ const Navigation = props => {
                     </div>
                     
                     <InputBase
-                            placeholder="Search library.."
+                            placeholder="Search insights.."
                             onChange={handleSearch}
                     classes={{
                         root: classes.inputRoot,
