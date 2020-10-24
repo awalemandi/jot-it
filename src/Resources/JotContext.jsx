@@ -9,7 +9,7 @@ export const JotContext = createContext();
 
 export const JotDistributor = props => {
     const [content, setContent] = useState(<CurrentRead />);
-    
+    const [searchField, setSearchField] = useState('');
     const [jotInfo, setJotInfo] = useState(
         {
             title: '',
@@ -22,7 +22,7 @@ export const JotDistributor = props => {
         }
     );
     return (
-        <JotContext.Provider value={{content: [content, setContent], info: [jotInfo, setJotInfo]}}>
+        <JotContext.Provider value={{content: [content, setContent], search: [searchField, setSearchField], info: [jotInfo, setJotInfo]}}>
             {props.children}
         </JotContext.Provider>
     );

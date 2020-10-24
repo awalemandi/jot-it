@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { JotContext } from '../../Resources/JotContext';
+
 import { fade, makeStyles } from '@material-ui/core/styles';
 import {CssBaseline, AppBar, Toolbar, Drawer, List, ListItem, ListItemIcon, ListItemText, Divider, IconButton, InputBase, Hidden } from '@material-ui/core';
 import clsx from 'clsx';
@@ -144,6 +146,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Navigation = props => {
     const classes = useStyles();
+    const { search } = useContext(JotContext);
+    const [searchField, setSearchField] = search;
     const [open, setOpen] = useState(false);
 
     const handleDrawerState = () => {
@@ -184,7 +188,8 @@ const Navigation = props => {
                     </div>
                     
                     <InputBase
-                    placeholder="Search…"
+                            placeholder="Search…"
+                            onChange={e => setSearchField(e.target.value)}
                     classes={{
                         root: classes.inputRoot,
                         input: classes.inputInput,
