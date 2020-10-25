@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { db, insightsDocRef } from '../../firebase';
 import { JotContext } from '../../Resources/JotContext';
 
-import { CssBaseline, Grid, Divider, Typography, makeStyles, TextField, IconButton, Input, Snackbar } from '@material-ui/core';
+import { CssBaseline, Grid, Divider, Typography, makeStyles, TextField, IconButton, Input, Snackbar, Tooltip } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
 
 
@@ -337,26 +337,29 @@ const CurrentRead = () => {
           <Grid item container xs={12} justify="space-around" alignItems="center">
             <Grid item xs={4}></Grid>
             <Grid item xs={2}>
-              <IconButton
+              <Tooltip title="Save">
+                <IconButton
                 color="secondary"
                 size="medium"
                 className={classes.button}
                 onClick={handleSave}
-              >
-                <SaveRoundedIcon />
-              </IconButton>
+                >
+                  <SaveRoundedIcon />
+                </IconButton>
+              </Tooltip>
             </Grid>
 
             <Grid item xs={2}>
-              <IconButton
-
+              <Tooltip title="Mark complete">
+                <IconButton
                 color="secondary"
                 size="medium"
                 className={classes.button}
                 onClick={handleComplete}
-              >
-                <DoneAllRoundedIcon />
-              </IconButton>
+                >
+                  <DoneAllRoundedIcon />
+                </IconButton>
+              </Tooltip>
             </Grid>
             <Grid item xs={3}></Grid>
           </Grid>

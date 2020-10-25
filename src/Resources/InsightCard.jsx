@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { insightsDocRef } from '../firebase';
 import { JotContext} from '../Resources/JotContext';
 
-import {Card, CardActions, CardContent, IconButton, Typography, Grid } from '@material-ui/core';
+import {Card, CardActions, CardContent, IconButton, Typography, Grid, Tooltip } from '@material-ui/core';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import DeleteOutlineRoundedIcon from '@material-ui/icons/DeleteOutlineRounded';
 import RestoreFromTrashRoundedIcon from '@material-ui/icons/RestoreFromTrashRounded';
@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
         width: 240,
         height: 280,
         backgroundColor: fade(theme.palette.common.white),
+
     },
     text: {
         margin: theme.spacing(2, 1, 0, 1),
@@ -54,17 +55,21 @@ const InsightCard = ({ id, title, author, jots, onDelete, renderRestore, onResto
                 <CardActions>
                     <Grid container justify="space-between">
                         <Grid item xs={2}>
-                            <IconButton variant="outlined" color="inherit" className={classes.button} size="medium" onClick={onDelete}>
-                                <DeleteOutlineRoundedIcon />
-                            </IconButton>
+                            <Tooltip title="Delete">
+                                <IconButton variant="outlined" color="inherit" className={classes.button} size="medium" onClick={onDelete}>
+                                    <DeleteOutlineRoundedIcon />
+                                </IconButton>
+                            </Tooltip>
                         </Grid>
                         <Grid item xs={6}></Grid>
                         <Grid item xs={3}>
                             {
                             renderRestore ?
-                            <IconButton variant="outlined" color="secondary" className={classes.button} size="medium" onClick={onRestore}>
-                                <RestoreFromTrashRoundedIcon />
-                            </IconButton>
+                            <Tooltip title="Restore">
+                                <IconButton variant="outlined" color="secondary" className={classes.button} size="medium" onClick={onRestore}>
+                                    <RestoreFromTrashRoundedIcon />
+                                </IconButton>
+                            </Tooltip>
                             :
                             <></>
                             }

@@ -4,7 +4,7 @@ import { userDocRef } from '../../firebase';
 
 
 import { fade, makeStyles } from '@material-ui/core/styles';
-import { Typography, Divider, IconButton, TextField, Button, Grid, Icon } from '@material-ui/core';
+import { Typography, Divider, IconButton, TextField, Button, Grid, Icon, Tooltip } from '@material-ui/core';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
 import TbrList from '../TbrList';
 
@@ -67,15 +67,17 @@ const ToBeRead = () => {
                 />
             </Grid>
             <Grid item xs={1}>
-                <IconButton
+                <Tooltip title="Add">
+                    <IconButton
                     variant="outlined"
                     size="large"
                     color="secondary"
                     className={classes.button}
                     onClick={handleAddItem}
-                >
-                    <AddRoundedIcon />
-                </IconButton>
+                    >
+                        <AddRoundedIcon />
+                    </IconButton>
+                </Tooltip>
             </Grid>
             <Grid item xs={2}></Grid>
             <Grid item xs={3}></Grid>
