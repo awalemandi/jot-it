@@ -42,7 +42,7 @@ const CurrentRead = () => {
   const classes = useStyles();
   const { info } = useContext(JotContext);
   const [infoValue, setInfoValue] = info;
-  const [preloadData, setPreloadData] = useState(null);
+  const [preloadData, setPreloadData] = useState({});
   const [alertOpen, setAlertOpen] = useState(false);
 
   //preload current read information
@@ -86,11 +86,19 @@ const CurrentRead = () => {
         ...infoValue,
         title: e.target.value
       })
+      setPreloadData({
+        ...preloadData,
+        title: e.target.value
+      })
     },
 
     author: function (e) {
       setInfoValue({
         ...infoValue,
+        author: e.target.value
+      })
+      setPreloadData({
+        ...preloadData,
         author: e.target.value
       })
     },
@@ -100,12 +108,20 @@ const CurrentRead = () => {
         ...infoValue,
         commenceDate: date
       })
+      setPreloadData({
+        ...preloadData,
+        commenceDate: date
+      })
     },
 
     jots: function (e, editor) {
       const data = editor.getData();
       setInfoValue({
         ...infoValue,
+        jots: data
+      })
+      setPreloadData({
+        ...preloadData,
         jots: data
       })
     },
@@ -200,7 +216,7 @@ const CurrentRead = () => {
           archived: false
         })
         .then(() => {
-          setPreloadData(null);
+          setPreloadData({});
           setInfoValue({
             title: '',
             author: '',
@@ -225,7 +241,7 @@ const CurrentRead = () => {
           archived: false
         })
         .then(() => {
-          setPreloadData(null);
+          setPreloadData({});
           setInfoValue({
             title: '',
             author: '',
@@ -257,7 +273,7 @@ const CurrentRead = () => {
           <Grid item xs={false} lg={2}></Grid>
           <Grid item xs={8} lg={4}>
             <Input
-              defaultValue={
+              value={
                   preloadData ?
                     preloadData.title : info[0].title
                 }
@@ -272,7 +288,7 @@ const CurrentRead = () => {
 
           <Grid item xs={8} lg={4}>
             <Input
-              defaultValue={
+              value={
                   preloadData ?
                     preloadData.author : info[0].author
                 }
