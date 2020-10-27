@@ -31,6 +31,7 @@ const handleArchive = insightId => {
 const Library = () => {
     const { search } = useContext(JotContext);
     const [searchField, setSearchField] = search;
+    const [loading, setLoading] = useState(true);
     const [insightsArray, setInsightsArray] = useState([]);
     const [filteredInsightsArray, setFilteredInsightsArray] = useState([]);
     const classes = useStyles();
@@ -44,6 +45,7 @@ const Library = () => {
                     ...doc.data()
                 }));
                 setInsightsArray(newInsights);
+                setLoading(false);
             });
         return () => unsubcribe;
     }, []);
@@ -59,7 +61,7 @@ const Library = () => {
         )
     }, [searchField, insightsArray]);
 
-    return filteredInsightsArray ? (
+    return !loading ? (
         <Grid container className={classes.paper} justify="space-evenly" alignItems="flex-start">
             <Grid item xs={false} lg={2}></Grid>
             <Grid item xs={8}>

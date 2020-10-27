@@ -41,6 +41,7 @@ const Bin = () => {
     const classes = useStyles();
     const { search } = useContext(JotContext);
     const [searchField, setSearchField] = search;
+    const [loading, setLoading] = useState(true);
     const [insightsArray, setInsightsArray] = useState([]);
     const [filteredInsightsArray, setFilteredInsightsArray] = useState([]);
 
@@ -52,6 +53,7 @@ const Bin = () => {
                     ...doc.data()
                 }));
                 setInsightsArray(newInsights);
+                setLoading(false);
             });
         return () => unsubcribe;
     }, []);
@@ -67,7 +69,7 @@ const Bin = () => {
         )
     }, [searchField, insightsArray]);
 
-    return filteredInsightsArray ? (
+    return !loading ? (
         <Grid container className={classes.paper} spacing={2} justify="space-around">
             <Grid item xs={false} lg={2}></Grid>
             <Grid item xs={8}>

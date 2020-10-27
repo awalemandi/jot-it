@@ -30,6 +30,7 @@ const handleItemDelete = item => {
 
 const TbrList = () => {
     const classes = useStyles();
+    const [loading, setLoading] = useState(true);
     const [itemsArray, setItemsArray] = useState(null);
 
     useEffect(() => {
@@ -40,11 +41,12 @@ const TbrList = () => {
                     newItems.push(e);
                 });
                 setItemsArray(newItems);
+                setLoading(false);
             })
         return () => unsubcribe;
     }, [])
     
-    return itemsArray ? (
+    return !loading ? (
         <List className={classes.paper}>
             {itemsArray.map(item => {
                 return (

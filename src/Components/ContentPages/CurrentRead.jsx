@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { db, insightsDocRef } from '../../firebase';
+import { insightsDocRef } from '../../firebase';
 
-import { CssBaseline, Grid, Divider, Typography, makeStyles, TextField, IconButton, Input, Snackbar, Tooltip } from '@material-ui/core';
+import { CssBaseline, Grid, Divider, Typography, makeStyles, IconButton, Input, Snackbar, Tooltip } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
 
 
@@ -47,20 +47,22 @@ const CurrentRead = () => {
 };
 
   const classes = useStyles();
+  const [loading, setLoading] = useState(true);
   const [preloadData, setPreloadData] = useState(newInsightDetails);
   const [fill, setFill] = useState(null);
   const [alertOpen, setAlertOpen] = useState(false);
 
  //preload current read information
   useEffect(() => {
+    console.log('useEffect running')
     const unsubcribe = insightsDocRef.where('completed', '==', false)
       .onSnapshot(snapshot => {
         let currentInsight = {};
         snapshot.forEach(doc => {
           currentInsight = { id: doc.id, ...doc.data() }
         })
-        setFill(currentInsight)
         setPreloadData(currentInsight)
+        setLoading(false);
       })
     return () => unsubcribe;
   }, []);
@@ -206,7 +208,7 @@ const CurrentRead = () => {
   };
 
 
-  return (
+  return !loading ?
     <>
       <CssBaseline />
       <form noValidate className={classes.root}>
@@ -214,16 +216,14 @@ const CurrentRead = () => {
           <Grid item xs={false} lg={2}></Grid>
           <Grid item xs={8}>
             <Typography component="h1" variant="h6">
-              {console.log(preloadData)}New Insight
+              New Insight
               <Divider />
             </Typography>
           </Grid>
           <Grid item xs={false} lg={2}></Grid>
           <Grid item xs={8} lg={4}>
             <Input
-              value={
-                preloadData.id
-              }
+              value={preloadData.title}
               name="title"
               placeholder="Title"
               fullWidth
@@ -235,7 +235,7 @@ const CurrentRead = () => {
 
           <Grid item xs={8} lg={4}>
             <Input
-              value={preloadData.commenceDate}
+              value={preloadData.author}
               name="author"
               placeholder="Author"
               fullWidth
@@ -304,7 +304,7 @@ const CurrentRead = () => {
         </Grid>
       </form>
     </>
-  )
+  : <> Loading ... </>
 }
 
 export default CurrentRead;
