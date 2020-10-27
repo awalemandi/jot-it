@@ -10,19 +10,9 @@ export const JotContext = createContext();
 export const JotDistributor = props => {
     const [content, setContent] = useState(<CurrentRead />);
     const [searchField, setSearchField] = useState('');
-    const [jotInfo, setJotInfo] = useState(
-        {
-            title: '',
-            author: '',
-            commenceDate: startOfToday(),
-            completeDate: '',
-            jots: '',
-            completed: false,
-            archived: false,
-        }
-    );
+    
     return (
-        <JotContext.Provider value={{content: [content, setContent], search: [searchField, setSearchField], info: [jotInfo, setJotInfo]}}>
+        <JotContext.Provider value={{content: [content, setContent], search: [searchField, setSearchField]}}>
             {props.children}
         </JotContext.Provider>
     );

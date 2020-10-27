@@ -1,6 +1,5 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { db, insightsDocRef } from '../../firebase';
-import { JotContext } from '../../Resources/JotContext';
 
 import { CssBaseline, Grid, Divider, Typography, makeStyles, TextField, IconButton, Input, Snackbar, Tooltip } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
@@ -36,33 +35,58 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-
 const CurrentRead = () => {
+  const newInsightDetails = {
+  title: '',
+  author: '',
+  commenceDate: startOfToday(),
+  completeDate: '',
+  jots: '',
+  completed: false,
+  archived: false,
+};
+
   const classes = useStyles();
-  const { info } = useContext(JotContext);
-  const [infoValue, setInfoValue] = info;
-  const [preloadData, setPreloadData] = useState(null);
+  const [preloadData, setPreloadData] = useState(newInsightDetails);
   const [alertOpen, setAlertOpen] = useState(false);
 
   //preload current read information
   useEffect(() => {
-    const unsubcribe = insightsDocRef.where('completed', '==', false)
-      .onSnapshot(snapshot => {
+    insightsDocRef.where('completed', '==', false)
+      .get()
+      .then(snapshot => {
         let currentInsight = {};
         snapshot.forEach(doc => {
           currentInsight = { id: doc.id, ...doc.data() }
-        })
-        setPreloadData(
-          {
-            title: currentInsight.title,
-            author: currentInsight.author,
-            commenceDate: currentInsight.commenceDate,
-            jots: currentInsight.jots,
-          })
+        });
+        setPreloadData({
+          title: currentInsight.title,
+          author: currentInsight.author,
+          commenceDate: currentInsight.commenceDate,
+          completeDate: '',
+          jots: currentInsight.jots,
+          completed: false,
+          archived: false,
+        });
       })
-    return () => unsubcribe;
   }, []);
+
+  const currentInsightDetails = {
+    title: preloadData.title,
+    author: preloadData.author,
+    commenceDate: preloadData.commenceDate,
+    completeDate: '',
+    jots: preloadData.jots,
+    archived: false,
+    completed: false
+  };
+
+  const completeInsightDetails = {
+    ...currentInsightDetails,
+    completeDate: startOfToday(),
+    completed: true
+  }
+
 
   
   // const handleAlertOpen = () => {
@@ -79,10 +103,6 @@ const CurrentRead = () => {
   //onChange handlers for updating state
   const updateState = {
     title: function (e) {
-      setInfoValue({
-        ...infoValue,
-        title: e.target.value
-      })
       setPreloadData({
         ...preloadData,
         title: e.target.value
@@ -90,10 +110,6 @@ const CurrentRead = () => {
     },
 
     author: function (e) {
-      setInfoValue({
-        ...infoValue,
-        author: e.target.value
-      })
       setPreloadData({
         ...preloadData,
         author: e.target.value
@@ -101,10 +117,6 @@ const CurrentRead = () => {
     },
 
     commenceDate: function (date) {
-      setInfoValue({
-        ...infoValue,
-        commenceDate: date
-      })
       setPreloadData({
         ...preloadData,
         commenceDate: date
@@ -113,10 +125,6 @@ const CurrentRead = () => {
 
     jots: function (e, editor) {
       const data = editor.getData();
-      setInfoValue({
-        ...infoValue,
-        jots: data
-      })
       setPreloadData({
         ...preloadData,
         jots: data
@@ -167,30 +175,14 @@ const CurrentRead = () => {
   const handleSave = () => {
     if (preloadData.id) {
       insightsDocRef.doc(preloadData.id)
-        .update({
-          title: info[0].title,
-          author: info[0].author,
-          commenceDate: info[0].commenceDate,
-          completeDate: '',
-          jots: info[0].jots,
-          archived: false,
-          completed: false
-        })
+        .update(currentInsightDetails)
         .then(() => {
           progressSavedAlert();
         })
         .catch(e => { console.log(e) })
     } else {
       insightsDocRef.doc()
-        .set({
-          title: info[0].title,
-          author: info[0].author,
-          commenceDate: info[0].commenceDate,
-          completeDate: '',
-          jots: info[0].jots,
-          archived: false,
-          completed: false
-        })
+        .set(currentInsightDetails)
         .then(() => {
           progressSavedAlert();
         })
@@ -200,54 +192,19 @@ const CurrentRead = () => {
 
   //if !currentInsight create new document, else update currentInsight to completed
   const handleComplete = () => {
-    console.log(info[0].title)
     if (preloadData.id) {
       insightsDocRef.doc(preloadData.id)
-        .update({
-          title: info[0].title,
-          author: info[0].author,
-          commenceDate: info[0].commenceDate,
-          completeDate: startOfToday(),
-          jots: info[0].jots,
-          completed: true,
-          archived: false
-        })
+        .update(completeInsightDetails)
         .then(() => {
-          setPreloadData(null);
-          setInfoValue({
-            title: '',
-            author: '',
-            commenceDate: startOfToday(),
-            completeDate: '',
-            jots: '',
-            completed: false,
-            archived: false
-          });
+          setPreloadData(newInsightDetails);
           finishedReadAlert();
         })
         .catch(e => { console.log(e) });
     } else {
       insightsDocRef.doc()
-        .set({
-          title: info[0].title,
-          author: info[0].author,
-          commenceDate: info[0].commenceDate,
-          completeDate: startOfToday(),
-          jots: info[0].jots,
-          completed: true,
-          archived: false
-        })
+        .set(completeInsightDetails)
         .then(() => {
-          setPreloadData(null);
-          setInfoValue({
-            title: '',
-            author: '',
-            commenceDate: startOfToday(),
-            completeDate: '',
-            jots: '',
-            completed: false,
-            archived: false
-          });
+          setPreloadData(newInsightDetails);
           finishedReadAlert();
         })
         .catch(e => { console.log(e) });
@@ -263,17 +220,14 @@ const CurrentRead = () => {
           <Grid item xs={false} lg={2}></Grid>
           <Grid item xs={8}>
             <Typography component="h1" variant="h6">
-              {info[0].title}New Insight {preloadData ? preloadData.title : info[0].title}
+              {preloadData.title}New Insight
               <Divider />
             </Typography>
           </Grid>
           <Grid item xs={false} lg={2}></Grid>
           <Grid item xs={8} lg={4}>
             <Input
-              value={
-                  preloadData ?
-                    preloadData.title : info[0].title
-                }
+              value={preloadData.title}
               name="title"
               placeholder="Title"
               fullWidth
@@ -285,10 +239,7 @@ const CurrentRead = () => {
 
           <Grid item xs={8} lg={4}>
             <Input
-              value={
-                  preloadData ?
-                    preloadData.author : info[0].author
-                }
+              value={preloadData.author}
               name="author"
               placeholder="Author"
               fullWidth
@@ -306,10 +257,7 @@ const CurrentRead = () => {
                 // format="dd/MM/yyyy"
                 margin="normal"
                 label="commenceDate"
-                value={
-                  preloadData ?
-                    preloadData.commenceDate : info[0].commenceDate
-                }
+                value={preloadData.commenceDate}
                 placeholder="dd/MM/yyyy"
                 onChange={updateState.commenceDate}
                 KeyboardButtonProps={{
@@ -323,10 +271,7 @@ const CurrentRead = () => {
           <Grid className={classes.textEditor} item xs={8}>
             <CKEditor
               editor={ClassicEditor}
-              data={
-                  preloadData ?
-                    preloadData.jots : info[0].jots
-                }
+              data={preloadData.jots}
               onChange={updateState.jots}
             />
           </Grid>
