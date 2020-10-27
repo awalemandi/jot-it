@@ -3,6 +3,7 @@ import { insightsDocRef } from '../../firebase';
 
 import { CssBaseline, Grid, Divider, Typography, makeStyles, IconButton, Input, Snackbar, Tooltip } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
+import PulseLoader from 'react-spinners/PulseLoader';
 
 
 import SaveRoundedIcon from '@material-ui/icons/SaveRounded';
@@ -14,7 +15,6 @@ import { MuiPickersUtilsProvider, KeyboardDatePicker } from "@material-ui/picker
 import { format } from 'date-fns/esm';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-
 
 
 const useStyles = makeStyles((theme) => ({
@@ -304,7 +304,13 @@ const CurrentRead = () => {
         </Grid>
       </form>
     </>
-  : <> Loading ... </>
+    :
+      <PulseLoader
+        size={10}
+        margin={5}
+        color={'#4db6ac'}
+        loading={true}
+    />
 }
 
 export default CurrentRead;

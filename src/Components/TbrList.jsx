@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { List, ListItem, ListItemIcon, ListItemSecondaryAction, ListItemText, Checkbox, IconButton } from '@material-ui/core';
 import ChevronRightRoundedIcon from '@material-ui/icons/ChevronRightRounded';
 import HighlightOffRoundedIcon from '@material-ui/icons/HighlightOffRounded';
+import PulseLoader from 'react-spinners/PulseLoader';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -69,7 +70,13 @@ const TbrList = () => {
             })}
         </List>
     )
-        : <>Loading...</>
+    :
+        <PulseLoader
+            size={10}
+            margin={5}
+            color={'#4db6ac'}
+            loading={true}
+        />
 };
 
 export default TbrList;

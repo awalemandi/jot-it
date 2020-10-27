@@ -4,6 +4,7 @@ import { JotContext } from '../../Resources/JotContext';
 import { insightsDocRef } from '../../firebase';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Divider, Grid } from '@material-ui/core';
+import PulseLoader from 'react-spinners/PulseLoader';
 
 import InsightCard from '../../Resources/InsightCard';
 
@@ -90,7 +91,13 @@ const Library = () => {
             }
         </Grid>
     )
-    : <>Loading... </>
+    :
+        <PulseLoader
+            size={10}
+            margin={5}
+            color={'#4db6ac'}
+            loading={true}
+        />
 };
 
 export default Library;
