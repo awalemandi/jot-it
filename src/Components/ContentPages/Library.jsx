@@ -60,7 +60,7 @@ const Library = () => {
     }, [searchField, insightsArray]);
 
     return filteredInsightsArray ? (
-        <Grid container className={classes.paper} spacing={2} justify="space-around">
+        <Grid container className={classes.paper} justify="space-evenly" alignItems="flex-start">
             <Grid item xs={false} lg={2}></Grid>
             <Grid item xs={8}>
                 <Typography component="h1" variant="h6">

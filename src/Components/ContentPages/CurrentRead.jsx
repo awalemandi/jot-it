@@ -42,7 +42,7 @@ const CurrentRead = () => {
   const classes = useStyles();
   const { info } = useContext(JotContext);
   const [infoValue, setInfoValue] = info;
-  const [preloadData, setPreloadData] = useState({});
+  const [preloadData, setPreloadData] = useState(null);
   const [alertOpen, setAlertOpen] = useState(false);
 
   //preload current read information
@@ -58,26 +58,23 @@ const CurrentRead = () => {
             title: currentInsight.title,
             author: currentInsight.author,
             commenceDate: currentInsight.commenceDate,
-            completeDate: currentInsight.completeDate,
             jots: currentInsight.jots,
-            completed: currentInsight.completed,
-            archived: currentInsight.archived,
           })
       })
     return () => unsubcribe;
   }, []);
 
   
-  const handleAlertOpen = () => {
-    setAlertOpen(true);
-  };
+  // const handleAlertOpen = () => {
+  //   setAlertOpen(true);
+  // };
 
-  const handleAlertClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setAlertOpen(false);
-  };
+  // const handleAlertClose = (event, reason) => {
+  //   if (reason === 'clickaway') {
+  //     return;
+  //   }
+  //   setAlertOpen(false);
+  // };
 
   //onChange handlers for updating state
   const updateState = {
@@ -216,7 +213,7 @@ const CurrentRead = () => {
           archived: false
         })
         .then(() => {
-          setPreloadData({});
+          setPreloadData(null);
           setInfoValue({
             title: '',
             author: '',
@@ -241,7 +238,7 @@ const CurrentRead = () => {
           archived: false
         })
         .then(() => {
-          setPreloadData({});
+          setPreloadData(null);
           setInfoValue({
             title: '',
             author: '',
@@ -266,8 +263,8 @@ const CurrentRead = () => {
           <Grid item xs={false} lg={2}></Grid>
           <Grid item xs={8}>
             <Typography component="h1" variant="h6">
-              New Insight
-                <Divider />
+              {info[0].title}New Insight {preloadData ? preloadData.title : info[0].title}
+              <Divider />
             </Typography>
           </Grid>
           <Grid item xs={false} lg={2}></Grid>

@@ -16,7 +16,8 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'space-between',
         width: 240,
         height: 280,
-        backgroundColor: fade(theme.palette.common.white),
+        margin: theme.spacing( 1, 1, 8, 1),
+        backgroundColor: theme.palette.action.hover,
 
     },
     text: {
@@ -27,8 +28,7 @@ const useStyles = makeStyles((theme) => ({
         padding: 0,
     },
     button: {
-        margin: theme.spacing(0, 1, 0, 0),
-        backgroundColor: fade(theme.palette.secondary.light),
+        margin: theme.spacing(0, 1, 0, 0)
     }
 }));
 
