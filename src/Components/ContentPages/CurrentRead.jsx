@@ -48,27 +48,21 @@ const CurrentRead = () => {
 
   const classes = useStyles();
   const [preloadData, setPreloadData] = useState(newInsightDetails);
+  const [fill, setFill] = useState(null);
   const [alertOpen, setAlertOpen] = useState(false);
 
-  //preload current read information
+ //preload current read information
   useEffect(() => {
-    insightsDocRef.where('completed', '==', false)
-      .get()
-      .then(snapshot => {
+    const unsubcribe = insightsDocRef.where('completed', '==', false)
+      .onSnapshot(snapshot => {
         let currentInsight = {};
         snapshot.forEach(doc => {
           currentInsight = { id: doc.id, ...doc.data() }
-        });
-        setPreloadData({
-          title: currentInsight.title,
-          author: currentInsight.author,
-          commenceDate: currentInsight.commenceDate,
-          completeDate: '',
-          jots: currentInsight.jots,
-          completed: false,
-          archived: false,
-        });
+        })
+        setFill(currentInsight)
+        setPreloadData(currentInsight)
       })
+    return () => unsubcribe;
   }, []);
 
   const currentInsightDetails = {
@@ -220,14 +214,16 @@ const CurrentRead = () => {
           <Grid item xs={false} lg={2}></Grid>
           <Grid item xs={8}>
             <Typography component="h1" variant="h6">
-              {preloadData.title}New Insight
+              {console.log(preloadData)}New Insight
               <Divider />
             </Typography>
           </Grid>
           <Grid item xs={false} lg={2}></Grid>
           <Grid item xs={8} lg={4}>
             <Input
-              value={preloadData.title}
+              value={
+                preloadData.id
+              }
               name="title"
               placeholder="Title"
               fullWidth
@@ -239,7 +235,7 @@ const CurrentRead = () => {
 
           <Grid item xs={8} lg={4}>
             <Input
-              value={preloadData.author}
+              value={preloadData.commenceDate}
               name="author"
               placeholder="Author"
               fullWidth
