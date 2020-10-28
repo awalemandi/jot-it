@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { insightsDocRef } from '../../firebase';
 
-import { CssBaseline, Grid, Divider, Typography, makeStyles, IconButton, Input, Snackbar, Tooltip } from '@material-ui/core';
+import { CssBaseline, Grid, Divider, Typography, makeStyles, IconButton, Input, TextField, Snackbar, Tooltip } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
 import PulseLoader from 'react-spinners/PulseLoader';
 
@@ -34,12 +34,12 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.common.white,
   },
 }));
-
+const dateFormat = 'MM/dd/yyyy';
 const CurrentRead = () => {
   const newInsightDetails = {
   title: '',
   author: '',
-  commenceDate: startOfToday(),
+  commenceDate: format(new Date(), dateFormat),
   completeDate: '',
   jots: '',
   completed: false,
@@ -49,7 +49,6 @@ const CurrentRead = () => {
   const classes = useStyles();
   const [loading, setLoading] = useState(true);
   const [preloadData, setPreloadData] = useState(newInsightDetails);
-  const [fill, setFill] = useState(null);
   const [alertOpen, setAlertOpen] = useState(false);
 
  //preload current read information
@@ -67,6 +66,10 @@ const CurrentRead = () => {
     return () => unsubcribe;
   }, []);
 
+  useEffect(() => {
+
+  }, []);
+
   const currentInsightDetails = {
     title: preloadData.title,
     author: preloadData.author,
@@ -78,8 +81,12 @@ const CurrentRead = () => {
   };
 
   const completeInsightDetails = {
-    ...currentInsightDetails,
-    completeDate: startOfToday(),
+    title: preloadData.title,
+    author: preloadData.author,
+    commenceDate: preloadData.commenceDate,
+    completeDate: format(new Date(), dateFormat),
+    jots: preloadData.jots,
+    archived: false,
     completed: true
   }
 
@@ -113,9 +120,10 @@ const CurrentRead = () => {
     },
 
     commenceDate: function (date) {
+      const formattedDate = (format(date, dateFormat));
       setPreloadData({
         ...preloadData,
-        commenceDate: date
+        commenceDate: formattedDate,
       })
     },
 
@@ -211,12 +219,12 @@ const CurrentRead = () => {
   return !loading ?
     <>
       <CssBaseline />
-      <form noValidate className={classes.root}>
+      <form className={classes.root}>
         <Grid container spacing={5} justify="center">
           <Grid item xs={false} lg={2}></Grid>
           <Grid item xs={8}>
             <Typography component="h1" variant="h6">
-              New Insight
+              New Insight {preloadData.commenceDate}
               <Divider />
             </Typography>
           </Grid>
@@ -235,12 +243,12 @@ const CurrentRead = () => {
 
           <Grid item xs={8} lg={4}>
             <Input
+              required={true}
               value={preloadData.author}
               name="author"
               placeholder="Author"
               fullWidth
               onChange={updateState.author}
-              required
               inputProps={{ 'aria-label': 'description' }}
             />
           </Grid>
@@ -250,11 +258,11 @@ const CurrentRead = () => {
               <KeyboardDatePicker
                 disableToolbar
                 variant="inline"
-                // format="dd/MM/yyyy"
+                format="MM/dd/yyyy"
                 margin="normal"
-                label="commenceDate"
+                label="Commence Date:"
                 value={preloadData.commenceDate}
-                placeholder="dd/MM/yyyy"
+                placeholder="MM/dd/yyyy"
                 onChange={updateState.commenceDate}
                 KeyboardButtonProps={{
                   'aria-label': 'change date',
