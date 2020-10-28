@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { insightsDocRef } from '../../firebase';
 
-import { CssBaseline, Grid, Divider, Typography, makeStyles, IconButton, Input, TextField, Snackbar, Tooltip } from '@material-ui/core';
+import { CssBaseline, Grid, Divider, Typography, makeStyles, IconButton, Input, TextField, Snackbar, Tooltip, Fab } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
 import PulseLoader from 'react-spinners/PulseLoader';
 
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     overflowX: 'hidden'
   },
   button: {
-    margin: theme.spacing(0),
+    margin: theme.spacing(0, 3, 0, 3),
     backgroundColor: theme.palette.common.white,
   },
 }));
@@ -281,30 +281,32 @@ const CurrentRead = () => {
           </Grid>
 
           <Grid item container xs={12} justify="space-around" alignItems="center">
-            <Grid item xs={4}></Grid>
-            <Grid item xs={2}>
+            <Grid item xs={3}></Grid>
+            <Grid item xs={3}>
               <Tooltip title="Save">
-                <IconButton
-                color="secondary"
+                <Fab
+                color="inherit"
                 size="medium"
+                variant="extended"
                 className={classes.button}
                 onClick={handleSave}
                 >
-                  <SaveRoundedIcon />
-                </IconButton>
+                  <SaveRoundedIcon color="primary"/>
+                </Fab>
               </Tooltip>
             </Grid>
 
-            <Grid item xs={2}>
+            <Grid item xs={3}>
               <Tooltip title="Mark complete">
-                <IconButton
-                color="secondary"
+                <Fab
+                color="inherit"
                 size="medium"
+                variant="extended"
                 className={classes.button}
                 onClick={handleComplete}
                 >
-                  <DoneAllRoundedIcon />
-                </IconButton>
+                  <DoneAllRoundedIcon color="primary" />
+                </Fab>
               </Tooltip>
             </Grid>
             <Grid item xs={3}></Grid>

@@ -66,8 +66,8 @@ const InsightCard = ({ id, title, author, jots, onDelete, renderRestore, onResto
                             {
                             renderRestore ?
                             <Tooltip title="Restore">
-                                <IconButton variant="outlined" color="secondary" className={classes.button} size="medium" onClick={onRestore}>
-                                    <RestoreFromTrashRoundedIcon />
+                                <IconButton variant="outlined" color="inherit" className={classes.button} size="medium" onClick={onRestore}>
+                                    <RestoreFromTrashRoundedIcon color="primary"/>
                                 </IconButton>
                             </Tooltip>
                             :

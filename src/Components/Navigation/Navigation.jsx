@@ -8,11 +8,11 @@ import clsx from 'clsx';
 import SearchIcon from '@material-ui/icons/Search';
 import MenuIcon from '@material-ui/icons/Menu';
 import MenuOpenRoundedIcon from '@material-ui/icons/MenuOpenRounded';
+import CodeRoundedIcon from '@material-ui/icons/CodeRounded';
 import FiberNewRoundedIcon from '@material-ui/icons/FiberNewRounded';
 import StoreRoundedIcon from '@material-ui/icons/StoreRounded';
 import LayersRoundedIcon from '@material-ui/icons/LayersRounded';
 import InsertChartRoundedIcon from '@material-ui/icons/InsertChartRounded';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import DeleteForeverRoundedIcon from '@material-ui/icons/DeleteForeverRounded';
 import LiveHelpIcon from '@material-ui/icons/LiveHelp';
 import logo from './jotit_white.png';
@@ -208,9 +208,11 @@ const Navigation = props => {
                         <LiveHelpIcon/>
                     </IconButton>
                     <div></div>
-                    <IconButton >
-                        <AccountCircleIcon />
-                    </IconButton>
+                    <a href="https://github.com/awalemandi/jot-it" target="_blank">
+                        <IconButton >
+                            <CodeRoundedIcon />
+                        </IconButton>
+                    </a>
                 </div>
                 
             </Toolbar>
