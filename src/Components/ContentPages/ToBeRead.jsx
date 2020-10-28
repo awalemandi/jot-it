@@ -20,6 +20,9 @@ const useStyles = makeStyles((theme) => ({
     button: {
         margin: theme.spacing(0,1,1,0),
     },
+    header: {
+        textAlign: 'center',
+    }
 }));
 
 
@@ -48,15 +51,15 @@ const ToBeRead = () => {
         <Grid container className={classes.paper} spacing={2} justify="center">
             <Grid item xs={2}></Grid>
             <Grid item xs={8}>
-                <Typography component="h1" variant="h6">
-                    To Be Read
-                        <Divider />
+                <Typography component="h1" variant="h6" className={classes.header}>
+                    To Be Read 🛒
                 </Typography>
+                <Divider />
             </Grid>
             <Grid item xs={2}></Grid>
 
-            <Grid item xs={2}></Grid>
-            <Grid item xs={6}>
+            <Grid item xs={3}></Grid>
+            <Grid item xs={5}>
                 <TextField
                     name="input"
                     value={input}
@@ -78,11 +81,11 @@ const ToBeRead = () => {
                 </Tooltip>
             </Grid>
             <Grid item xs={2}></Grid>
-            <Grid item xs={3}></Grid>
-            <Grid item xs ={6}>
+            <Grid item xs={2}></Grid>
+            <Grid item xs ={8}>
                 <TbrList/>
             </Grid>
-            <Grid item xs={3}></Grid>
+            <Grid item xs={2}></Grid>
             
         </Grid>
     )

@@ -15,6 +15,10 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(0, 0, 0, 1),
         padding: theme.spacing(1, 1, 1, 3),
     },
+    header: {
+        textAlign: 'center',
+        marginBottom: theme.spacing(3)
+    }
 }));
 
 //moves insight from library to bin
@@ -66,10 +70,10 @@ const Library = () => {
         <Grid container className={classes.paper} justify="space-evenly" alignItems="flex-start">
             <Grid item xs={false} lg={2}></Grid>
             <Grid item xs={8}>
-                <Typography component="h1" variant="h6">
-                    Your Insights Library
-                        <Divider />
+                <Typography component="h1" variant="h6" className={classes.header}>
+                    Your Insights Library 📚
                 </Typography>
+                <Divider />
             </Grid>
             <Grid item sm={false} lg={2}></Grid>
             {

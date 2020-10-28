@@ -33,6 +33,10 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(0, 3, 0, 3),
     backgroundColor: theme.palette.common.white,
   },
+  header: {
+    textAlign: 'center',
+    marginBottom: theme.spacing(3)
+  }
 }));
 const dateFormat = 'MM/dd/yyyy';
 const CurrentRead = () => {
@@ -223,10 +227,10 @@ const CurrentRead = () => {
         <Grid container spacing={5} justify="center">
           <Grid item xs={false} lg={2}></Grid>
           <Grid item xs={8}>
-            <Typography component="h1" variant="h6">
-              New Insight {preloadData.commenceDate}
-              <Divider />
+            <Typography component="h1" variant="h6" className={classes.header}>
+              New Insight 🌱 
             </Typography>
+            <Divider />
           </Grid>
           <Grid item xs={false} lg={2}></Grid>
           <Grid item xs={8} lg={4}>

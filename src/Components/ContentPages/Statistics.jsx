@@ -3,7 +3,7 @@ import React from 'react';
 const Statistics = () => {
     return (
         <>
-            Statistics Page.
+            Statistics Page 🚧
         </>
     )
 };
