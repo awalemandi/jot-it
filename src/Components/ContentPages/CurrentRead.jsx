@@ -45,15 +45,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 const dateFormat = 'MM/dd/yyyy';
 const CurrentRead = () => {
-  const newInsightDetails = {
-  title: '',
-  author: '',
-  commenceDate: format(new Date(), dateFormat),
-  completeDate: '',
-  jots: '',
-  completed: false,
-  archived: false,
-};
+    const newInsightDetails = {
+    title: '',
+    author: '',
+    commenceDate: format(new Date(), dateFormat),
+    completeDate: '',
+    jots: '',
+    completed: false,
+    archived: false,
+  };
 
   const classes = useStyles();
   const [loading, setLoading] = useState(true);
@@ -69,15 +69,13 @@ const CurrentRead = () => {
         snapshot.forEach(doc => {
           currentInsight = { id: doc.id, ...doc.data() }
         })
-        setPreloadData(currentInsight)
+        //Only set preloadData if incoming data is defined 
+        currentInsight.id ? setPreloadData(currentInsight) : setPreloadData(newInsightDetails);
         setLoading(false);
       })
     return () => unsubcribe;
   }, []);
 
-  useEffect(() => {
-
-  }, []);
 
   const currentInsightDetails = {
     title: preloadData.title,
@@ -194,6 +192,7 @@ const CurrentRead = () => {
         })
         .catch(e => { console.log(e) })
     } else {
+      console.log(preloadData);
       insightsDocRef.doc()
         .set(currentInsightDetails)
         .then(() => {
@@ -214,6 +213,7 @@ const CurrentRead = () => {
         })
         .catch(e => { console.log(e) });
     } else {
+      console.log(completeInsightDetails);
       insightsDocRef.doc()
         .set(completeInsightDetails)
         .then(() => {
