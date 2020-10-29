@@ -237,7 +237,7 @@ const CurrentRead = () => {
             <Divider />
           </Grid>
           <Grid item xs={2}></Grid>
-          <Grid item xs={8} lg={5}>
+          <Grid item xs={8} lg={4}>
             <Input
               value={preloadData.title}
               name="title"
@@ -249,7 +249,7 @@ const CurrentRead = () => {
             />
           </Grid>
 
-          <Grid item xs={8} lg={5}>
+          <Grid item xs={8} lg={4}>
             <Input
               required
               value={preloadData.author}
@@ -278,7 +278,7 @@ const CurrentRead = () => {
               />
             </MuiPickersUtilsProvider>
           </Grid>
-          <Grid item xs={false} lg={2}></Grid>
+          <Grid item xs={false} lg={3}></Grid>
           <Grid className={classes.textEditor} item xs={8}>
             <CKEditor
               editor={ClassicEditor}
