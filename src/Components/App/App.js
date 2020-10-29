@@ -25,7 +25,7 @@ root: {
   width: '100%',
   height: '100%',
   margin: theme.spacing(0),
-  padding: theme.spacing(1, 4, 4, 9),
+  padding: theme.spacing(0),
 },
 
 navigation: {
@@ -36,38 +36,38 @@ toolbar: {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'flex-end',
-  padding: theme.spacing(0, 1, 2, 0),
+  padding: theme.spacing(0),
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 },
 
 content: {
   position: 'relative',
-  padding: theme.spacing(2, 1, 2, 1),
+  padding: theme.spacing(3,0,0,0),
   alignItems: 'center',
   justifyContent: 'space-evenly',
-  width: '60%',
-  margin: theme.spacing(0, 0, 10, 0),
-  height: 'auto',
+  width: '55%',
+  margin: theme.spacing(0),
   maxHeight: 700,
-  overflow: 'auto',
 },
 
 footer: {
   position: "absolute",
   bottom: 0,
-  padding: theme.spacing(5, 1, 1, 1),
-  margin: theme.spacing(1, 8, 0, 8),
+  padding: theme.spacing(1, 0, 0, 0),
+  margin: theme.spacing(1),
   width: '66%',
   height: 'auto',
 },
 
 paper: {
   display: 'flex',
-  padding: theme.spacing(5,1),
+  flexShrink: 2,
+  padding: theme.spacing(5, 1),
+  width: '100%',
+  maxHeight: 700,
   alignItems: 'center',
-  justifyContent: 'space-evenly',
-},
+  justifyContent: 'space-evenly',},
 }));
 
 

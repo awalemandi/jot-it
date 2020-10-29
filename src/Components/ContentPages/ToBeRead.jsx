@@ -9,20 +9,21 @@ import AddRoundedIcon from '@material-ui/icons/AddRounded';
 import TbrList from '../TbrList';
 
 const useStyles = makeStyles((theme) => ({
-    paper: {
-        margin: theme.spacing(0, 0, 8, 2),
-        padding: theme.spacing(0, 2, 0, 2),
-        minHeight: 400,
-    },
     root: {
-        width: '100%',
+        width: '80%',
+        maxHeight: 650,
+        textAlign: 'center',
+        overflowY: 'auto',
+        margin: theme.spacing(0, 0, 1, 0),
+        padding: theme.spacing(0, 0, 3, 0),
+    },
+    header: {
+        textAlign: 'center',
+        margin: theme.spacing(0, 0, 2, 0)
     },
     button: {
         margin: theme.spacing(0,1,1,0),
     },
-    header: {
-        textAlign: 'center',
-    }
 }));
 
 
@@ -48,7 +49,7 @@ const ToBeRead = () => {
 
 
     return (
-        <Grid container className={classes.paper} spacing={2} justify="center">
+        <Grid container className={classes.root} spacing={2} justify="center">
             <Grid item xs={2}></Grid>
             <Grid item xs={8}>
                 <Typography component="h1" variant="h6" className={classes.header}>

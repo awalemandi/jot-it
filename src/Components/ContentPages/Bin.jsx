@@ -9,13 +9,20 @@ import InsightCard from '../../Resources/InsightCard';
 
 const renderRestoreButton = true ;
 const useStyles = makeStyles((theme) => ({
-    paper: {
-        margin: theme.spacing(0, 0, 0, 1),
-        padding: theme.spacing(1, 1, 1, 3),
+    root: {
+        width: '80%',
+        maxHeight: 650,
+        textAlign: 'center',
+        overflowY: 'auto',
+        margin: theme.spacing(0, 0, 1, 0),
+        padding: theme.spacing(0, 0, 3, 0),
     },
     header: {
         textAlign: 'center',
-        marginBottom: theme.spacing(3)
+        margin: theme.spacing(0, 0, 2, 0)
+    },
+    card: {
+        marginTop: theme.spacing(2)
     }
 }));
 
@@ -74,7 +81,7 @@ const Bin = () => {
     }, [searchField, insightsArray]);
 
     return !loading ? (
-        <Grid container className={classes.paper} spacing={2} justify="space-around">
+        <Grid container className={classes.root} spacing={2} justify="space-around">
             <Grid item xs={false} lg={2}></Grid>
             <Grid item xs={8}>
                 <Typography component="h1" variant="h6" className={classes.header}>
@@ -87,7 +94,7 @@ const Bin = () => {
                 !filteredInsightsArray?
                     <Typography variant="h10">😐 You don't have any insights yet. Complete your current read to add!</Typography>
                 : filteredInsightsArray.map((insight) =>
-                <Grid item xs={10} md={6} xl={4}>
+                <Grid item xs={10} md={6} xl={4} className={classes.card}>
                     <InsightCard
                         key={insight.id}
                         id={insight.id}

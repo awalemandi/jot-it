@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(0, 0, 0, 1),
         padding: theme.spacing(0, 0, 0, 1),
         width: '100%',
-        height: 'auto',
+        maxHeight: 400,
         overflow: 'auto',
     },
     complete: {

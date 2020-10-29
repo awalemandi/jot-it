@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: '80%',
     height: 'auto',
-    flexShrink: 5,
   },
   textEditor: {
     height: 130,
@@ -29,13 +28,17 @@ const useStyles = makeStyles((theme) => ({
     overflowY: 'auto',
     overflowX: 'hidden'
   },
+  buttonGrid: {
+    textAlign: 'center',
+  },
   button: {
-    margin: theme.spacing(0, 3, 0, 3),
+    margin: theme.spacing(5, 3, 5, 3),
+    textAlign: 'center',
     backgroundColor: theme.palette.common.white,
   },
   header: {
     textAlign: 'center',
-    marginBottom: theme.spacing(3)
+    margin: theme.spacing(0, 0, 2, 0)
   }
 }));
 const dateFormat = 'MM/dd/yyyy';
@@ -286,7 +289,7 @@ const CurrentRead = () => {
 
           <Grid item container xs={12} justify="space-around" alignItems="center">
             <Grid item xs={3}></Grid>
-            <Grid item xs={3}>
+            <Grid item xs={3} className={classes.buttonGrid}>
               <Tooltip title="Save">
                 <Fab
                 color="inherit"
@@ -300,7 +303,7 @@ const CurrentRead = () => {
               </Tooltip>
             </Grid>
 
-            <Grid item xs={3}>
+            <Grid item xs={3} className={classes.buttonGrid}>
               <Tooltip title="Mark complete">
                 <Fab
                 color="inherit"
