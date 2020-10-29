@@ -19,13 +19,14 @@ const useStyles = makeStyles((theme) => ({
 root: {
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'space-between',
+  justifyContent: 'flex-start',
   alignItems: 'center',
   flexGrow: 1,
   width: '100%',
-  height: '100%',
+  height: '100vh',
   margin: theme.spacing(0),
-  padding: theme.spacing(0),
+  padding: theme.spacing(5, 0, 0, 0),
+  backgroundColor: theme.palette.action.hover,
 },
 
 navigation: {
@@ -43,19 +44,20 @@ toolbar: {
 
 content: {
   position: 'relative',
-  padding: theme.spacing(3,0,0,0),
+  padding: theme.spacing(3, 0, 1, 0),
   alignItems: 'center',
   justifyContent: 'space-evenly',
   width: '55%',
-  margin: theme.spacing(0),
+  margin: theme.spacing(5, 0, 1, 0),
   maxHeight: 700,
+  minHeight: 500,
 },
 
 footer: {
   position: "absolute",
   bottom: 0,
   padding: theme.spacing(1, 0, 0, 0),
-  margin: theme.spacing(1),
+  margin: theme.spacing(0),
   width: '66%',
   height: 'auto',
 },
@@ -63,11 +65,12 @@ footer: {
 paper: {
   display: 'flex',
   flexShrink: 2,
-  padding: theme.spacing(5, 1),
+  padding: theme.spacing(2),
   width: '100%',
   maxHeight: 700,
+  minHeight: 100,
   alignItems: 'center',
-  justifyContent: 'space-evenly',},
+  justifyContent: 'space-evenly'},
 }));
 
 
@@ -105,7 +108,6 @@ function App() {
           </header>
 
           <main className={classes.content}>
-            <div className={classes.toolbar} />
             <Paper elevation={3} className={classes.paper}>
               {contentValue}
             </Paper>

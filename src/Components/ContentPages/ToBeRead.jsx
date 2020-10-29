@@ -11,11 +11,10 @@ import TbrList from '../TbrList';
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '80%',
+        minHeight: 500,
         maxHeight: 650,
         textAlign: 'center',
         overflowY: 'auto',
-        margin: theme.spacing(0, 0, 1, 0),
-        padding: theme.spacing(0, 0, 3, 0),
     },
     header: {
         textAlign: 'center',

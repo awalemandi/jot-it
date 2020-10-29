@@ -20,7 +20,13 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '80%',
-    height: 'auto',
+    minHeight: 500,
+    maxHeight: 650,
+    textAlign: 'center',
+  },
+  header: {
+    textAlign: 'center',
+    margin: theme.spacing(0, 0, 2, 0)
   },
   textEditor: {
     height: 130,
@@ -36,10 +42,6 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     backgroundColor: theme.palette.common.white,
   },
-  header: {
-    textAlign: 'center',
-    margin: theme.spacing(0, 0, 2, 0)
-  }
 }));
 const dateFormat = 'MM/dd/yyyy';
 const CurrentRead = () => {
@@ -225,7 +227,6 @@ const CurrentRead = () => {
 
   return !loading ?
     <>
-      <CssBaseline />
       <form className={classes.root}>
         <Grid container spacing={5} justify="center">
           <Grid item xs={false} lg={2}></Grid>
