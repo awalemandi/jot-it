@@ -170,9 +170,9 @@ const Navigation = props => {
         setTipOpen(false);
     };
 
-    const handleTooltipOpen = () => {
-        setTipOpen(true);
-    };
+    const handleTooltipState = () => {
+        setTipOpen(!tipOpen);
+    }
 
     const handleDrawerState = () => {
         (drawerOpen) ? setDrawerOpen(false) : setDrawerOpen(true);
@@ -242,7 +242,7 @@ const Navigation = props => {
                             title={helpMessage}
                             arrow
                         >
-                            <IconButton onClick={handleTooltipOpen} >
+                            <IconButton onClick={handleTooltipState} >
                                 <LiveHelpIcon/>
                             </IconButton>
                         </LightTooltip>
