@@ -3,8 +3,9 @@ import { JotContext } from '../../Resources/JotContext';
 
 import { insightsDocRef } from '../../firebase';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Divider, Grid } from '@material-ui/core';
+import { Typography, Divider, Grid, Snackbar } from '@material-ui/core';
 import PulseLoader from 'react-spinners/PulseLoader';
+import Alert from '../../Resources/Alert';
 
 import InsightCard from '../../Resources/InsightCard';
 
@@ -27,6 +28,33 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+const Library = () => {
+    const { search } = useContext(JotContext);
+    const [searchField, setSearchField] = search;
+    const [loading, setLoading] = useState(true);
+    const [insightsArray, setInsightsArray] = useState([]);
+    const [filteredInsightsArray, setFilteredInsightsArray] = useState([]);
+    const [archiveAlertOpen, setArchiveAlertOpen] = useState(false);
+    const classes = useStyles();
+
+    const openAlert = () => {
+        setArchiveAlertOpen(true);
+    };
+
+    const closeAlert = (event, reason) => {
+    if (reason === 'clickaway') {
+        return;
+    }
+        setArchiveAlertOpen(false);
+    };
+    
+    const archiveAlert = <Snackbar open={archiveAlertOpen} autoHideDuration={4000} onClose={closeAlert}>
+                            <Alert onClose={closeAlert} severity="warning">
+                                Insight has archived! You can restore it from the bin. 🗑
+                            </Alert>
+    </Snackbar>
+    
+
 //moves insight from library to bin
 const handleArchive = insightId => {
     insightsDocRef.doc(insightId)
@@ -34,18 +62,10 @@ const handleArchive = insightId => {
             archived: true
         })
         .then(() => {
-            alert('Insight has archived! You can restore it from the bin. 🗑');
+            openAlert();
         })
         .catch(e => console.log(e));
 }
-
-const Library = () => {
-    const { search } = useContext(JotContext);
-    const [searchField, setSearchField] = search;
-    const [loading, setLoading] = useState(true);
-    const [insightsArray, setInsightsArray] = useState([]);
-    const [filteredInsightsArray, setFilteredInsightsArray] = useState([]);
-    const classes = useStyles();
 
     useEffect(() => {
         const unsubcribe = insightsDocRef.where('completed', '==', true)
@@ -99,6 +119,7 @@ const Library = () => {
                 </Grid>
             )
             }
+            {archiveAlert}
         </Grid>
     )
     :

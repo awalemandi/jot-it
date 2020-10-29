@@ -2,8 +2,9 @@ import React, { useState, useContext, useEffect } from 'react';
 import { JotContext } from '../../Resources/JotContext';
 import { insightsDocRef } from '../../firebase';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Divider, Grid } from '@material-ui/core';
+import { Typography, Divider, Grid, Snackbar } from '@material-ui/core';
 import PulseLoader from 'react-spinners/PulseLoader';
+import Alert from '../../Resources/Alert';
 
 import InsightCard from '../../Resources/InsightCard';
 
@@ -25,12 +26,49 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+const Bin = () => {
+    const classes = useStyles();
+    const { search } = useContext(JotContext);
+    const [searchField, setSearchField] = search;
+    const [loading, setLoading] = useState(true);
+    const [insightsArray, setInsightsArray] = useState([]);
+    const [filteredInsightsArray, setFilteredInsightsArray] = useState([]);
+    const [deleteAlertOpen, setDeleteAlertOpen] = useState(false);
+    const [restoreAlertOpen, setRestoreAlertOpen] = useState(false);
+
+    const openAlert = action => {
+    action == 'delete' && setDeleteAlertOpen(true);
+    action == 'restore' && setRestoreAlertOpen(true);
+  };
+
+  const closeAlert = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setDeleteAlertOpen(false);
+    setRestoreAlertOpen(false);
+  };
+
+    const deleteAlert = <Snackbar open={deleteAlertOpen} autoHideDuration={4000} onClose={closeAlert}>
+                    <Alert onClose={closeAlert} severity="error">
+                        Insight has been permanently deleted! ❌
+                    </Alert>
+</Snackbar>
+
+const restoreAlert = <Snackbar open={restoreAlertOpen} autoHideDuration={4000} onClose={closeAlert}>
+                    <Alert onClose={closeAlert} severity="success">
+                        Insight has been restored to library! ♻ 
+                    </Alert>
+</Snackbar>
+    
+
 //deletes insight from the database
 const handleDelete = insightId => {
     insightsDocRef.doc(insightId)
         .delete()
         .then(() => {
-            alert('Insight has been permanently deleted! ❌' );
+            openAlert('delete');
         })
         .catch(e => { console.log(e) });
 };
@@ -42,19 +80,11 @@ const handleRestore = insightId => {
             archived: false
         })
         .then(() => {
-            alert('Insight has been restored to library!');
+            openAlert('restore');
         })
         .catch(e => console.log(e));
 }
-
-const Bin = () => {
-    const classes = useStyles();
-    const { search } = useContext(JotContext);
-    const [searchField, setSearchField] = search;
-    const [loading, setLoading] = useState(true);
-    const [insightsArray, setInsightsArray] = useState([]);
-    const [filteredInsightsArray, setFilteredInsightsArray] = useState([]);
-
+    
     useEffect(() => {
         const unsubcribe = insightsDocRef.where('archived', '==', true)
             .onSnapshot(snapshot => {
@@ -108,6 +138,7 @@ const Bin = () => {
                 </Grid>
             )
             }
+            {deleteAlert} {restoreAlert}
         </Grid>
     )
     :
