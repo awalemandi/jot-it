@@ -73,10 +73,11 @@ const ToBeRead = () => {
                 <Tooltip title="Add">
                     <Fab
                     size="medium"
+                    color="primary"
                     className={classes.button}
                     onClick={handleAddItem}
                     >
-                        <AddRoundedIcon color="primary" />
+                        <AddRoundedIcon />
                     </Fab>
                 </Tooltip>
             </Grid>

@@ -1,8 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { JotContext } from '../../Resources/JotContext';
 
-import { fade, makeStyles } from '@material-ui/core/styles';
-import {CssBaseline, AppBar, Toolbar, Drawer, List, ListItem, ListItemIcon, ListItemText, Divider, IconButton, InputBase, Hidden } from '@material-ui/core';
+import { fade, withStyles, makeStyles } from '@material-ui/core/styles';
+import {CssBaseline, AppBar, Toolbar, Drawer, List, ListItem, ListItemIcon, ListItemText, Divider, IconButton, InputBase, Tooltip, ClickAwayListener } from '@material-ui/core';
 import clsx from 'clsx';
 
 import SearchIcon from '@material-ui/icons/Search';
@@ -18,6 +18,20 @@ import LiveHelpIcon from '@material-ui/icons/LiveHelp';
 import logo from './jotit_white.png';
 
 const drawerWidth = 200;
+const helpMessage = `Jot it is a note taking app that helps you track and revisit insights. 
+                    You can add new insights by completing a new read. You can browse through your insights library or use the search bar to find it.
+                    You can also delete and restore them as needed and use the TBR list to track future reads.
+                    Happy Jotting! 📖✍️`;
+
+const LightTooltip = withStyles((theme) => ({
+    tooltip: {
+        backgroundColor: theme.palette.common.white,
+        color: 'rgba(0, 0, 0, 0.87)',
+        boxShadow: theme.shadows[1],
+        fontSize: 11,
+},
+}))(Tooltip);
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -148,10 +162,19 @@ const Navigation = props => {
     const classes = useStyles();
     const { search } = useContext(JotContext);
     const [searchField, setSearchField] = search;
-    const [open, setOpen] = useState(false);
+    const [drawerOpen, setDrawerOpen] = useState(false);
+    const [tipOpen, setTipOpen] = useState(false);
+
+    const handleTooltipClose = () => {
+        setTipOpen(false);
+    };
+
+    const handleTooltipOpen = () => {
+        setTipOpen(true);
+    };
 
     const handleDrawerState = () => {
-        (open) ? setOpen(false) : setOpen(true);
+        (drawerOpen) ? setDrawerOpen(false) : setDrawerOpen(true);
     };
     
     const handleSearch = e => {
@@ -176,7 +199,7 @@ const Navigation = props => {
                     className={classes.icon}
                 >
                         {
-                            !open ? <MenuIcon /> : <MenuOpenRoundedIcon />
+                            !drawerOpen ? <MenuIcon /> : <MenuOpenRoundedIcon />
                     }
                 </IconButton>
                 
@@ -204,15 +227,33 @@ const Navigation = props => {
                 <div></div>
                 
                 <div className={classes.icon} edge="end">
-                    <IconButton >
-                        <LiveHelpIcon/>
-                    </IconButton>
+                    <ClickAwayListener onClickAway={handleTooltipClose}>
+                        <div>
+                        <LightTooltip
+                            PopperProps={{
+                            disablePortal: true,
+                            }}
+                            onClose={handleTooltipClose}
+                            open={tipOpen}
+                            disableFocusListener
+                            disableHoverListener
+                            disableTouchListener
+                            title={helpMessage}
+                        >
+                            <IconButton onClick={handleTooltipOpen} >
+                                <LiveHelpIcon/>
+                            </IconButton>
+                        </LightTooltip>
+                        </div>
+                    </ClickAwayListener>
                     <div></div>
-                    <a href="https://github.com/awalemandi/jot-it" target="_blank">
-                        <IconButton >
-                            <CodeRoundedIcon />
-                        </IconButton>
-                    </a>
+                    <Tooltip title="Source code">
+                        <a href="https://github.com/awalemandi/jot-it" target="_blank">
+                            <IconButton >
+                                <CodeRoundedIcon />
+                            </IconButton>
+                        </a>
+                    </Tooltip>
                 </div>
                 
             </Toolbar>
@@ -221,13 +262,13 @@ const Navigation = props => {
         <Drawer
             variant="permanent"
             className={clsx(classes.drawer, {
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
+            [classes.drawerOpen]: drawerOpen,
+            [classes.drawerClose]: !drawerOpen,
             })}
             classes={{
             paper: clsx({
-                [classes.drawerOpen]: open,
-                [classes.drawerClose]: !open,
+                [classes.drawerOpen]: drawerOpen,
+                [classes.drawerClose]: !drawerOpen,
             }),
             }}
         >

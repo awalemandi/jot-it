@@ -261,7 +261,7 @@ const CurrentRead = () => {
             />
           </Grid>
 
-          <Grid item xs={7} lg={5}>
+          <Grid item xs={7} lg={6}>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardDatePicker
                 disableToolbar

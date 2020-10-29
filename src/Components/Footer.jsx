@@ -6,14 +6,13 @@ import Link from '@material-ui/core/Link';
 
 const Copyright = () => {
     return (
-      <Typography variant="body2" color="textSecondary">
+      <Typography variant="body2" color="textPrimary">
         {'Copyright © '}
         <Link color="inherit" href="https://github.com/awalemandi/jot-it">
           Jot it
         </Link>{' '}
         {new Date().getFullYear()}
         {'. '}
-        All Rights Reserved.
       </Typography>
     );
   }
@@ -25,7 +24,7 @@ const Footer = () => {
     <div>
       <CssBaseline />
         <Container maxWidth="sm">
-          <Typography variant="body1">  </Typography>
+          <Typography variant="inherit">  </Typography>
           <Copyright />
         </Container>
     </div>
