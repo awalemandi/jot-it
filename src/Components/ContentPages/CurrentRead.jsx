@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { insightsDocRef } from '../../firebase';
 
 import { CssBaseline, Grid, Divider, Typography, makeStyles, IconButton, Input, TextField, Snackbar, Tooltip, Fab } from '@material-ui/core';
-import MuiAlert from '@material-ui/lab/Alert';
 import PulseLoader from 'react-spinners/PulseLoader';
 
 
@@ -15,6 +14,7 @@ import { MuiPickersUtilsProvider, KeyboardDatePicker } from "@material-ui/picker
 import { format } from 'date-fns/esm';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import Alert from '../../Resources/Alert';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -58,8 +58,35 @@ const CurrentRead = () => {
   const classes = useStyles();
   const [loading, setLoading] = useState(true);
   const [preloadData, setPreloadData] = useState(newInsightDetails);
-  const [alertOpen, setAlertOpen] = useState(false);
+  const [saveAlertOpen, setSaveAlertOpen] = useState(false);
+  const [completeAlertOpen, setCompleteAlertOpen] = useState(false);
 
+  const openAlert = action => {
+    action == 'save' && setSaveAlertOpen(true);
+    action == 'complete' && setCompleteAlertOpen(true);
+  };
+
+  const closeAlert = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setSaveAlertOpen(false);
+    setCompleteAlertOpen(false);
+  };
+
+  const saveAlert = <Snackbar open={saveAlertOpen} autoHideDuration={4000} onClose={closeAlert}>
+                    <Alert onClose={closeAlert} severity="success">
+                      Your progress has been saved! 👍
+                    </Alert>
+</Snackbar>
+
+const completeAlert = <Snackbar open={completeAlertOpen} autoHideDuration={4000} onClose={closeAlert}>
+                    <Alert onClose={closeAlert} severity="success">
+                      Wow, you finished your read! 👏
+                    </Alert>
+</Snackbar>
+  
  //preload current read information
   useEffect(() => {
     console.log('useEffect running')
@@ -98,18 +125,6 @@ const CurrentRead = () => {
   }
 
 
-  
-  // const handleAlertOpen = () => {
-  //   setAlertOpen(true);
-  // };
-
-  // const handleAlertClose = (event, reason) => {
-  //   if (reason === 'clickaway') {
-  //     return;
-  //   }
-  //   setAlertOpen(false);
-  // };
-
   //onChange handlers for updating state
   const updateState = {
     title: function (e) {
@@ -143,35 +158,6 @@ const CurrentRead = () => {
     },
   };
 
-  // function Alert(props) {
-  //   return <MuiAlert elevation={6} variant="filled" {...props} />;
-  // }
-
-  // const saveSuccessAlert = () => {
-  //   console.log(`snackbar being returned ${alertOpen}`);
-  //   console.log(alertOpen);
-  //   return <Snackbar open={alertOpen} autoHideDuration={6000} onClose={handleAlertClose}>
-  //     <Alert onClose={handleAlertClose} severity="success">
-  //       Your progress has been saved! 👍
-  //             </Alert>
-  //   </Snackbar>;
-  // };
-
-  // const completeSuccessAlert = () => {
-  //   return <Snackbar open={alertOpen} autoHideDuration={6000} onClose={handleAlertClose}>
-  //     <Alert onClose={handleAlertClose} severity="success">
-  //       Wow, you finished your read! 👏
-  //                 </Alert>
-  //   </Snackbar>
-  // };
-
-  // const deleteWarningAlert = () => {
-  //   return <Snackbar open={alertOpen} autoHideDuration={6000} onClose={handleAlertClose}>
-  //     <Alert onClose={handleAlertClose} severity="warning">
-  //       Your progress has been saved! 👍
-  //                 </Alert>
-  //   </Snackbar>
-  // };
 
   const progressSavedAlert = () => {
     alert('Your progress has been saved! 👍');
@@ -188,7 +174,7 @@ const CurrentRead = () => {
       insightsDocRef.doc(preloadData.id)
         .update(currentInsightDetails)
         .then(() => {
-          progressSavedAlert();
+          openAlert('save');
         })
         .catch(e => { console.log(e) })
     } else {
@@ -196,7 +182,7 @@ const CurrentRead = () => {
       insightsDocRef.doc()
         .set(currentInsightDetails)
         .then(() => {
-          progressSavedAlert();
+          openAlert('save');
         })
         .catch(e => { console.log(e) })
     }
@@ -209,7 +195,7 @@ const CurrentRead = () => {
         .update(completeInsightDetails)
         .then(() => {
           setPreloadData(newInsightDetails);
-          finishedReadAlert();
+          openAlert('complete');
         })
         .catch(e => { console.log(e) });
     } else {
@@ -218,7 +204,7 @@ const CurrentRead = () => {
         .set(completeInsightDetails)
         .then(() => {
           setPreloadData(newInsightDetails);
-          finishedReadAlert();
+          openAlert('complete');
         })
         .catch(e => { console.log(e) });
     }
@@ -318,6 +304,8 @@ const CurrentRead = () => {
             <Grid item xs={3}></Grid>
           </Grid>
         </Grid>
+        {saveAlert}
+        {completeAlert}
       </form>
     </>
     :
