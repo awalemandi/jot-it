@@ -14,8 +14,8 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        maxWidth: 240,
-        maxHeight: 270,
+        width: 240,
+        height: 270,
         margin: theme.spacing( 1, 1, 8, 1),
         backgroundColor: theme.palette.action.hover,
 
