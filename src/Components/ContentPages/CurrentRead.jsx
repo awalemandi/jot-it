@@ -229,15 +229,15 @@ const CurrentRead = () => {
     <>
       <form className={classes.root}>
         <Grid container spacing={5} justify="center">
-          <Grid item xs={false} lg={2}></Grid>
+          <Grid item xs={2}></Grid>
           <Grid item xs={8}>
             <Typography component="h1" variant="h6" className={classes.header}>
               New Insight 🌱 
             </Typography>
             <Divider />
           </Grid>
-          <Grid item xs={false} lg={2}></Grid>
-          <Grid item xs={8} lg={4}>
+          <Grid item xs={2}></Grid>
+          <Grid item xs={8} lg={5}>
             <Input
               value={preloadData.title}
               name="title"
@@ -249,9 +249,9 @@ const CurrentRead = () => {
             />
           </Grid>
 
-          <Grid item xs={8} lg={4}>
+          <Grid item xs={8} lg={5}>
             <Input
-              required={true}
+              required
               value={preloadData.author}
               name="author"
               placeholder="Author"
@@ -260,8 +260,8 @@ const CurrentRead = () => {
               inputProps={{ 'aria-label': 'description' }}
             />
           </Grid>
-
-          <Grid item xs={7} lg={6}>
+          
+          <Grid item xs={7} lg={8}>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardDatePicker
                 disableToolbar
@@ -278,8 +278,7 @@ const CurrentRead = () => {
               />
             </MuiPickersUtilsProvider>
           </Grid>
-          <Grid item xs={false} lg={3}></Grid>
-
+          <Grid item xs={false} lg={2}></Grid>
           <Grid className={classes.textEditor} item xs={8}>
             <CKEditor
               editor={ClassicEditor}
@@ -287,7 +286,6 @@ const CurrentRead = () => {
               onChange={updateState.jots}
             />
           </Grid>
-
           <Grid item container xs={12} justify="space-around" alignItems="center">
             <Grid item xs={3}></Grid>
             <Grid item xs={3} className={classes.buttonGrid}>

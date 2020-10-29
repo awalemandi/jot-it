@@ -29,6 +29,7 @@ const LightTooltip = withStyles((theme) => ({
         color: 'rgba(0, 0, 0, 0.87)',
         boxShadow: theme.shadows[1],
         fontSize: 11,
+        maxWidth: 200,
 },
 }))(Tooltip);
 
@@ -239,6 +240,7 @@ const Navigation = props => {
                             disableHoverListener
                             disableTouchListener
                             title={helpMessage}
+                            arrow
                         >
                             <IconButton onClick={handleTooltipOpen} >
                                 <LiveHelpIcon/>
