@@ -10,9 +10,9 @@ import TbrList from '../TbrList';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: '80%',
-        minHeight: 500,
-        maxHeight: 650,
+        width: '100%',
+        // minHeight: 500,
+        // maxHeight: 650,
         textAlign: 'center',
         overflowY: 'auto',
     },

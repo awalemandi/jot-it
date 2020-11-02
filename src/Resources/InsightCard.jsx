@@ -1,8 +1,6 @@
-import React, { useContext } from 'react'
-import { insightsDocRef } from '../firebase';
-import { JotContext} from '../Resources/JotContext';
+import React from 'react'
 
-import {Card, CardActions, CardContent, IconButton, Typography, Grid, Tooltip } from '@material-ui/core';
+import {Card, CardActions, CardContent, IconButton, Typography, Grid, Tooltip, Paper } from '@material-ui/core';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import DeleteOutlineRoundedIcon from '@material-ui/icons/DeleteOutlineRounded';
 import RestoreFromTrashRoundedIcon from '@material-ui/icons/RestoreFromTrashRounded';
@@ -15,10 +13,24 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         justifyContent: 'space-between',
         width: 240,
-        height: 270,
-        margin: theme.spacing( 1, 1, 8, 1),
-        backgroundColor: theme.palette.action.hover,
-
+        height: 275,
+        margin: theme.spacing(1, 1, 8, 1),
+        pading: theme.spacing(2),
+        backgroundColor: fade(theme.palette.secondary.main, 0.45),
+        boxShadow: `0 6px 12px 0 #ccc`,
+        borderRadius: 16,
+        transition: '0.3s',
+        '&:hover': {
+            transform: 'scale(1.2)',
+            backgroundColor: fade(theme.palette.secondary.main, 0.75),
+            boxShadow: `1px 2.8px 2.2px rgba(0, 0, 0, 0.034),
+                        1px 6.7px 5.3px rgba(0, 0, 0, 0.048),
+                        1px 12.5px 10px rgba(0, 0, 0, 0.06),
+                        1px 22.3px 17.9px rgba(0, 0, 0, 0.072)`
+        },
+    },
+    header: {
+        height: 35,
     },
     text: {
         margin: theme.spacing(2, 1, 0, 1),
@@ -28,29 +40,29 @@ const useStyles = makeStyles((theme) => ({
         padding: 0,
     },
     button: {
-        margin: theme.spacing(0, 1, 0, 0)
+        margin: theme.spacing(0, 1, 1, 0)
     }
 }));
 
 
 const InsightCard = ({ id, title, author, jots, onDelete, renderRestore, onRestore }) => {
-    const { content } = useContext(JotContext);
-    const [contentValue, setContentValue] = content;
 
     const classes = useStyles();
     return (
-        <Card raised={true} className={classes.root} variant="outlined">
+        <Card raised className={classes.root} variant="outlined">
                 <CardContent>
-                    <div>
+                    <div className={classes.header}>
                         <Typography variant="button" gutterBottom>
-                            {title}
+                            <b>{title}</b>
                         </Typography>
 
                         <Typography variant="caption" color="textSecondary">  by {author}</Typography>
                     </div>
-                    <Typography className={classes.text} variant="body2" component="p">
-                        {ReactHtmlParser(jots)}
-                    </Typography>
+                    
+                        <Typography className={classes.text} variant="body2" component="p" align="left">
+                            {ReactHtmlParser(jots)}
+                        </Typography>
+                    
                 </CardContent>
                 <CardActions>
                     <Grid container justify="space-between">
