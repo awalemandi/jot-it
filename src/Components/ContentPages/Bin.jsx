@@ -11,7 +11,8 @@ import InsightCard from '../../Resources/InsightCard';
 const renderRestoreButton = true ;
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: '80%',
+        width: '100%',
+        padding: theme.spacing(0, 2),
         minHeight: 500,
         maxHeight: 650,
         textAlign: 'center',
@@ -39,16 +40,16 @@ const Bin = () => {
     const openAlert = action => {
     action == 'delete' && setDeleteAlertOpen(true);
     action == 'restore' && setRestoreAlertOpen(true);
-  };
+};
 
-  const closeAlert = (event, reason) => {
+const closeAlert = (event, reason) => {
     if (reason === 'clickaway') {
-      return;
+    return;
     }
 
     setDeleteAlertOpen(false);
     setRestoreAlertOpen(false);
-  };
+};
 
     const deleteAlert = <Snackbar open={deleteAlertOpen} autoHideDuration={4000} onClose={closeAlert}>
                     <Alert onClose={closeAlert} severity="error">
@@ -110,7 +111,7 @@ const handleRestore = insightId => {
     }, [searchField, insightsArray]);
 
     return !loading ? (
-        <Grid container className={classes.root} spacing={2} justify="space-around">
+        <Grid container className={classes.root} justify="space-evenly" alignItems="center">
             <Grid item xs={false} lg={2}></Grid>
             <Grid item xs={8}>
                 <Typography component="h1" variant="h6" className={classes.header}>
@@ -119,25 +120,27 @@ const handleRestore = insightId => {
                 <Divider />
             </Grid>
             <Grid item sm={false} lg={2}></Grid>
+            <Grid item container xs={12} className={classes.card} justify="space-evenly" alignItems="center">
             {
                 !filteredInsightsArray?
-                    <Typography variant="h10">😐 You don't have any insights yet. Complete your current read to add!</Typography>
+                    <Typography variant="h10">Your archived insights will show up here.</Typography>
                 : filteredInsightsArray.map((insight) =>
-                <Grid item xs={10} md={6} xl={4} className={classes.card}>
-                    <InsightCard
-                        key={insight.id}
-                        id={insight.id}
-                        title={insight.title}
-                        author={insight.author}
-                        commenceDate={insight.commenceDate}
-                        jots={insight.jots}
-                        onDelete={() => handleDelete(insight.id)}
-                        renderRestore={renderRestoreButton}
-                        onRestore={() => handleRestore(insight.id)}
-                    />
-                </Grid>
-            )
+                    <Grid item xs={10} md={6} lg={4} xl={4}>
+                        <InsightCard
+                            key={insight.id}
+                            id={insight.id}
+                            title={insight.title}
+                            author={insight.author}
+                            commenceDate={insight.commenceDate}
+                            jots={insight.jots}
+                            onDelete={() => handleDelete(insight.id)}
+                            renderRestore={renderRestoreButton}
+                            onRestore={() => handleRestore(insight.id)}
+                        />
+                    </Grid>
+                )
             }
+            </Grid>
             {deleteAlert} {restoreAlert}
         </Grid>
     )

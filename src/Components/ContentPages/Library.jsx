@@ -13,7 +13,8 @@ import InsightCard from '../../Resources/InsightCard';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: '80%',
+        width: '100%',
+        padding: theme.spacing(0, 2),
         minHeight: 500,
         maxHeight: 650,
         textAlign: 'center',
@@ -93,7 +94,7 @@ const handleArchive = insightId => {
     }, [searchField, insightsArray]);
 
     return !loading ? (
-        <Grid container className={classes.root} justify="space-evenly" alignItems="flex-start">
+        <Grid container className={classes.root} justify="space-evenly" alignItems="center">
             <Grid item xs={false} lg={2}></Grid>
             <Grid item xs={8}>
                 <Typography component="h1" variant="h6" className={classes.header}>
@@ -102,23 +103,25 @@ const handleArchive = insightId => {
                 <Divider />
             </Grid>
             <Grid item sm={false} lg={2}></Grid>
+            <Grid item container xs={12} className={classes.card} justify="space-evenly" alignItems="center">
             {
                 !filteredInsightsArray?
                     <Typography variant="h10">😐 You don't have any insights yet. Complete your current read to add!</Typography>
                 : filteredInsightsArray.map((insight) =>
-                <Grid item xs={10} md={6} xl={4} className={classes.card}>
-                    <InsightCard
-                        key={insight.id}
-                        id={insight.id}
-                        title={insight.title}
-                        author={insight.author}
-                        commenceDate={insight.commenceDate}
-                        jots={insight.jots}
-                        onDelete={() => handleArchive(insight.id)}
-                    />
-                </Grid>
-            )
+                    <Grid item xs={10} md={6} lg={4} xl={4}>
+                        <InsightCard
+                            key={insight.id}
+                            id={insight.id}
+                            title={insight.title}
+                            author={insight.author}
+                            commenceDate={insight.commenceDate}
+                            jots={insight.jots}
+                            onDelete={() => handleArchive(insight.id)}
+                        />
+                    </Grid>
+                )
             }
+            </Grid>
             {archiveAlert}
         </Grid>
     )

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { insightsDocRef } from '../../firebase';
 
-import { CssBaseline, Grid, Divider, Typography, makeStyles, IconButton, Input, TextField, Snackbar, Tooltip, Fab } from '@material-ui/core';
+import { CssBaseline, Grid, Divider, Typography, makeStyles, IconButton, Input, TextField, Snackbar, Tooltip, Fab, Hidden } from '@material-ui/core';
 import PulseLoader from 'react-spinners/PulseLoader';
 
 
@@ -44,8 +44,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const dateFormat = 'MM/dd/yyyy';
+
 const CurrentRead = () => {
-    const newInsightDetails = {
+  const newInsightDetails = {
     title: '',
     author: '',
     commenceDate: format(new Date(), dateFormat),
@@ -61,6 +62,7 @@ const CurrentRead = () => {
   const [saveAlertOpen, setSaveAlertOpen] = useState(false);
   const [completeAlertOpen, setCompleteAlertOpen] = useState(false);
 
+  //state handlers for alerts
   const openAlert = action => {
     action == 'save' && setSaveAlertOpen(true);
     action == 'complete' && setCompleteAlertOpen(true);
@@ -81,15 +83,14 @@ const CurrentRead = () => {
                     </Alert>
 </Snackbar>
 
-const completeAlert = <Snackbar open={completeAlertOpen} autoHideDuration={4000} onClose={closeAlert}>
+  const completeAlert = <Snackbar open={completeAlertOpen} autoHideDuration={4000} onClose={closeAlert}>
                     <Alert onClose={closeAlert} severity="success">
                       Wow, you finished your read! 👏
                     </Alert>
 </Snackbar>
   
- //preload current read information
+ //preload current read information on initial render
   useEffect(() => {
-    console.log('useEffect running')
     const unsubcribe = insightsDocRef.where('completed', '==', false)
       .onSnapshot(snapshot => {
         let currentInsight = {};
@@ -125,7 +126,7 @@ const completeAlert = <Snackbar open={completeAlertOpen} autoHideDuration={4000}
   }
 
 
-  //onChange handlers for updating state
+  //onChange handlers for updating input state
   const updateState = {
     title: function (e) {
       setPreloadData({
@@ -156,15 +157,6 @@ const completeAlert = <Snackbar open={completeAlertOpen} autoHideDuration={4000}
         jots: data
       })
     },
-  };
-
-
-  const progressSavedAlert = () => {
-    alert('Your progress has been saved! 👍');
-  };
-
-  const finishedReadAlert = () => {
-    alert('Wow, you finished your read! 👏');
   };
 
   //onClick handlers for save and markAsComplete button
@@ -212,9 +204,9 @@ const completeAlert = <Snackbar open={completeAlertOpen} autoHideDuration={4000}
 
 
   return !loading ?
-    <>
-      <form className={classes.root}>
-        <Grid container spacing={5} justify="center">
+    <form className={classes.root}>
+      <Grid container spacing={5} justify="center">
+
           <Grid item xs={2}></Grid>
           <Grid item xs={8}>
             <Typography component="h1" variant="h6" className={classes.header}>
@@ -223,6 +215,8 @@ const completeAlert = <Snackbar open={completeAlertOpen} autoHideDuration={4000}
             <Divider />
           </Grid>
           <Grid item xs={2}></Grid>
+
+            <Grid item xs={2}></Grid>
           <Grid item xs={8} lg={4}>
             <Input
               value={preloadData.title}
@@ -234,7 +228,12 @@ const completeAlert = <Snackbar open={completeAlertOpen} autoHideDuration={4000}
               inputProps={{ 'aria-label': 'description' }}
             />
           </Grid>
-
+          <Hidden lgUp>
+            <Grid item xs={2}></Grid>
+          </Hidden>
+          <Hidden lgUp>
+            <Grid item xs={2}></Grid>
+          </Hidden>
           <Grid item xs={8} lg={4}>
             <Input
               required
@@ -245,9 +244,10 @@ const completeAlert = <Snackbar open={completeAlertOpen} autoHideDuration={4000}
               onChange={updateState.author}
               inputProps={{ 'aria-label': 'description' }}
             />
-          </Grid>
+        </Grid>
+            <Grid item xs={2}></Grid>
           
-          <Grid item xs={7} lg={8}>
+          <Grid item xs={8} lg={4}>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardDatePicker
                 disableToolbar
@@ -264,7 +264,11 @@ const completeAlert = <Snackbar open={completeAlertOpen} autoHideDuration={4000}
               />
             </MuiPickersUtilsProvider>
           </Grid>
-          <Grid item xs={false} lg={3}></Grid>
+        <Grid item xs={8} lg={4}></Grid>
+        <Hidden lgUp>
+          <Grid item xs={2}></Grid>
+        </Hidden>
+
           <Grid className={classes.textEditor} item xs={8}>
             <CKEditor
               editor={ClassicEditor}
@@ -272,6 +276,7 @@ const completeAlert = <Snackbar open={completeAlertOpen} autoHideDuration={4000}
               onChange={updateState.jots}
             />
           </Grid>
+
           <Grid item container xs={12} justify="space-around" alignItems="center">
             <Grid item xs={3}></Grid>
             <Grid item xs={3} className={classes.buttonGrid}>
@@ -291,29 +296,29 @@ const completeAlert = <Snackbar open={completeAlertOpen} autoHideDuration={4000}
             <Grid item xs={3} className={classes.buttonGrid}>
               <Tooltip title="Mark complete">
                 <Fab
-                color="inherit"
-                size="medium"
-                variant="extended"
-                className={classes.button}
-                onClick={handleComplete}
+                  color="inherit"
+                  size="medium"
+                  variant="extended"
+                  className={classes.button}
+                  onClick={handleComplete}
                 >
                   <DoneAllRoundedIcon color="primary" />
                 </Fab>
               </Tooltip>
             </Grid>
             <Grid item xs={3}></Grid>
+
           </Grid>
         </Grid>
-        {saveAlert}
-        {completeAlert}
-      </form>
-    </>
+      {saveAlert}
+      {completeAlert}
+    </form>
     :
-      <PulseLoader
-        size={10}
-        margin={5}
-        color={'#4db6ac'}
-        loading={true}
+    <PulseLoader
+      size={10}
+      margin={5}
+      color={'#4db6ac'}
+      loading={true}
     />
 }
 
