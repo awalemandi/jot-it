@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { insightsDocRef } from '../../firebase';
 
-import { CssBaseline, Grid, Divider, Typography, makeStyles, IconButton, Input, TextField, Snackbar, Tooltip, Fab } from '@material-ui/core';
+import { CssBaseline, Grid, Divider, Typography, makeStyles, IconButton, Input, TextField, Snackbar, Tooltip, Fab, Hidden } from '@material-ui/core';
 import PulseLoader from 'react-spinners/PulseLoader';
 
 
@@ -91,7 +91,6 @@ const CurrentRead = () => {
   
  //preload current read information on initial render
   useEffect(() => {
-    console.log('useEffect running')
     const unsubcribe = insightsDocRef.where('completed', '==', false)
       .onSnapshot(snapshot => {
         let currentInsight = {};
@@ -215,8 +214,9 @@ const CurrentRead = () => {
             </Typography>
             <Divider />
           </Grid>
-
           <Grid item xs={2}></Grid>
+
+            <Grid item xs={2}></Grid>
           <Grid item xs={8} lg={4}>
             <Input
               value={preloadData.title}
@@ -228,7 +228,12 @@ const CurrentRead = () => {
               inputProps={{ 'aria-label': 'description' }}
             />
           </Grid>
-
+          <Hidden lgUp>
+            <Grid item xs={2}></Grid>
+          </Hidden>
+          <Hidden lgUp>
+            <Grid item xs={2}></Grid>
+          </Hidden>
           <Grid item xs={8} lg={4}>
             <Input
               required
@@ -239,9 +244,10 @@ const CurrentRead = () => {
               onChange={updateState.author}
               inputProps={{ 'aria-label': 'description' }}
             />
-          </Grid>
+        </Grid>
+            <Grid item xs={2}></Grid>
           
-          <Grid item xs={7} lg={8}>
+          <Grid item xs={8} lg={4}>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardDatePicker
                 disableToolbar
@@ -258,7 +264,10 @@ const CurrentRead = () => {
               />
             </MuiPickersUtilsProvider>
           </Grid>
-          <Grid item xs={false} lg={3}></Grid>
+        <Grid item xs={8} lg={4}></Grid>
+        <Hidden lgUp>
+          <Grid item xs={2}></Grid>
+        </Hidden>
 
           <Grid className={classes.textEditor} item xs={8}>
             <CKEditor
