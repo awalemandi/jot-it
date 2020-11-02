@@ -23,7 +23,7 @@ root: {
   alignItems: 'center',
   flexGrow: 1,
   width: '100%',
-  height: '100vh',
+  minHeight: '100vh',
   margin: theme.spacing(0),
   padding: theme.spacing(5, 0, 0, 0),
   backgroundColor: theme.palette.action.hover,
@@ -54,10 +54,9 @@ content: {
 },
 
 footer: {
-  position: "absolute",
   bottom: 0,
   padding: theme.spacing(1, 0, 0, 0),
-  margin: theme.spacing(0),
+  marginTop: 'auto',
   width: '66%',
   height: 'auto',
 },
