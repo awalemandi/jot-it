@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { JotContext } from '../../Resources/JotContext';
 
 import { fade, withStyles, makeStyles } from '@material-ui/core/styles';
-import {CssBaseline, AppBar, Toolbar, Drawer, List, ListItem, ListItemIcon, ListItemText, Divider, IconButton, InputBase, Tooltip, ClickAwayListener } from '@material-ui/core';
+import {CssBaseline, AppBar, Toolbar, Drawer, List, ListItem, ListItemIcon, ListItemText, Hidden, Divider, IconButton, InputBase, Tooltip, ClickAwayListener } from '@material-ui/core';
 import clsx from 'clsx';
 
 import SearchIcon from '@material-ui/icons/Search';
@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         flexGrow: 1,
+        justifyContent: 'space-between',
     },
     
     appBar: {
@@ -51,7 +52,8 @@ const useStyles = makeStyles((theme) => ({
     
     icon: {
         display: 'flex',
-        margin: theme.spacing(0, 2, 0, 1),
+        flexShrink: 2,
+        margin: theme.spacing(0),
     },
     
     logo: {
@@ -72,8 +74,8 @@ const useStyles = makeStyles((theme) => ({
         '&:hover': {
         backgroundColor: fade(theme.palette.common.white, 0.25),
         },
-        marginRight: theme.spacing(2),
-        marginLeft: 0,
+        marginRight: theme.spacing(1),
+        marginLeft: theme.spacing(2),
         width: '100%',
         [theme.breakpoints.up('sm')]: {
         marginLeft: theme.spacing(3),
@@ -191,19 +193,20 @@ const Navigation = props => {
         className={clsx(classes.appBar)}
         
         >
-            <Toolbar className={classes.toolbar}>
-                <IconButton
-                    color="default"
-                    aria-label="open drawer"
-                    onClick={handleDrawerState}
-                    edge="start"
-                    className={classes.icon}
-                >
+                <Toolbar className={classes.toolbar}>
+                <Hidden smDown>
+                    <IconButton
+                        color="default"
+                        aria-label="open drawer"
+                        onClick={handleDrawerState}
+                        edge="start"
+                        className={classes.icon}
+                    >
                         {
                             !drawerOpen ? <MenuIcon /> : <MenuOpenRoundedIcon />
-                    }
-                </IconButton>
-                
+                        }
+                    </IconButton>
+                </Hidden>
                 <div>
                     <img className={classes.logo} src={logo} alt="logo"/>
                 </div>
@@ -249,13 +252,13 @@ const Navigation = props => {
                         </div>
                     </ClickAwayListener>
                     <div></div>
-                    <Tooltip title="Source code">
-                        <a href="https://github.com/awalemandi/jot-it" target="_blank">
-                            <IconButton >
-                                <CodeRoundedIcon />
-                            </IconButton>
-                        </a>
-                    </Tooltip>
+                        <Tooltip title="Source code">
+                            <a href="https://github.com/awalemandi/jot-it" target="_blank">
+                                <IconButton >
+                                    <CodeRoundedIcon />
+                                </IconButton>
+                            </a>
+                        </Tooltip>
                 </div>
                 
             </Toolbar>

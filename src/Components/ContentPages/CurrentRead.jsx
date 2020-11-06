@@ -19,14 +19,13 @@ import Alert from '../../Resources/Alert';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '80%',
-    minHeight: 500,
-    maxHeight: 650,
+    width: '100%',
+    height: 'auto',
     textAlign: 'center',
   },
   header: {
     textAlign: 'center',
-    margin: theme.spacing(0, 0, 2, 0)
+    margin: theme.spacing(0, 0, 1, 0)
   },
   textEditor: {
     height: 130,
@@ -38,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
   },
   button: {
-    margin: theme.spacing(5, 3, 5, 3),
+    margin: theme.spacing(0),
     textAlign: 'center',
     backgroundColor: theme.palette.common.white,
   },
@@ -205,19 +204,23 @@ const CurrentRead = () => {
 
   return !loading ?
     <form className={classes.root}>
-      <Grid container spacing={5} justify="center">
+      <Grid container spacing={3} justify="space-around" alignItems="stretch"
+      >
 
-          <Grid item xs={2}></Grid>
-          <Grid item xs={8}>
+          <Hidden xsDown>
+            <Grid item xs={2}></Grid>
+          </Hidden>
+          <Grid item xs={12} sm={8}>
             <Typography component="h1" variant="h6" className={classes.header}>
               New Insight 🌱 
             </Typography>
             <Divider />
           </Grid>
-          <Grid item xs={2}></Grid>
-
+          <Hidden xsDown>
             <Grid item xs={2}></Grid>
-          <Grid item xs={8} lg={4}>
+          </Hidden>
+
+          <Grid item xs={12} sm={8} lg={5}>
             <Input
               value={preloadData.title}
               name="title"
@@ -228,13 +231,7 @@ const CurrentRead = () => {
               inputProps={{ 'aria-label': 'description' }}
             />
           </Grid>
-          <Hidden lgUp>
-            <Grid item xs={2}></Grid>
-          </Hidden>
-          <Hidden lgUp>
-            <Grid item xs={2}></Grid>
-          </Hidden>
-          <Grid item xs={8} lg={4}>
+          <Grid item xs={12} sm={8} lg={5}>
             <Input
               required
               value={preloadData.author}
@@ -244,10 +241,12 @@ const CurrentRead = () => {
               onChange={updateState.author}
               inputProps={{ 'aria-label': 'description' }}
             />
-        </Grid>
-            <Grid item xs={2}></Grid>
+          </Grid>
+          <Hidden lgDown>
+            <Grid item lg={4}></Grid>
+          </Hidden>
           
-          <Grid item xs={8} lg={4}>
+          <Grid item xs={12} sm={8} lg={5}>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardDatePicker
                 disableToolbar
@@ -264,12 +263,14 @@ const CurrentRead = () => {
               />
             </MuiPickersUtilsProvider>
           </Grid>
-        <Grid item xs={8} lg={4}></Grid>
-        <Hidden lgUp>
-          <Grid item xs={2}></Grid>
+        <Hidden xsDown>
+          <Grid item xs={8} lg={4}></Grid>
+        </Hidden>
+        <Hidden xsDown lgUp>
+          <Grid item md={2}></Grid>
         </Hidden>
 
-          <Grid className={classes.textEditor} item xs={8}>
+          <Grid className={classes.textEditor} item xs={12} sm={8} lg={10}>
             <CKEditor
               editor={ClassicEditor}
               data={preloadData.jots}
@@ -278,8 +279,10 @@ const CurrentRead = () => {
           </Grid>
 
           <Grid item container xs={12} justify="space-around" alignItems="center">
-            <Grid item xs={3}></Grid>
-            <Grid item xs={3} className={classes.buttonGrid}>
+            <Hidden xsDown>
+              <Grid item md={3}></Grid>
+            </Hidden>
+            <Grid item xs={6} md={3} className={classes.buttonGrid}>
               <Tooltip title="Save">
                 <Fab
                 color="inherit"
@@ -293,7 +296,7 @@ const CurrentRead = () => {
               </Tooltip>
             </Grid>
 
-            <Grid item xs={3} className={classes.buttonGrid}>
+            <Grid item xs={6} md={3} className={classes.buttonGrid}>
               <Tooltip title="Mark complete">
                 <Fab
                   color="inherit"
@@ -306,7 +309,9 @@ const CurrentRead = () => {
                 </Fab>
               </Tooltip>
             </Grid>
-            <Grid item xs={3}></Grid>
+            <Hidden xsDown>
+              <Grid item md={3}></Grid>
+            </Hidden>
 
           </Grid>
         </Grid>
