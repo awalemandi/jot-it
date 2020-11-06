@@ -19,9 +19,8 @@ import Alert from '../../Resources/Alert';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '80%',
-    minHeight: 400,
-    maxHeight: 650,
+    width: '100%',
+    height: 'auto',
     textAlign: 'center',
   },
   header: {

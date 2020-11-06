@@ -25,7 +25,7 @@ root: {
   width: '100%',
   minHeight: '100vh',
   margin: theme.spacing(0),
-  padding: theme.spacing(5, 0, 0, 0),
+  padding: theme.spacing(5, 0, 0, 3),
   backgroundColor: theme.palette.action.hover,
 },
 
@@ -44,30 +44,27 @@ toolbar: {
 
 content: {
   position: 'relative',
-  padding: theme.spacing(3, 0, 1, 0),
   alignItems: 'center',
   justifyContent: 'space-evenly',
-  width: '55%',
-  margin: theme.spacing(5, 0, 1, 0),
-  maxHeight: 700,
-  minHeight: 500,
+  width: '60%',
+  margin: theme.spacing(5, 0, 0, 0),
+  height: 'auto',
 },
 
 footer: {
   bottom: 0,
   padding: theme.spacing(1, 0, 0, 0),
   marginTop: 'auto',
-  width: '66%',
+  width: '100%',
   height: 'auto',
+  
 },
 
 paper: {
   display: 'flex',
-  flexShrink: 2,
   padding: theme.spacing(2),
   width: '100%',
-  maxHeight: 700,
-  minHeight: 100,
+  minHeight: '6rem',
   alignItems: 'center',
   justifyContent: 'space-evenly'},
 }));
