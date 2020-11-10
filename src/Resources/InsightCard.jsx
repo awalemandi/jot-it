@@ -10,12 +10,14 @@ import ReactHtmlParser from 'react-html-parser';
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
+        flexGrow: 1,
+        flexShrink: 1,
         flexDirection: 'column',
         justifyContent: 'space-between',
-        width: 230,
-        height: 270,
-        margin: theme.spacing(1, 1, 8, 1),
-        pading: theme.spacing(2),
+        width: '14rem',
+        height: '19rem',
+        margin: theme.spacing(1, 1, 6, 1),
+        padding: theme.spacing(1),
         backgroundColor: fade(theme.palette.secondary.main, 0.45),
         boxShadow: `0 6px 12px 0 #ccc`,
         borderRadius: 16,
@@ -30,14 +32,13 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     header: {
-        height: 35,
+        height: '3rem',
     },
     text: {
         margin: theme.spacing(2, 1, 0, 1),
         width: '100%',
-        height: 130,
+        height: '8rem',
         overflow: 'auto',
-        padding: 0,
     },
     button: {
         margin: theme.spacing(0, 1, 1, 0)
@@ -45,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const InsightCard = ({ id, title, author, jots, onDelete, renderRestore, onRestore }) => {
+const InsightCard = ({ id, title, author, jots, commenceDate, completeDate, onDelete, renderRestore, onRestore }) => {
 
     const classes = useStyles();
     return (
@@ -58,7 +59,7 @@ const InsightCard = ({ id, title, author, jots, onDelete, renderRestore, onResto
 
                         <Typography variant="caption" color="textSecondary">  by {author}</Typography>
                     </div>
-                    
+                        {/* <Typography variant="caption" color="textSecondary">{commenceDate} to {completeDate}</Typography> */}
                         <Typography className={classes.text} variant="body2" component="p" align="left">
                             {ReactHtmlParser(jots)}
                         </Typography>

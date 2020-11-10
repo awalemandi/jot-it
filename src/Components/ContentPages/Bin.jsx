@@ -132,6 +132,7 @@ const handleRestore = insightId => {
                             title={insight.title}
                             author={insight.author}
                             commenceDate={insight.commenceDate}
+                            completeDate={insight.completeDate}
                             jots={insight.jots}
                             onDelete={() => handleDelete(insight.id)}
                             renderRestore={renderRestoreButton}

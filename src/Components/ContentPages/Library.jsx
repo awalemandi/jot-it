@@ -13,10 +13,11 @@ import InsightCard from '../../Resources/InsightCard';
 
 const useStyles = makeStyles((theme) => ({
     root: {
+        display: 'flex',
         width: '100%',
-        padding: theme.spacing(0, 2),
+        height: 'auto',
         minHeight: 500,
-        maxHeight: 650,
+        padding: theme.spacing(0, 0, 1, 0),
         textAlign: 'center',
         overflowY: 'auto',
     },
@@ -25,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(0, 0, 2, 0)
     },
     card: {
-        marginTop: theme.spacing(2)
+        marginTop: theme.spacing(1)
     }
 }));
 
@@ -98,7 +99,7 @@ const handleArchive = insightId => {
             <Grid item xs={false} lg={2}></Grid>
             <Grid item xs={8}>
                 <Typography component="h1" variant="h6" className={classes.header}>
-                    Your Insights Library 📚
+                    Insights Library 📚
                 </Typography>
                 <Divider />
             </Grid>
@@ -115,6 +116,7 @@ const handleArchive = insightId => {
                             title={insight.title}
                             author={insight.author}
                             commenceDate={insight.commenceDate}
+                            completeDate={insight.completeDate}
                             jots={insight.jots}
                             onDelete={() => handleArchive(insight.id)}
                         />

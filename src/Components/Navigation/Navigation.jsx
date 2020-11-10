@@ -57,7 +57,8 @@ const useStyles = makeStyles((theme) => ({
     },
     
     logo: {
-        display: 'none',
+        display: 'flex',
+        flexShrink: 6,
         [theme.breakpoints.up('sm')]: {
         display: 'block',
         },
@@ -218,7 +219,7 @@ const Navigation = props => {
                     </div>
                     
                     <InputBase
-                            placeholder="Search insights.."
+                            placeholder="Search.."
                             onChange={handleSearch}
                     classes={{
                         root: classes.inputRoot,

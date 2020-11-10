@@ -1,10 +1,9 @@
 import React, { useContext } from 'react';
 import { JotContext} from '../../Resources/JotContext';
-import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import { fade, makeStyles} from '@material-ui/core/styles';
 import { Paper, CssBaseline } from '@material-ui/core';
 import Navigation from '../Navigation/Navigation';
 import Footer from '../Footer';
-import { lightTheme, darkTheme } from '../../Resources/theme';
 import CurrentRead from '../ContentPages/CurrentRead';
 import Library from '../ContentPages/Library';
 import ToBeRead from '../ContentPages/ToBeRead';
@@ -15,58 +14,73 @@ import Feedback from "feeder-react-feedback"; // import Feedback component
 import "feeder-react-feedback/dist/feeder-react-feedback.css"; // import stylesheet
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    width: '100%',
+    minHeight: '100vh',
+    [theme.breakpoints.down('md')]: {
+      margin: theme.spacing(1, 0, 0, 1),
+      padding: theme.spacing(3, 0, 0, 2),
+    },
+    [theme.breakpoints.up('md')]: {
+      margin: theme.spacing(2, 0, 0, 0),
+      padding: theme.spacing(3, 0, 0, 0),
+    },
+    backgroundColor: theme.palette.action.hover,
+  },
 
-root: {
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'flex-start',
-  alignItems: 'center',
-  flexGrow: 1,
-  width: '100%',
-  minHeight: '100vh',
-  margin: theme.spacing(0),
-  padding: theme.spacing(5, 0, 0, 3),
-  backgroundColor: theme.palette.action.hover,
-},
+  navigation: {
+  marginBottom: theme.spacing(5),
+  },
 
-navigation: {
-  marginRight: theme.spacing(1),
-},
+  content: {
+    flexGrow: 1,
+    flexShrink: 1,
+    position: 'relative',
+    alignItems: 'center',
+    [theme.breakpoints.down('md')]: {
+      width: '75%',
+      marginTop: theme.spacing(1),
+    },
+    [theme.breakpoints.up('md')]: {
+      width: '50%',
+      marginTop: theme.spacing(5),
+    },
+    height: 'auto',
+    textAlign: 'center',
+    },
 
-toolbar: {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'flex-end',
-  padding: theme.spacing(0),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-},
+  footer: {
+    display: 'flex',
+    marginTop: '3rem',
+    width: '100%',
+    height: '7rem',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    backgroundColor: fade(theme.palette.secondary.main, 0.45)
+  },
 
-content: {
-  position: 'relative',
-  alignItems: 'center',
-  justifyContent: 'space-evenly',
-  width: '60%',
-  margin: theme.spacing(5, 0, 0, 0),
-  height: 'auto',
-},
-
-footer: {
-  bottom: 0,
-  padding: theme.spacing(1, 0, 0, 0),
-  marginTop: 'auto',
-  width: '100%',
-  height: 'auto',
-  
-},
-
-paper: {
-  display: 'flex',
-  padding: theme.spacing(2),
-  width: '100%',
-  minHeight: '6rem',
-  alignItems: 'center',
-  justifyContent: 'space-evenly'},
+  paper: {
+    width: '100%',
+    [theme.breakpoints.down('xs')]: {
+      maxHeight: 550,
+    },
+    [theme.breakpoints.up('sm')]: {
+      maxHeight: 650,
+    },
+    [theme.breakpoints.up('md')]: {
+      maxHeight: 750,
+    },
+    [theme.breakpoints.up('lg')]: {
+      maxHeight: 850,
+    },
+    padding: theme.spacing(2, 1, 2, 1),
+    textAlign: 'center',
+    overflow: 'auto'
+  }
 }));
 
 
@@ -96,32 +110,29 @@ function App() {
   
   
   return (
-    <ThemeProvider theme={lightTheme}>
-      <CssBaseline/>
-        <div className={classes.root}>
-          <header className={classes.navigation}>
-            <Navigation page={displayPage}/>
-          </header>
+    <>
+      <CssBaseline />
+      <div className={classes.root}>
+        <header className={classes.navigation}>
+          <Navigation page={displayPage} />
+        </header>
 
-          <main className={classes.content}>
-            <Paper elevation={3} className={classes.paper}>
-              {contentValue}
-            </Paper>
-          </main>
+        <main className={classes.content} >
+          <Paper elevation={3} className={classes.paper}>
+            {contentValue}
+          </Paper>
+        </main>
 
-          <div className={classes.toolbar} />
-          <footer className={classes.footer}>
-            <Paper elevation={3} className={classes.paper}>
-              <Footer />
-            </Paper>
-          </footer>
+        <footer className={classes.footer}>
+          <Footer />
+        </footer>
 
-          <Feedback
-            primaryColor="#00897b"
-            projectId="5f864c3404ba4d0004fb43a1"
-          />
-        </div>
-    </ThemeProvider>
+        <Feedback
+          primaryColor="#00897b"
+          projectId="5f864c3404ba4d0004fb43a1"
+        />
+      </div>
+    </>
   );
 }
 
