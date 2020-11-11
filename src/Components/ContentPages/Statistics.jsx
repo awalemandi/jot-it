@@ -1,15 +1,13 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { Typography, Divider, Grid } from '@material-ui/core';
+import { Typography, Divider, Grid, Hidden } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: '80%',
-        minHeight: 500,
-        maxHeight: 650,
+        width: '100%',
         textAlign: 'center',
-        overflowY: 'auto',
+        minHeight: 400,
     },
     header: {
         textAlign: 'center',
@@ -23,18 +21,25 @@ const Statistics = () => {
 
     return (
         <Grid container className={classes.root} spacing={2} justify="center">
-            <Grid item xs={8}>
+            <Hidden xsDown>
+                <Grid item xs={2}></Grid>
+            </Hidden>
+            <Grid item xs={12} sm={8}>
                 <Typography component="h1" variant="h6" className={classes.header}>
                     Statistics Page 📊
                 </Typography>
                 <Divider />
             </Grid>
+            <Hidden xsDown>
+                <Grid item xs={2}></Grid>
+            </Hidden>
             <Grid item xs={12}>
                 🚧
             </Grid>
             <Grid item xs={12}>
             </Grid>
             <Grid item xs={12}>
+                <Grid item xs={2}></Grid>
             </Grid>
         </Grid>
     )

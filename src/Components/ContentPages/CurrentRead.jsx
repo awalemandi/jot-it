@@ -19,13 +19,27 @@ import Alert from '../../Resources/Alert';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
+    margin: 'auto',
+    padding: 'auto',
+    width: '90%',
     height: 'auto',
     textAlign: 'center',
+    [theme.breakpoints.down('xs')]: {
+    minHeight: 400,
+    },
+    [theme.breakpoints.up('sm')]: {
+    minHeight: 450,
+    },
+    [theme.breakpoints.up('md')]: {
+      minHeight: 500,
+    },
+    [theme.breakpoints.up('lg')]: {
+      minHeight: 500,
+    },
   },
   header: {
     textAlign: 'center',
-    margin: theme.spacing(0, 0, 1, 0)
+    margin: theme.spacing(0)
   },
   textEditor: {
     height: 130,
@@ -37,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
   },
   button: {
-    margin: theme.spacing(0),
+    margin: theme.spacing(1, 0, 0, 0),
     textAlign: 'center',
     backgroundColor: theme.palette.common.white,
   },
@@ -204,9 +218,7 @@ const CurrentRead = () => {
 
   return !loading ?
     <form className={classes.root}>
-      <Grid container spacing={3} justify="space-around" alignItems="stretch"
-      >
-
+      <Grid container spacing={5} justify="space-around">
           <Hidden xsDown>
             <Grid item xs={2}></Grid>
           </Hidden>
@@ -219,8 +231,10 @@ const CurrentRead = () => {
           <Hidden xsDown>
             <Grid item xs={2}></Grid>
           </Hidden>
-
-          <Grid item xs={12} sm={8} lg={5}>
+          <Hidden smDown>
+            <Grid item xs={2} lg={1}></Grid>
+          </Hidden>
+          <Grid item xs={12} sm={8} md={4} lg={5}>
             <Input
               value={preloadData.title}
               name="title"
@@ -231,7 +245,7 @@ const CurrentRead = () => {
               inputProps={{ 'aria-label': 'description' }}
             />
           </Grid>
-          <Grid item xs={12} sm={8} lg={5}>
+          <Grid item xs={12} sm={8} md={4} lg={5}>
             <Input
               required
               value={preloadData.author}
@@ -242,10 +256,9 @@ const CurrentRead = () => {
               inputProps={{ 'aria-label': 'description' }}
             />
           </Grid>
-          <Hidden lgDown>
-            <Grid item lg={4}></Grid>
+          <Hidden smDown>
+            <Grid item xs={2} lg={1}></Grid>
           </Hidden>
-          
           <Grid item xs={12} sm={8} lg={5}>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardDatePicker
@@ -262,7 +275,11 @@ const CurrentRead = () => {
                 }}
               />
             </MuiPickersUtilsProvider>
-          </Grid>
+        </Grid>
+        <Hidden lgDown>
+            <Grid item lg={5}></Grid>
+        </Hidden>
+        
         <Hidden xsDown>
           <Grid item xs={8} lg={4}></Grid>
         </Hidden>
@@ -314,7 +331,7 @@ const CurrentRead = () => {
             </Hidden>
 
           </Grid>
-        </Grid>
+    </Grid>
       {saveAlert}
       {completeAlert}
     </form>

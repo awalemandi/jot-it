@@ -4,7 +4,7 @@ import { userDocRef } from '../../firebase';
 
 
 import { fade, makeStyles } from '@material-ui/core/styles';
-import { Typography, Divider, Fab, TextField, Button, Grid, Icon, Tooltip } from '@material-ui/core';
+import { Typography, Divider, Fab, TextField, Button, Grid, Icon, Tooltip, Hidden } from '@material-ui/core';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
 import TbrList from '../TbrList';
 
@@ -12,7 +12,6 @@ const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
         textAlign: 'center',
-        overflowY: 'auto',
     },
     header: {
         textAlign: 'center',
@@ -34,7 +33,9 @@ const ToBeRead = () => {
 
     const handleAddItem = item => {
         item = input;
-        userDocRef
+        if (!item || item == '')
+            return;
+            userDocRef
         .update({
             toBeRead: firebase.firestore.FieldValue.arrayUnion(item)
         })
@@ -46,17 +47,21 @@ const ToBeRead = () => {
 
 
     return (
-        <Grid container className={classes.root} spacing={2} justify="center">
-            <Grid item xs={2}></Grid>
-            <Grid item xs={8}>
+        <Grid container className={classes.root} justify="space-around" alignItems="center">
+            <Hidden xsDown>
+                <Grid item xs={2}></Grid>
+            </Hidden>
+            <Grid item xs={12} sm={8}>
                 <Typography component="h1" variant="h6" className={classes.header}>
-                    To Be Read 🛒
+                To Be Read 🛒 
                 </Typography>
                 <Divider />
             </Grid>
-            <Grid item xs={2}></Grid>
+            <Hidden xsDown>
+                <Grid item xs={2}></Grid>
+            </Hidden>
 
-            <Grid item xs={3}></Grid>
+            <Grid item xs={2}></Grid>
             <Grid item xs={5}>
                 <TextField
                     name="input"
@@ -70,7 +75,7 @@ const ToBeRead = () => {
             <Grid item xs={1}>
                 <Tooltip title="Add">
                     <Fab
-                    size="medium"
+                    size="small"
                     color="primary"
                     className={classes.button}
                     onClick={handleAddItem}
@@ -80,11 +85,9 @@ const ToBeRead = () => {
                 </Tooltip>
             </Grid>
             <Grid item xs={2}></Grid>
-            <Grid item xs={2}></Grid>
-            <Grid item xs ={8}>
+            <Grid item xs ={12} sm={10} md={8}>
                 <TbrList/>
             </Grid>
-            <Grid item xs={2}></Grid>
             
         </Grid>
     )
