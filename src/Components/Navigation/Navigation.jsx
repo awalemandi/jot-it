@@ -16,11 +16,12 @@ import InsertChartRoundedIcon from '@material-ui/icons/InsertChartRounded';
 import DeleteForeverRoundedIcon from '@material-ui/icons/DeleteForeverRounded';
 import LiveHelpIcon from '@material-ui/icons/LiveHelp';
 import logo from './jotit_white.png';
+import compactLogo from './jotit_white_compact.png';
 
 const drawerWidth = 200;
-const helpMessage = `Jot it is a note taking app that helps you track and revisit insights. 
+const helpMessage = `"Jot it" is a note taking app that helps you track and revisit insights. 
                     You can add new insights by completing a new read. You can browse through your insights library or use the search bar to find it.
-                    You can also delete and restore them as needed and use the TBR list to track future reads.
+                    You can also delete and restore them as needed and use the TBR list to keep track of future reads.
                     Happy Jotting! 📖✍️`;
 
 const LightTooltip = withStyles((theme) => ({
@@ -58,13 +59,13 @@ const useStyles = makeStyles((theme) => ({
     
     logo: {
         display: 'flex',
-        flexShrink: 6,
-        [theme.breakpoints.up('sm')]: {
-        display: 'block',
-        },
+        flexShrink: 1,
         height: 'auto',
         width: 'auto',
-        maxHeight: 40,
+        maxHeight: 35,
+        [theme.breakpoints.up('sm')]: {
+            maxHeight: 45,
+        },
         maxWidth: 'auto',
     },
     
@@ -105,8 +106,6 @@ const useStyles = makeStyles((theme) => ({
         paddingLeft: `calc(1.5em + ${theme.spacing(4)}px)`,
         transition: theme.transitions.create('width'),
         width: '100%',
-        [theme.breakpoints.up('xs')]: {
-        },
     },
 
     
@@ -141,7 +140,7 @@ const useStyles = makeStyles((theme) => ({
         duration: theme.transitions.duration.leavingScreen,
         }),
         overflowX: 'hidden',
-        width: theme.spacing(7) + 1,
+        width: theme.spacing(7),
         [theme.breakpoints.up('sm')]: {
         width: theme.spacing(9) + 1,
         },
@@ -208,9 +207,12 @@ const Navigation = props => {
                         }
                     </IconButton>
                 </Hidden>
-                <div>
+                <Hidden xsDown>
                     <img className={classes.logo} src={logo} alt="logo"/>
-                </div>
+                </Hidden>
+                <Hidden smUp>
+                    <img className={classes.logo} src={compactLogo} alt="logo"/>
+                </Hidden>
                 <div></div>
                 
                 <div className={classes.search}>
@@ -253,13 +255,15 @@ const Navigation = props => {
                         </div>
                     </ClickAwayListener>
                     <div></div>
-                        <Tooltip title="Source code">
-                            <a href="https://github.com/awalemandi/jot-it" target="_blank">
-                                <IconButton >
-                                    <CodeRoundedIcon />
-                                </IconButton>
-                            </a>
-                        </Tooltip>
+                        <Hidden xsDown>
+                            <Tooltip title="Source code">
+                                <a href="https://github.com/awalemandi/jot-it" target="_blank">
+                                    <IconButton >
+                                        <CodeRoundedIcon />
+                                    </IconButton>
+                                </a>
+                            </Tooltip>
+                        </Hidden>
                 </div>
                 
             </Toolbar>

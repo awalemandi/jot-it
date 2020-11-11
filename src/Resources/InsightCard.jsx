@@ -14,10 +14,15 @@ const useStyles = makeStyles((theme) => ({
         flexShrink: 1,
         flexDirection: 'column',
         justifyContent: 'space-between',
-        width: '14rem',
-        height: '19rem',
-        margin: theme.spacing(1, 1, 6, 1),
-        padding: theme.spacing(1),
+            [theme.breakpoints.down('sm')]: {
+                maxWidth: '12rem',
+                height: '16rem'
+            },
+            [theme.breakpoints.up('sm')]: {
+                maxWidth: '14rem',
+                maxHeight: '20rem'
+            },
+        margin: theme.spacing(2),
         backgroundColor: fade(theme.palette.secondary.main, 0.45),
         boxShadow: `0 6px 12px 0 #ccc`,
         borderRadius: 16,
@@ -32,17 +37,27 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     header: {
-        height: '3rem',
+        flexShrink: 1,
+        height: '2rem',
     },
     text: {
+        flexShrink: 1,
         margin: theme.spacing(2, 1, 0, 1),
+        padding: theme.spacing(2, 0, 0, 0),
         width: '100%',
-        height: '8rem',
-        overflow: 'auto',
+        [theme.breakpoints.down('sm')]: {
+                height: '6rem'
+            },
+            [theme.breakpoints.up('md')]: {
+                height: '9rem'
+            },
+        overflowY: 'auto',
+        overflowX: 'hidden'
     },
     button: {
-        margin: theme.spacing(0, 1, 1, 0)
-    }
+        flexShrink: 1,
+        margin: 0
+    },
 }));
 
 
@@ -63,10 +78,9 @@ const InsightCard = ({ id, title, author, jots, commenceDate, completeDate, onDe
                         <Typography className={classes.text} variant="body2" component="p" align="left">
                             {ReactHtmlParser(jots)}
                         </Typography>
-                    
                 </CardContent>
                 <CardActions>
-                    <Grid container justify="space-between">
+                    <Grid container justify="space-between" className={classes.action}>
                         <Grid item xs={2}>
                             <Tooltip title="Delete">
                                 <IconButton variant="outlined" color="inherit" className={classes.button} size="medium" onClick={onDelete}>
@@ -77,15 +91,15 @@ const InsightCard = ({ id, title, author, jots, commenceDate, completeDate, onDe
                         <Grid item xs={6}></Grid>
                         <Grid item xs={3}>
                             {
-                            renderRestore ?
-                            <Tooltip title="Restore">
+                                renderRestore ?
+                                <Tooltip title="Restore">
                                 <IconButton variant="outlined" color="inherit" className={classes.button} size="medium" onClick={onRestore}>
                                     <RestoreFromTrashRoundedIcon color="primary"/>
                                 </IconButton>
                             </Tooltip>
                             :
                             <></>
-                            }
+                        }
                         </Grid>
                     </Grid>
                 </CardActions>

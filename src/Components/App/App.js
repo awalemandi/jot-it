@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { JotContext} from '../../Resources/JotContext';
-import { fade, makeStyles} from '@material-ui/core/styles';
+import { JotContext } from '../../Resources/JotContext';
+import { fade, makeStyles } from '@material-ui/core/styles';
 import { Paper, CssBaseline } from '@material-ui/core';
 import Navigation from '../Navigation/Navigation';
 import Footer from '../Footer';
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   navigation: {
-  marginBottom: theme.spacing(5),
+    marginBottom: theme.spacing(5),
   },
 
   content: {
@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     },
     height: 'auto',
     textAlign: 'center',
-    },
+  },
 
   footer: {
     display: 'flex',
@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('lg')]: {
       maxHeight: 850,
     },
-    padding: theme.spacing(2, 1, 2, 1),
+    padding: theme.spacing(2),
     textAlign: 'center',
     overflow: 'auto'
   }
@@ -107,8 +107,8 @@ function App() {
       setContentValue(<Bin />)
     }
   }
-  
-  
+
+
   return (
     <>
       <CssBaseline />

@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { JotContext } from '../../Resources/JotContext';
 import { insightsDocRef } from '../../firebase';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Divider, Grid, Snackbar } from '@material-ui/core';
+import { Typography, Divider, Grid, Snackbar, Hidden } from '@material-ui/core';
 import PulseLoader from 'react-spinners/PulseLoader';
 import Alert from '../../Resources/Alert';
 
@@ -12,18 +12,23 @@ const renderRestoreButton = true ;
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
-        padding: theme.spacing(0, 2),
+        height: 'auto',
         minHeight: 500,
-        maxHeight: 650,
+        maxHeight: '100%',
+        padding: theme.spacing(0, 0, 1, 0),
         textAlign: 'center',
-        overflowY: 'auto',
     },
     header: {
         textAlign: 'center',
         margin: theme.spacing(0, 0, 2, 0)
     },
-    card: {
-        marginTop: theme.spacing(2)
+    cardContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+        marginTop: theme.spacing(1),
     }
 }));
 
@@ -112,20 +117,23 @@ const handleRestore = insightId => {
 
     return !loading ? (
         <Grid container className={classes.root} justify="space-evenly" alignItems="center">
-            <Grid item xs={false} lg={2}></Grid>
-            <Grid item xs={8}>
-                <Typography component="h1" variant="h6" className={classes.header}>
-                    Archive 🗑️
-                </Typography>
-                <Divider />
+            <Hidden xsDown>
+                <Grid item xs={2}></Grid>
+            </Hidden>
+            <Grid item xs={12} sm={8}>
+            <Typography component="h1" variant="h6" className={classes.header}>
+                Archive 🗑️
+            </Typography>
+            <Divider />
             </Grid>
-            <Grid item sm={false} lg={2}></Grid>
-            <Grid item container xs={12} className={classes.card} justify="space-evenly" alignItems="center">
+            <Hidden xsDown>
+                <Grid item xs={2}></Grid>
+            </Hidden>
+            <Grid item xs={12} className={classes.cardContainer}>
             {
                 !filteredInsightsArray?
                     <Typography variant="h10">Your archived insights will show up here.</Typography>
                 : filteredInsightsArray.map((insight) =>
-                    <Grid item xs={10} md={6} lg={4} xl={4}>
                         <InsightCard
                             key={insight.id}
                             id={insight.id}
@@ -138,7 +146,6 @@ const handleRestore = insightId => {
                             renderRestore={renderRestoreButton}
                             onRestore={() => handleRestore(insight.id)}
                         />
-                    </Grid>
                 )
             }
             </Grid>

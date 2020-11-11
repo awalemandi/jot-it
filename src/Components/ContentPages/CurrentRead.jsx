@@ -218,9 +218,7 @@ const CurrentRead = () => {
 
   return !loading ?
     <form className={classes.root}>
-      <Grid container spacing={5} justify="space-around"
-      >
-
+      <Grid container spacing={5} justify="space-around">
           <Hidden xsDown>
             <Grid item xs={2}></Grid>
           </Hidden>
@@ -233,8 +231,10 @@ const CurrentRead = () => {
           <Hidden xsDown>
             <Grid item xs={2}></Grid>
           </Hidden>
-
-          <Grid item xs={12} sm={8} lg={4}>
+          <Hidden smDown>
+            <Grid item xs={2} lg={1}></Grid>
+          </Hidden>
+          <Grid item xs={12} sm={8} md={4} lg={5}>
             <Input
               value={preloadData.title}
               name="title"
@@ -245,7 +245,7 @@ const CurrentRead = () => {
               inputProps={{ 'aria-label': 'description' }}
             />
           </Grid>
-          <Grid item xs={12} sm={8} lg={4}>
+          <Grid item xs={12} sm={8} md={4} lg={5}>
             <Input
               required
               value={preloadData.author}
@@ -256,7 +256,9 @@ const CurrentRead = () => {
               inputProps={{ 'aria-label': 'description' }}
             />
           </Grid>
-          
+          <Hidden smDown>
+            <Grid item xs={2} lg={1}></Grid>
+          </Hidden>
           <Grid item xs={12} sm={8} lg={5}>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardDatePicker
@@ -329,7 +331,7 @@ const CurrentRead = () => {
             </Hidden>
 
           </Grid>
-        </Grid>
+    </Grid>
       {saveAlert}
       {completeAlert}
     </form>

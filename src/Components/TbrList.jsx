@@ -8,12 +8,8 @@ import HighlightOffRoundedIcon from '@material-ui/icons/HighlightOffRounded';
 import PulseLoader from 'react-spinners/PulseLoader';
 
 const useStyles = makeStyles((theme) => ({
-    paper: {
-        margin: theme.spacing(0, 0, 0, 1),
-        padding: theme.spacing(0, 0, 0, 1),
+    root: {
         width: '100%',
-        maxHeight: 400,
-        overflow: 'auto',
     },
     complete: {
         textDecoration: 'line-through',
@@ -48,7 +44,7 @@ const TbrList = () => {
     }, [])
     
     return !loading ? (
-        <List className={classes.paper}>
+        <List className={classes.root}>
             {itemsArray.map(item => {
                 return (
                     <ListItem dense>
